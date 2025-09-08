@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.post("/add-user", signUp);
 
+app.use("/api/users", router);
+
 };
 
 module.exports = {userRoutes};

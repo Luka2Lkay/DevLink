@@ -5,8 +5,10 @@ const app = express();
 const port = 3000;
 
 const { db } = require("./src/config/db_config");
+const {userRoutes} = require("./src/routes/user_routes")
 
 app.use(express.json());
+app.use(express.urlencoded({extended: false}))
 app.use(cors());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -15,6 +17,8 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept, x-access-token"
   );
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+
+  next();
 });
 
 mongoose
@@ -32,6 +36,8 @@ app.get("/", (req, res) => {
     .status(200)
     .send("<h1 style='text-align: center'>The application is running!</h1>");
 });
+
+userRoutes(app);
 
 app.listen(port, () => {
   console.log(`App is running in port ${port}`);

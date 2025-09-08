@@ -6,6 +6,7 @@ const { secretKey } = require("../config/auth_key_config");
 const signUp = async (req, res) => {
   const { name, email, password, confirmPassword, githubUsername } = req.body;
 
+  return res.status(200).send("hey")
   const hash = bcrypt.hashSync(password, 10);
   const hash2 = bcrypt.hashSync(confirmPassword, 10);
 
