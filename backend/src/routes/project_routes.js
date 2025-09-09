@@ -4,7 +4,8 @@ const {
   deleteOneProject,
   deleteAllProjects,
   getOneProject,
-  getAllProjects
+  getAllProjects,
+  updateProject,
 } = require("../controllers/project_controller");
 
 const projectRoutes = (app) => {
@@ -14,7 +15,8 @@ const projectRoutes = (app) => {
   router.delete("/delete-project/:id", deleteOneProject);
   router.delete("/delete-all-projects", deleteAllProjects);
   router.get("/get-project/:id", getOneProject);
-  router.get("/get-all-projects", getAllProjects)
+  router.get("/get-all-projects", getAllProjects);
+  router.put("/update-project/:id", updateProject);
 
   app.use("/api/projects", router);
 };
