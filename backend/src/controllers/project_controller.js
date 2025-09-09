@@ -29,4 +29,14 @@ const deleteOneProject = async (req, res) => {
   }
 };
 
-module.exports = { createProject, deleteOneProject };
+const deleteAllProjects = async (req, res) => {
+  try {
+    await Project.deleteMany();
+
+    res.status(200).json({ message: "Successfully deleted all projects!" });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+module.exports = { createProject, deleteOneProject, deleteAllProjects };
