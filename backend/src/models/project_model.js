@@ -4,9 +4,9 @@ const uniqueValidator = require("mongoose-unique-validator");
 const projectSchema = new mongoose.Schema({
   title: { type: String, require: true, unique: false },
   description: { type: String, require: true, unique: false },
-  owner: { types: mongoose.Types.ObjectId, ref: "User", require: true },
+  owner: { type: mongoose.Types.ObjectId, ref: "User", require: true },
   collaborators: [
-    { types: mongoose.Types.ObjectId, ref: "User", require: false },
+    { type: mongoose.Types.ObjectId, ref: "User", require: false },
   ],
 });
 
@@ -19,4 +19,4 @@ projectSchema.method("toJSON", function () {
   return object;
 });
 
-module.exports = mongoose.Model("Project", projectSchema);
+module.exports = mongoose.model("Project", projectSchema);

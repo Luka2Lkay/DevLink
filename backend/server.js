@@ -5,10 +5,11 @@ const app = express();
 const port = 3000;
 
 const { db } = require("./src/config/db_config");
-const {userRoutes} = require("./src/routes/user_routes")
+const { userRoutes } = require("./src/routes/user_routes");
+const { projectRoutes } = require("./src/routes/project_routes");
 
 app.use(express.json());
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -38,6 +39,7 @@ app.get("/", (req, res) => {
 });
 
 userRoutes(app);
+projectRoutes(app);
 
 app.listen(port, () => {
   console.log(`App is running in port ${port}`);
