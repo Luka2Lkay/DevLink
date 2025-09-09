@@ -17,7 +17,7 @@ const createProject = async (req, res) => {
   }
 };
 
-const deleteProject = async (req, res) => {
+const deleteOneProject = async (req, res) => {
   try {
     const userId = req.params.id;
 
@@ -29,4 +29,4 @@ const deleteProject = async (req, res) => {
   }
 };
 
-module.exports = { createProject, deleteProject };
+module.exports = { createProject, deleteOneProject };
