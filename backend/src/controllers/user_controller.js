@@ -37,9 +37,37 @@ const signUp = async (req, res) => {
   }
 };
 
+const signIn = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found!" });
+    }
+
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatch) {
+      return res.status(401).json({ message: "Incorrect password!" });
+    }
+
+    const token = jwt.sign(
+      { userId: user.id, name: user.name, githubUsername: user.githubUsername },
+      secretKey.key,
+      { expiresIn: "1h" }
+    );
+
+    res.status(200).json({ token });
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 const deleteAllUsers = async (req, res) => {
   try {
-    await User.deleteMany({});
+    await User.deleteMany();
 
     res.status(200).json({ message: "Successfully deleted all users!" });
   } catch (error) {
@@ -49,7 +77,7 @@ const deleteAllUsers = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await User.find();
 
     res.status(200).json({ users });
   } catch (error) {
@@ -89,6 +117,7 @@ const deleteOneUser = async (req, res) => {
 
 module.exports = {
   signUp,
+  signIn,
   deleteAllUsers,
   deleteOneUser,
   getAllUsers,

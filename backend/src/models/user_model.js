@@ -11,4 +11,11 @@ const userSchema = new mongoose.Schema({
 
 userSchema.plugin(uniqueValidator);
 
+userSchema.method("toJSON", function () {
+  const { _id, ...object } = this.toObject();
+  object.id = _id;
+
+  return object;
+});
+
 module.exports = mongoose.model("User", userSchema);
