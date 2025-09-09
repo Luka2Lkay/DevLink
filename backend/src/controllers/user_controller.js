@@ -2,8 +2,15 @@ const User = require("../models/user_model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { secretKey } = require("../config/auth_key_config");
+const { validationResult } = require("express-validator");
 
 const signUp = async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ error: errors.array() });
+  }
+
   const { name, email, password, confirmPassword, githubUsername } = req.body;
 
   const hash = bcrypt.hashSync(password, 10);

@@ -6,4 +6,14 @@ const validateCreateProject = [
   body("owner").notEmpty().withMessage("Owner is required!"),
 ];
 
-module.exports = { validateCreateProject };
+const validateSignup = [
+  body("name").notEmpty().withMessage("name is required!"),
+  body("email").notEmpty().withMessage("email is required!"),
+  body("password").notEmpty().withMessage("password is required!"),
+  body("confirmPassword")
+    .notEmpty()
+    .withMessage("confirmPassword is required!"),
+  body("githubUsername").notEmpty().withMessage("githubUsername is required!"),
+];
+
+module.exports = { validateCreateProject, validateSignup };
