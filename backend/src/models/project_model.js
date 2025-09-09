@@ -3,9 +3,11 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 const projectSchema = new mongoose.Schema({
   title: { type: String, require: true, unique: false },
-  description: { type: String, required: true, unique: false },
-  owner: { types: mongoose.Types.ObjectId, ref: "User" },
-  collaborators: [{ types: mongoose.Types.ObjectId, ref: "User" }],
+  description: { type: String, require: true, unique: false },
+  owner: { types: mongoose.Types.ObjectId, ref: "User", require: true },
+  collaborators: [
+    { types: mongoose.Types.ObjectId, ref: "User", require: false },
+  ],
 });
 
 projectSchema.plugin(uniqueValidator);
