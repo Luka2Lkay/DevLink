@@ -7,6 +7,7 @@ const {
   getAllProjects,
   updateProject,
   projectsByUserId,
+  githubRepoCommits,
 } = require("../controllers/project_controller");
 const { verifyToken } = require("../middleware/verify");
 const { validateCreateProject } = require("../middleware/validation");
@@ -26,6 +27,7 @@ const projectRoutes = (app) => {
   router.get("/get-all-projects", verifyToken, getAllProjects);
   router.put("/update-project/:id", verifyToken, updateProject);
   router.get("/projects-by-user/:id", verifyToken, projectsByUserId);
+  router.get("/commits/:id", verifyToken, githubRepoCommits);
 
   app.use("/api/projects", router);
 };

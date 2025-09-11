@@ -2,6 +2,7 @@ const Project = require("../models/project_model");
 const { validationResult } = require("express-validator");
 const User = require("../models/user_model");
 const Invite = require("../models/invite_model");
+const axios = require("axios");
 
 const createProject = async (req, res) => {
   const errors = validationResult(req);
@@ -137,6 +138,44 @@ const projectsByUserId = async (req, res) => {
   }
 };
 
+const githubRepoCommits = async (req, res) => {
+  try {
+    const projectId = req.params.id;
+    const project = await Project.findById(projectId);
+
+    if (!project) {
+      return res.status(404).json({ message: "Project not found!" });
+    }
+
+    const splitUrl = project.githubRepoUrl.split("/");
+    const owner = splitUrl[0].split(":")[1];
+    const repo = splitUrl[splitUrl.length - 1].replace(".git", "");
+
+    const repoUrl = `https://api.github.com/repos/${owner}/${repo}`;
+    const repoResponse = await axios.get(repoUrl);
+
+    if (repoResponse.data.private === true) {
+      return res
+        .status(403)
+        .json({ message: "Repository is private. Commits cannot be fetched." });
+    }
+
+    const commitsResponse = await axios.get(`${repoUrl}/commits`);
+
+    const commits = commitsResponse.data.map((commit) => ({
+      sha: commit.sha,
+      message: commit.commit.message,
+      author: commit.commit.author.name,
+      date: commit.commit.author.date,
+      url: commit.html._url,
+    }));
+
+    res.status(200).json(commits);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
 module.exports = {
   createProject,
   deleteOneProject,
@@ -145,4 +184,5 @@ module.exports = {
   getAllProjects,
   updateProject,
   projectsByUserId,
+  githubRepoCommits,
 };
