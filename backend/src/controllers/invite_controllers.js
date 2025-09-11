@@ -59,6 +59,26 @@ const sendInvite = async (req, res) => {
   }
 };
 
-const deleteAllInvites = async (req, res) => {};
+const deleteAllInvites = async (req, res) => {
+  try {
+    await Invite.deleteMany();
 
-module.exports = { sendInvite };
+    res.status(200).json({ message: "Successlly deleted all invites!" });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+const deleteOneInvite = async (req, res) => {
+  try {
+    const inviteId = req.params.id;
+
+    await Invite.findByIdAndDelete(inviteId);
+
+    res.status(200).json({ message: "Invite deleted!" });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+module.exports = { sendInvite, deleteAllInvites, deleteOneInvite };

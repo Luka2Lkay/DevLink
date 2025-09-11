@@ -28,9 +28,9 @@ const createProject = async (req, res) => {
 
 const deleteOneProject = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const projectId = req.params.id;
 
-    await Project.findByIdAndDelete(userId);
+    await Project.findByIdAndDelete(projectId);
 
     res.status(200).json({ message: "Project successfully deleted!" });
   } catch (error) {
@@ -50,8 +50,8 @@ const deleteAllProjects = async (req, res) => {
 
 const getOneProject = async (req, res) => {
   try {
-    const userId = req.params.id;
-    const project = await Project.findById(userId);
+    const projectId = req.params.id;
+    const project = await Project.findById(projectId);
 
     if (project) {
       res.status(200).json({ project });
