@@ -4,7 +4,7 @@ const User = require("../models/user_model");
 
 const sendInvite = async (req, res) => {
   try {
-    const { projectId } = req.params;
+    const projectId = req.params.id;
     const { toUserId } = req.body;
     const { user } = req;
 
@@ -61,7 +61,7 @@ const sendInvite = async (req, res) => {
 
 const inviteResponse = async (req, res) => {
   try {
-    const { inviteId } = req.params;
+    const inviteId = req.params.id;
     const { status } = req.body;
     const { user } = req;
 
@@ -71,11 +71,37 @@ const inviteResponse = async (req, res) => {
       return res.status(404).json({ message: "Invite not found!" });
     }
 
-    if (invite.toUser !== user.userId) {
+    if (invite.toUser.toString() !== user.userId) {
       return res
         .status(401)
         .json({ message: "Not authorised to respond to this invite!" });
     }
+
+    if (!["accepted", "rejected"].includes(status)) {
+      return res.status(400).json({
+        message: "Invalid status. Status must be 'accepted' or 'rejected'",
+      });
+    }
+
+    invite.status = status;
+    await invite.save();
+
+    if (status === "accepted") {
+      const project = await Project.findById(invite.projectId);
+
+      if (!project) {
+        return res.status(404).json({
+          message: "The project associated with this invite is not found!",
+        });
+      }
+
+      if (!project.collaborators.includes(user.userId)) {
+        project.collaborators.push(user.userId);
+        await project.save();
+      }
+    }
+
+    res.status(200).json({ message: "Responded to the invite!", invite });
   } catch (error) {
     res.status(500).send(error.message);
   }
