@@ -7,6 +7,7 @@ const port = 3000;
 const { db } = require("./src/config/db_config");
 const { userRoutes } = require("./src/routes/user_routes");
 const { projectRoutes } = require("./src/routes/project_routes");
+const { inviteRoutes } = require("./src/routes/invite_routes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,6 +41,7 @@ app.get("/", (req, res) => {
 
 userRoutes(app);
 projectRoutes(app);
+inviteRoutes(app);
 
 app.listen(port, () => {
   console.log(`App is running in port ${port}`);
