@@ -1,15 +1,14 @@
 const Invite = require("../models/invite_model");
 const Project = require("../models/project_model");
 const User = require("../models/user_model");
-const {validateSendInvite} = require("../middleware/validation");
-const {validationResult} = require("express-validator");
+
+const { validationResult } = require("express-validator");
 
 const sendInvite = async (req, res) => {
-
   const errors = validationResult(req);
 
-  if(!errors.isEmpty()){
-    return res.status(400).json({errors: errors.array()});
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
 
   try {
@@ -138,9 +137,28 @@ const deleteOneInvite = async (req, res) => {
   }
 };
 
+const sentInvitesByUser = async (req, res) => {
+  try {
+    const { user } = req;
+
+    const invites = await Invite.find().populate("toUser projectId", "name githubUsername title githubRepoUrl");
+
+    const sentInvites = invites.filter((invite) => {
+      if (invite.fromUser == user.userId) {
+        return invite;
+      }
+    });
+
+    res.status(200).json({ ["sent Invites"]: sentInvites });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
 module.exports = {
   sendInvite,
   deleteAllInvites,
   deleteOneInvite,
   inviteResponse,
+  sentInvitesByUser,
 };

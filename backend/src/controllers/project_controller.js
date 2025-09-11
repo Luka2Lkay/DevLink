@@ -1,6 +1,7 @@
 const Project = require("../models/project_model");
 const { validationResult } = require("express-validator");
 const User = require("../models/user_model");
+const Invite = require("../models/invite_model");
 
 const createProject = async (req, res) => {
   const errors = validationResult(req);
@@ -10,11 +11,13 @@ const createProject = async (req, res) => {
   }
 
   try {
-    const { title, description, owner, collaborators } = req.body;
+    const { title, description, githubRepoUrl, owner, collaborators } =
+      req.body;
 
     const project = new Project({
       title,
       description,
+      githubRepoUrl,
       owner,
       collaborators,
     });
@@ -54,6 +57,7 @@ const deleteOneProject = async (req, res) => {
 const deleteAllProjects = async (req, res) => {
   try {
     await Project.deleteMany();
+    await Invite.deleteMany();
 
     res.status(200).json({ message: "Successfully deleted all projects!" });
   } catch (error) {
@@ -97,7 +101,7 @@ const updateProject = async (req, res) => {
       return res.status(404).json({ message: "Project not found!" });
     }
 
-    if (!project.owner.toString() !== user.userId) {
+    if (project.owner.toString() !== user.userId) {
       return res
         .status(401)
         .json({ message: "You are not authorised to edit this project!" });

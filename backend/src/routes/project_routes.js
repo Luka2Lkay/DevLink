@@ -21,7 +21,7 @@ const projectRoutes = (app) => {
     createProject
   );
   router.delete("/delete-project/:id", verifyToken, deleteOneProject);
-  router.delete("/delete-all-projects", verifyToken, deleteAllProjects);
+  router.delete("/delete-all-projects", deleteAllProjects);
   router.get("/get-project/:id", verifyToken, getOneProject);
   router.get("/get-all-projects", verifyToken, getAllProjects);
   router.put("/update-project/:id", verifyToken, updateProject);
