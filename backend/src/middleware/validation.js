@@ -1,9 +1,10 @@
-const { body } = require("express-validator");
+const { param, body } = require("express-validator");
 
 const validateCreateProject = [
-  body("title").notEmpty().withMessage("Title is required!"),
-  body("description").notEmpty().withMessage("Description is required!"),
-  body("owner").notEmpty().withMessage("Owner is required!"),
+  body("title").notEmpty().withMessage("title is required!"),
+  body("description").notEmpty().withMessage("description is required!"),
+  body("githubRepoUrl").notEmpty().withMessage("githubRepoUrl is required!"),
+  body("owner").notEmpty().withMessage("owner is required!"),
 ];
 
 const validateSignup = [
@@ -16,4 +17,9 @@ const validateSignup = [
   body("githubUsername").notEmpty().withMessage("githubUsername is required!"),
 ];
 
-module.exports = { validateCreateProject, validateSignup };
+const validateSendInvite = [
+  param("id").notEmpty().withMessage("id is required!"),
+  body("toUserId").notEmpty().withMessage("toUserId is required!"),
+];
+
+module.exports = { validateCreateProject, validateSignup, validateSendInvite };

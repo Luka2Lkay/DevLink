@@ -1,8 +1,17 @@
 const Invite = require("../models/invite_model");
 const Project = require("../models/project_model");
 const User = require("../models/user_model");
+const {validateSendInvite} = require("../middleware/validation");
+const {validationResult} = require("express-validator");
 
 const sendInvite = async (req, res) => {
+
+  const errors = validationResult(req);
+
+  if(!errors.isEmpty()){
+    return res.status(400).json({errors: errors.array()});
+  }
+
   try {
     const projectId = req.params.id;
     const { toUserId } = req.body;

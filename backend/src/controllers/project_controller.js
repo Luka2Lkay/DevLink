@@ -29,6 +29,19 @@ const createProject = async (req, res) => {
 const deleteOneProject = async (req, res) => {
   try {
     const projectId = req.params.id;
+    const { user } = req;
+
+    const project = await Project.findById(projectId);
+
+    if (!project) {
+      return res.status(404).json({ message: "Project not found!" });
+    }
+
+    if (!project.owner.toString() !== user.userId) {
+      return res
+        .status(401)
+        .json({ message: "You are not authorised to delete this project!" });
+    }
 
     await Project.findByIdAndDelete(projectId);
 
@@ -76,6 +89,19 @@ const getAllProjects = async (req, res) => {
 const updateProject = async (req, res) => {
   try {
     const projectId = req.params.id;
+    const { user } = req;
+
+    const project = await Project.findById(projectId);
+
+    if (!project) {
+      return res.status(404).json({ message: "Project not found!" });
+    }
+
+    if (!project.owner.toString() !== user.userId) {
+      return res
+        .status(401)
+        .json({ message: "You are not authorised to edit this project!" });
+    }
 
     await Project.findByIdAndUpdate(projectId, req.body);
 

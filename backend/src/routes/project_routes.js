@@ -20,12 +20,12 @@ const projectRoutes = (app) => {
     validateCreateProject,
     createProject
   );
-  router.delete("/delete-project/:id", deleteOneProject);
-  router.delete("/delete-all-projects", deleteAllProjects);
-  router.get("/get-project/:id", getOneProject);
-  router.get("/get-all-projects", getAllProjects);
-  router.put("/update-project/:id", updateProject);
-  router.get("/projects-by-user/:id", projectsByUserId);
+  router.delete("/delete-project/:id", verifyToken, deleteOneProject);
+  router.delete("/delete-all-projects", verifyToken, deleteAllProjects);
+  router.get("/get-project/:id", verifyToken, getOneProject);
+  router.get("/get-all-projects", verifyToken, getAllProjects);
+  router.put("/update-project/:id", verifyToken, updateProject);
+  router.get("/projects-by-user/:id", verifyToken, projectsByUserId);
 
   app.use("/api/projects", router);
 };
