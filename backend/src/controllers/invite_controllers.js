@@ -25,7 +25,7 @@ const sendInvite = async (req, res) => {
     }
 
     if (
-      project.owner === toUserId ||
+      project.owner.toString() === toUserId ||
       project.collaborators.includes(toUserId)
     ) {
       return res.status(400).json({
@@ -53,7 +53,29 @@ const sendInvite = async (req, res) => {
 
     await newInvite.save();
 
-    res.status(200).json({ message: "Invite sent!", newInvite });
+    res.status(201).json({ message: "Invite sent!", newInvite });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+const inviteResponse = async (req, res) => {
+  try {
+    const { inviteId } = req.params;
+    const { status } = req.body;
+    const { user } = req;
+
+    const invite = await Invite.findById(inviteId);
+
+    if (!invite) {
+      return res.status(404).json({ message: "Invite not found!" });
+    }
+
+    if (invite.toUser !== user.userId) {
+      return res
+        .status(401)
+        .json({ message: "Not authorised to respond to this invite!" });
+    }
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -81,4 +103,9 @@ const deleteOneInvite = async (req, res) => {
   }
 };
 
-module.exports = { sendInvite, deleteAllInvites, deleteOneInvite };
+module.exports = {
+  sendInvite,
+  deleteAllInvites,
+  deleteOneInvite,
+  inviteResponse,
+};
