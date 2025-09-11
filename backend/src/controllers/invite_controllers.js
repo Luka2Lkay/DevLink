@@ -141,15 +141,39 @@ const sentInvitesByUser = async (req, res) => {
   try {
     const { user } = req;
 
-    const invites = await Invite.find().populate("toUser projectId", "name githubUsername title githubRepoUrl");
+    const invites = await Invite.find().populate(
+      "toUser projectId",
+      "name githubUsername title githubRepoUrl"
+    );
 
     const sentInvites = invites.filter((invite) => {
-      if (invite.fromUser == user.userId) {
+      if (invite.fromUser.toString() === user.userId) {
         return invite;
       }
     });
 
     res.status(200).json({ ["sent Invites"]: sentInvites });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+const receivedInvitesByUser = async (req, res) => {
+  try {
+    const { user } = req;
+
+    const invites = await Invite.find().populate(
+      "fromUser projectId",
+      "name githubUsername title githubRepoUrl"
+    );
+
+    const receivedInvites = invites.filter((invite) => {
+      if (invite.toUser.toString() === user.userId) {
+        return invite;
+      }
+    });
+
+    res.status(200).json({ ["received invites"]: receivedInvites });
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -161,4 +185,5 @@ module.exports = {
   deleteOneInvite,
   inviteResponse,
   sentInvitesByUser,
+  receivedInvitesByUser,
 };

@@ -5,6 +5,7 @@ const {
   deleteOneInvite,
   inviteResponse,
   sentInvitesByUser,
+  receivedInvitesByUser,
 } = require("../controllers/invite_controllers");
 const { verifyToken } = require("../middleware/verify");
 
@@ -16,6 +17,7 @@ const inviteRoutes = (app) => {
   router.delete("/delete-all-invites", verifyToken, deleteAllInvites);
   router.patch("/:id", verifyToken, inviteResponse);
   router.get("/sent-invites", verifyToken, sentInvitesByUser);
+  router.get("/received-invites", verifyToken, receivedInvitesByUser);
 
   app.use("/api/invites", router);
 };
