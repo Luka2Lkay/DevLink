@@ -161,3 +161,15 @@ All authenticated routes require a valid JSON Web Token (JWT) in the `x-access-t
 - **Response (401 Unauthorized):** `You are not authorised to edit this project!`.
 - **Response (404 Not Found):** `User not found.`.
 - **Response (403 Forbidden):** `Repository is private. Commits cannot be fetched.`.
+
+### Invite
+
+- **Response (404 Not Found):** `Project not found!`.
+- **Response (401 Unauthorized):** `You don't own this project.`.
+- **Response (404 Not Found):** `User to invite not found!`.
+- **Response (400 Bad Request):** `The user owns the project or is already a collaborator!`.
+- **Response (409 Conflict):** `Invite for this user already sent!`.
+- **Response (404 Not Found):** `Invite not found!`.
+- **Response (401 Unauthorized):** `Not authorised to respond to this invite!`.
+- **Response (400 Bad Request):** `Invalid status. Status must be 'accepted' or 'rejected'`.
+- **Response (404 Not Found):** `The project associated with this invite is not found!`.
