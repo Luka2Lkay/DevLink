@@ -145,3 +145,11 @@ All authenticated routes require a valid JSON Web Token (JWT) in the `x-access-t
 
  - **Header Name:** `x-access-token`.
  - **Value Format:** `Bearer <your-jwt-token>`.
+
+## 4. Common Error Messages
+
+### User
+
+- **Response (400 Bad Request):** `Passwords don't match`.
+- **Response (404 Not Found):** `User not found!`.
+- **Response (401 Unauthorized):** `Incorrect password!`.
