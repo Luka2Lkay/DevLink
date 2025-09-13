@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 const User = require("../models/user_model");
 const Invite = require("../models/invite_model");
 const axios = require("axios");
+require("dotenv").config();
 
 const createProject = async (req, res) => {
   const errors = validationResult(req);
@@ -140,6 +141,10 @@ const projectsByUserId = async (req, res) => {
 
 const githubRepoCommits = async (req, res) => {
   try {
+    const githubToken = process.env.GITHUB_TOKEN;
+    const githubHeaders = {
+      Authorization: `token ${githubToken}`
+    }
     const projectId = req.params.id;
     const project = await Project.findById(projectId);
 
@@ -152,7 +157,7 @@ const githubRepoCommits = async (req, res) => {
     const repo = splitUrl[splitUrl.length - 1].replace(".git", "");
 
     const repoUrl = `https://api.github.com/repos/${owner}/${repo}`;
-    const repoResponse = await axios.get(repoUrl);
+    const repoResponse = await axios.get(repoUrl, {headers: githubHeaders});
 
     if (repoResponse.data.private === true) {
       return res
@@ -160,14 +165,14 @@ const githubRepoCommits = async (req, res) => {
         .json({ message: "Repository is private. Commits cannot be fetched." });
     }
 
-    const commitsResponse = await axios.get(`${repoUrl}/commits`);
+    const commitsResponse = await axios.get(`${repoUrl}/commits`, {headers: githubHeaders});
 
     const commits = commitsResponse.data.map((commit) => ({
       sha: commit.sha,
       message: commit.commit.message,
       author: commit.commit.author.name,
       date: commit.commit.author.date,
-      url: commit.html._url,
+      url: commit.html_url,
     }));
 
     res.status(200).json(commits);
