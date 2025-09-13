@@ -11,7 +11,7 @@
 - `http://localhost:3000/api/users/get-all-users`
 - `http://localhost:3000/api/users/get-user/:id`
 
-## Project
+### Project
 
 - `http://localhost:3000/api/projects/add-project`
 - `http://localhost:3000/api/projects/delete-project/:id`
@@ -21,3 +21,12 @@
 - `http://localhost:3000/api/projects/update-project/:id`
 - `http://localhost:3000/api/projects/projects-by-user/:id`
 - `http://localhost:3000/api/projects/commits/:id`
+
+### Invite
+
+- `http://localhost:3000/api/invites/send-invite/:id`
+- `http://localhost:3000/api/invites/delete-invite/:id`
+- `http://localhost:3000/api/invites/delete-all-invites`
+- `http://localhost:3000/api/invites/:id`
+- `http://localhost:3000/api/invites/sent-invites`
+- `http://localhost:3000/api/invites/received-invites`
