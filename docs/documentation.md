@@ -69,7 +69,7 @@
 
 `POST /api/projects/add-project`
 
-- **Request Body:** A JSON object representing a new project. The  `title`, `description`, `githubRepoUrl`, and `owner` fields are required.
+- **Request Body:** A JSON object representing the new project. The `title`, `description`, `githubRepoUrl`, and `owner` fields are required.
 - **Response (201 Created):** Outputs the message, `Project successfully created!` and the `project` JSON object.
 
 `DELETE /api/projects/delete-project/{id}`
@@ -106,3 +106,35 @@
 
 - **Request:** No body required.
 - **Response (200 OK):** Outputs an array of project commits.
+
+### Invite
+
+`POST /api/invites/send-invite/{id}`
+
+- **Request Body:** A JSON object representing the new invite. The `toUser` field is required.
+- **Response (201 Created):** Outputs the message, `Invite sent!` and the new invite JSON object.
+
+`DELETE /api/invites/delete-invite/{id}`
+
+- **Request:** No body required.
+- **Response (204 No Content):** Outputs the message, `Invite deleted!`.
+
+`DELETE /api/invites/delete-all-invites`
+
+- **Request:** No body required.
+- **Response (204 No Content):** Outputs the message, `Successlly deleted all invites!`.
+
+`PATCH /api/invites/:id`
+
+- **Request:** No body required.
+- **Response (200 Ok):** Outputs the message, `Responded to the invite!` and the invite JSON object. The `status` field is required.
+
+`GET /api/invites/sent-invites`
+
+- **Request:** No body required.
+- **Response (200 Ok):** Outputs an array of sent invites.
+
+`GET /api/invites/received-invites`
+
+- **Request:** No body required.
+- **Response (200 Ok):** Outputs an array of received invites.
