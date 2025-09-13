@@ -138,3 +138,10 @@
 
 - **Request:** No body required.
 - **Response (200 Ok):** Outputs an array of received invites.
+
+## 3. Required Headers
+
+All authenticated routes require a valid JSON Web Token (JWT) in the `x-access-token` header.
+
+ - **Header Name:** `x-access-token`.
+ - **Value Format:** `Bearer <your-jwt-token>`.
