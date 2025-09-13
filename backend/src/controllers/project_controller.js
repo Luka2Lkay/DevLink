@@ -50,7 +50,7 @@ const deleteOneProject = async (req, res) => {
 
     await Project.findByIdAndDelete(projectId);
 
-    res.status(200).json({ message: "Project successfully deleted!" });
+    res.status(204).json({ message: "Project successfully deleted!" });
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -61,7 +61,7 @@ const deleteAllProjects = async (req, res) => {
     await Project.deleteMany();
     await Invite.deleteMany();
 
-    res.status(200).json({ message: "Successfully deleted all projects!" });
+    res.status(204).json({ message: "Successfully deleted all projects!" });
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -111,7 +111,7 @@ const updateProject = async (req, res) => {
 
     await Project.findByIdAndUpdate(projectId, req.body);
 
-    res.status(200).json({ message: "Project successfully updated!" });
+    res.status(204).json({ message: "Project successfully updated!" });
   } catch (error) {
     res.status(500).send(error.message);
   }

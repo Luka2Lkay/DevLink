@@ -63,4 +63,46 @@
 `GET /api/users/get-user/{id}`
 
 - **Request:** No body required.
-- **Response (200 Ok):** Ouputs the user JSON object.
+- **Response (200 Ok):** Ouputs the `user` JSON object.
+
+### Project
+
+`POST /api/projects/add-project`
+
+- **Request Body:** A JSON object representing a new project. The  `title`, `description`, `githubRepoUrl`, and `owner` fields are required.
+- **Response (201 Created):** Outputs the message, `Project successfully created!` and the `project` JSON object.
+
+`DELETE /api/projects/delete-project/{id}`
+
+- **Request:** No body required.
+- **Response (204 No Content):** Outputs the message, `Project successfully deleted!`.
+
+`DELETE /api/projects/delete-all-projects`
+
+**Request:** No body required.
+**Response (204 No Content):** Outputs the message, `Successfully deleted all projects!`.
+
+`GET /api/projects/get-project/{id}`
+
+- **Request:** No body required.
+- **Response (200 Ok):** Ouputs the `project` JSON object.
+
+`GET /api/projects/get-all-projects`
+
+- **Request:** No body required.
+- **Response (200 Ok):** Outputs an array of projects.
+
+`PUT /api/projects/update-project/{id}`
+
+- **Request Body:** A JSON object with the fields you want to update.
+- **Response (204 Ok):** Outputs the message, `successfully updated!`.
+
+`GET /api/projects/projects-by-user/{id}`
+
+- **Request:** No body required.
+- **Response (200 Ok):** Outputs an array of the user projects.
+
+`GET /api/projects/commits/{id}`
+
+- **Request:** No body required.
+- **Response (200 OK):** Outputs an array of project commits.
