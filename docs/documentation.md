@@ -1,6 +1,6 @@
 # API Documentation
 
-## Routes and Endpoints
+## 1. Routes and Endpoints
 
 ### User
 
@@ -30,3 +30,37 @@
 - `http://localhost:3000/api/invites/:id`
 - `http://localhost:3000/api/invites/sent-invites`
 - `http://localhost:3000/api/invites/received-invites`
+
+## 2. Expected Inputs and Outputs
+
+### User
+
+`POST /api/users/signin`
+
+- **Request Body:** A JSON object representing the registered user. The `email` and `password` fields are required.
+- **Response (200 Ok):** Outputs a JWT token.
+
+`POST /api/users/signup`
+
+- **Request Body:** A JSON object representing the new user. The `name`, `email`, `password`, `confirmPassword`, and `githubUsername` are required.
+- **Response (201 Created):** Outputs the message, `Registered sucessfully!`.
+
+`DELETE /api/users/delete-user/{id}`
+
+- **Request:** No body required.
+- **Response (204 No Content):** Outputs the message, `The user is successfully deleted!`.
+
+`DELETE /api/users/delete-all-users`
+
+- **Request:** No body required.
+- **Response (204 No Content):** Outputs the message, `Successfully deleted all users!`
+
+`GET /api/users/get-all-users`
+
+- **Request:** No body required.
+- **Response (200 Ok):** Outputs an array of users.
+
+`GET /api/users/get-user/{id}`
+
+- **Request:** No body required.
+- **Response (200 Ok):** Ouputs the user JSON object.
