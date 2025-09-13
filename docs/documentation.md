@@ -143,8 +143,8 @@
 
 All authenticated routes require a valid JSON Web Token (JWT) in the `x-access-token` header.
 
- - **Header Name:** `x-access-token`.
- - **Value Format:** `Bearer <your-jwt-token>`.
+- **Header Name:** `x-access-token`.
+- **Value Format:** `Bearer <your-jwt-token>`.
 
 ## 4. Common Error Messages
 
@@ -153,3 +153,11 @@ All authenticated routes require a valid JSON Web Token (JWT) in the `x-access-t
 - **Response (400 Bad Request):** `Passwords don't match`.
 - **Response (404 Not Found):** `User not found!`.
 - **Response (401 Unauthorized):** `Incorrect password!`.
+
+### Project
+
+- **Response (404 Not Found):** `Project not found!`.
+- **Response (401 Unauthorized):** `You are not authorised to delete this project!`.
+- **Response (401 Unauthorized):** `You are not authorised to edit this project!`.
+- **Response (404 Not Found):** `User not found.`.
+- **Response (403 Forbidden):** `Repository is private. Commits cannot be fetched.`.
