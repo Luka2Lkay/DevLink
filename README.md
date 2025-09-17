@@ -11,7 +11,7 @@ cd DevLink
 
 ### Backend
 
-1. **Navigate to the Backend directory
+1. **Navigate to the Backend directory**
 
 `cd backend`
 
