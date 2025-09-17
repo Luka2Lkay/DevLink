@@ -11,17 +11,35 @@ cd DevLink
 
 ### Backend
 
-1. **Install Dependecies**
+1. **Navigate to the Backend directory**
+
+`cd backend`
+
+2. **Install Dependecies**
 
 `npm install`
 
-2. **Create a .env file**
+3. **Create a .env file**
 
 ```
 CONNECTION_STRING=<YOUR_MONGODB_CONNECTION_STRING>
 GITHUB_TOKEN=<YOUR_GITHUB_TOKEN>
 JWT_SECRET_KEY=<YOUR_SECRET_KEY>
 ```
+
+4. **Run the project**
+
+`npm run dev`
+
+### Frontend
+
+1. **Navigate to the Frontend directory**
+
+`cd frontend`
+
+2. **Install dependencies**
+
+`npm install`
 
 3. **Run the project**
 
