@@ -28,11 +28,12 @@ function LandingPage() {
             <li><span className="text-primary-variant"><strong><IoIosPeople size={30} />Find Your People:</strong></span> Connect with a community of other early-career developers who are facing the same challenges. Share insights and support each other.</li>
           </ul>
 
-          <button className="text-white bg-primary p-2 rounde-50">Start Building Your Future</button>
+          <button className="text-white bg-primary p-2 rounded-lg cursor-pointer hover:bg-primary-variant">Start Building Your Future</button>
 
         </article>
-
       </main>
+
+      <footer className="text-white mt-5"><small>&copy; Lukhanyo Matshebelele {new Date().getFullYear()}</small></footer>
     </div>
   )
 }
