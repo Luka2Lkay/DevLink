@@ -1,6 +1,33 @@
-
+import { useState, useEffect } from "react"
 
 function Login() {
+  const initialFormFields = {
+    email: "",
+    password: ""
+  }
+
+  const [login, setLogin] = useState(initialFormFields);
+
+  const handleChange = (e) => {
+    setLogin({
+      ...login,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const signIn = async (e) => {
+    e.prevent.default();
+
+    const data = { ...login };
+    const baseUrl = "http://localhost:3000/api/users/signin";
+
+    await axios.post(baseUrl, data).then(reset())
+  }
+
+  const reset = () => {
+    setLogin(initialFormFields)
+  }
+
   return (
     <div className="flex flex-col justify-center px-6 py-12 lg:px-8">
 
@@ -10,19 +37,19 @@ function Login() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+        <form onSubmit={signIn} className="space-y-6">
 
           <div>
             <label htmlFor="email" className="text-left text-gray-100 block font-medium text-sm/6">Email address</label>
             <div className="mt-2">
-              <input id="email" name="email" type="email" autoComplete="email" required className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 -outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:-outline-offset-2 sm:text-sm/6" />
+              <input id="email" name="email" type="email" value={login.email} onChange={handleChange} autoComplete="email" required className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 -outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:-outline-offset-2 sm:text-sm/6" />
             </div>
           </div>
 
           <div>
             <label htmlFor="password" className="text-left text-gray-100 block font-medium text-sm/6">Password</label>
             <div className="mt-2">
-              <input id="password" name="password" type="password" autoComplete="none" required className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6" />
+              <input id="password" name="password" type="password" value={login.password} onChange={handleChange} autoComplete="none" required className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6" />
             </div>
           </div>
 
