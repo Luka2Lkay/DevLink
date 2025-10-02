@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Register() {
   const initialFormFields = {
@@ -11,6 +12,7 @@ function Register() {
   };
 
   const [register, setRegister] = useState(initialFormFields);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState({
     password: "",
     email: "",
@@ -35,11 +37,15 @@ function Register() {
       return setError({ ...error, password: "Passwords don't match" });
     }
 
+    setLoading(true);
+    setError({ ...error, password: "", server: "" });
+
     try {
       await axios.post(baseUrl, data);
-
+      setLoading(false);
       reset();
     } catch (error) {
+      setLoading(false);
       if (error.response) {
         setError({ ...error, server: error.response.data.message });
       } else {
@@ -63,7 +69,10 @@ function Register() {
         <h2 className="mt-10 text-white text-center font-bold">Sign up</h2>
       </div>
 
-      <p className="text-red-500 mt-2 text-sm/6">{error.server}</p>
+      <div>
+        {error && <p className="text-red-500 mt-2 text-sm/6">{error.server}</p>}
+        {loading && <CircularProgress className="mt-2" role="progressbar" />}
+      </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form onSubmit={signUp} className="space-y-6">
@@ -77,7 +86,7 @@ function Register() {
             <div className="mt-2">
               <input
                 id="name"
-                data-testId="name-id"
+                data-testid="name-id"
                 name="name"
                 type="text"
                 value={register.name}
@@ -99,7 +108,7 @@ function Register() {
             <div className="mt-2">
               <input
                 id="email"
-                data-testId="email-id"
+                data-testid="email-id"
                 name="email"
                 type="email"
                 value={register.email}
@@ -121,7 +130,7 @@ function Register() {
             <div className="mt-2">
               <input
                 id="password"
-                data-testId="password-id"
+                data-testid="password-id"
                 name="password"
                 type="password"
                 value={register.password}
@@ -143,7 +152,7 @@ function Register() {
             <div className="mt-2">
               <input
                 id="confirm-password"
-                data-testId="confirm-password-id"
+                data-testid="confirm-password-id"
                 name="confirmPassword"
                 type="password"
                 value={register.confirmPassword}
@@ -166,7 +175,7 @@ function Register() {
             <div className="mt-2">
               <input
                 id="github-username"
-                data-testId="github-username-id"
+                data-testid="github-username-id"
                 name="githubUsername"
                 type="text"
                 value={register.githubUsername}
