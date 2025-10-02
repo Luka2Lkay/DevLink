@@ -2,12 +2,17 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Register from "./Register";
 import axios from "axios";
+import { MemoryRouter } from "react-router-dom";
 
 vitest.mock("axios");
 
 describe("Register Component", () => {
   beforeEach(() => {
-    render(<Register />);
+    render(
+      <MemoryRouter>
+        <Register />
+      </MemoryRouter>
+    );
   });
 
   afterEach(() => {

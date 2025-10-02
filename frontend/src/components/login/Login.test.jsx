@@ -2,12 +2,17 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Login from "./Login";
 import axios from "axios";
+import { MemoryRouter } from "react-router-dom";
 
 vitest.mock("axios");
 
 describe("Login Component", () => {
   beforeEach(() => {
-    render(<Login />);
+    render(
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>
+    );
   });
 
   afterEach(() => {

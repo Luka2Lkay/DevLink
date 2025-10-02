@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Link } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Login() {
   const initialFormFields = {
@@ -48,6 +49,13 @@ function Login() {
   };
 
   return (
+    <>
+    <div className="flex justify-start">
+      <ArrowBackIcon
+        className="text-white m-5 text-3xl cursor-pointer"
+        onClick={() => window.history.back()}
+      />
+    </div>
     <div className="flex flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
@@ -132,6 +140,7 @@ function Login() {
         </p>
       </div>
     </div>
+    </>
   );
 }
 
