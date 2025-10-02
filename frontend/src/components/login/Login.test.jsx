@@ -6,14 +6,17 @@ import axios from "axios";
 vitest.mock("axios");
 
 describe("Login Component", () => {
-  it("should render the login form", () => {
+  beforeEach(() => {
     render(<Login />);
+  });
+
+  afterEach(() => {
+    axios.post.mockClear();
   });
 
   it("should display loading indicator when loading", async () => {
     axios.post.mockImplementation(() => new Promise(() => {}));
 
-    render(<Login />);
     const emailInput = screen.getByTestId("email-input");
     const passwordInput = screen.getByTestId("password-input");
     const signInButton = screen.getByRole("button", { name: /Sign in/i });
@@ -31,13 +34,25 @@ describe("Login Component", () => {
     );
   });
 
-  //   it("should display error message when there's an error", () => {
-  //     const { getByText } = render(<Login />);
+  it("should display error message when there's an error", async () => {
+    axios.post.mockRejectedValue(new Error("Network Error"));
 
-  //     expect(
-  //       getByText("An error occurred. Please try again.")
-  //     ).toBeInTheDocument();
-  //   });
+    const emailInput = screen.getByTestId("email-input");
+    const passwordInput = screen.getByTestId("password-input");
+    const signInButton = screen.getByRole("button", { name: /Sign in/i });
+
+    await userEvent.type(emailInput, "luka@gmail.com");
+    await userEvent.type(passwordInput, "password");
+
+    await userEvent.click(signInButton);
+
+    await waitFor(() => {
+      expect(axios.post).toHaveBeenCalledTimes(1);
+      expect(
+        screen.getByText("An error occurred. Please try again.")
+      ).toBeInTheDocument();
+    });
+  });
 
   //   it("should have email and password input fields", () => {
   //     const { getByLabelText } = render(<Login />);
