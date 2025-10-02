@@ -59,9 +59,9 @@ describe("Login Component", () => {
     expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
   });
 
-  //   it("should have a submit button", () => {
-  //     const { getByRole } = render(<Login />);
-
-  //     expect(getByRole("button", { name: /Sign In/i })).toBeInTheDocument();
-  //   });
+  it("should have a submit button", () => {
+    expect(
+      screen.getByRole("button", { name: /Sign In/i })
+    ).toBeInTheDocument();
+  });
 });
