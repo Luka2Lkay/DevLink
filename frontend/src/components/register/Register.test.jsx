@@ -1,10 +1,41 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Register from "./Register";
+import axios from "axios";
+
+vitest.mock("axios");
 
 describe("Register Component", () => {
   beforeEach(() => {
     render(<Register />);
   });
+
+  it("should display error message when there's an error", async () => {
+    axios.post.mockRejectedValue(new Error("Network Error"));
+
+    const nameInput = screen.getByTestId("name-id");
+    const emailInput = screen.getByTestId("email-id");
+    const passwordInput = screen.getByTestId("password-id");
+    const confirmPasswordInput = screen.getByTestId("confirm-password-id");
+    const githubUsernameInput = screen.getByTestId("github-username-id");
+    const signUpButton = screen.getByRole("button", { name: /sign up/i });
+
+    await userEvent.type(nameInput, "Luka");
+    await userEvent.type(emailInput, "luka@mail.com");
+    await userEvent.type(passwordInput, "password");
+    await userEvent.type(confirmPasswordInput, "password");
+    await userEvent.type(githubUsernameInput, "luka-git");
+
+    await userEvent.click(signUpButton);
+    
+    await waitFor(() => {   
+        expect(axios.post).toHaveBeenCalledTimes(1);
+        expect(
+          screen.getByText("An error occurred. Please try again.")
+        ).toBeInTheDocument();
+    })
+
+});
 
   it("has all input fields", () => {
     expect(screen.getByLabelText("Name")).toBeInTheDocument();
