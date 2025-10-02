@@ -54,12 +54,10 @@ describe("Login Component", () => {
     });
   });
 
-  //   it("should have email and password input fields", () => {
-  //     const { getByLabelText } = render(<Login />);
-
-  //     expect(getByLabelText(/Email address/i)).toBeInTheDocument();
-  //     expect(getByLabelText(/Password/i)).toBeInTheDocument();
-  //   });
+  it("should have email and password input fields", () => {
+    expect(screen.getByLabelText(/Email address/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
+  });
 
   //   it("should have a submit button", () => {
   //     const { getByRole } = render(<Login />);
