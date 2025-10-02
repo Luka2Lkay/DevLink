@@ -71,11 +71,13 @@ function Register() {
 
       <div className="flex flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            src="https://i.postimg.cc/wxSVR0jG/logo.png"
-            alt="logo"
-            className="mx-auto w-auto h-10 rounded-sm"
-          />
+          <Link to={"/"}>
+            <img
+              src="https://i.postimg.cc/wxSVR0jG/logo.png"
+              alt="logo"
+              className="mx-auto w-auto h-10 rounded-sm"
+            />
+          </Link>
           <h2 className="mt-10 text-white text-center font-bold">Sign up</h2>
         </div>
 
