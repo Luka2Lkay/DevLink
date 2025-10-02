@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Link } from "react-router-dom";
 
 function Register() {
   const initialFormFields = {
@@ -199,12 +200,12 @@ function Register() {
 
         <p className="mt-10 text-center text-sm/6 text-gray-400">
           Already have an account?{" "}
-          <a
-            href="#"
+          <Link
+            to={"/login"}
             className="font-semibold text-indigo-500 hover:text-indigo-400"
           >
             Sign in
-          </a>
+          </Link>{" "}
           .
         </p>
       </div>
