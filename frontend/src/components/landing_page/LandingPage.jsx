@@ -15,8 +15,8 @@ function LandingPage() {
             width="50"
             alt="logo"
           />
-          <div className="justify-end text-white hover:text-primary-variant hover:transition text-2xl">
-            <Link to={"/login"} className="mr-5">
+          <div className="justify-end">
+            <Link to={"/login"} className="mr-5 text-base text-white hover:text-primary-variant hover:transition sm:text-xl duration-200 transition-colors ease-in-out font-semibold">
               Login
             </Link>
           </div>
@@ -25,10 +25,10 @@ function LandingPage() {
 
       <main>
         <article className="text-white">
-          <h1 className="text-3xl font-semibold">
+          <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl lg:text-5xl">
             Build Your Portfolio. Grow Your Network. Land Your First Dev Job.
           </h1>
-          <p className="text-xl p-2 text-light">
+          <p className="text-lg p-2 text-light sm:text-xl md:text-2xl mt-5">
             Devlink is the all-in-one platform for early-career developers to
             showcase their work, collaborate on real projects, and connect with
             other developers.
