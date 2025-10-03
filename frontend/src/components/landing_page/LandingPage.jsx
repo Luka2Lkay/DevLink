@@ -11,8 +11,7 @@ function LandingPage() {
         <div className="flex items-center justify-between">
           <img
             src="https://i.postimg.cc/wxSVR0jG/logo.png"
-            className="rounded-sm"
-            width="50"
+            className="rounded-sm w-10 sm:w-15"
             alt="logo"
           />
           <div className="justify-end">
