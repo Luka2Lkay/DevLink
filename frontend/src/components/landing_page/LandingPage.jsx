@@ -36,7 +36,7 @@ function LandingPage() {
 
         <article className="mt-10">
           <h2 className="text-2xl text-white">Key Features</h2>
-          <ul className="grid grid-cols-4 p-2 text-left text-white mt-2">
+          <ul className="grid sm:grid-cols-4 sm:p-2 text-left text-white mt-2 gap-5">
             <li>
               <span className="text-primary-variant">
                 <strong>
