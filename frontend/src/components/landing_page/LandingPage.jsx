@@ -80,7 +80,7 @@ function LandingPage() {
             </li>
           </ul>
 
-          <button className="text-white bg-primary p-2 rounded-lg cursor-pointer hover:bg-primary-variant">
+          <button className="text-white mt-5 bg-primary p-2 rounded-lg cursor-pointer hover:bg-primary-variant">
             Start Building Your Future
           </button>
         </article>
