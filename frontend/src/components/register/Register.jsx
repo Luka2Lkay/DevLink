@@ -2,7 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Link } from "react-router-dom";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import { Link, useNavigate } from "react-router-dom";
 
 function Register() {
   const initialFormFields = {
@@ -19,8 +20,10 @@ function Register() {
     password: "",
     email: "",
     githubUsername: "",
-    server: "",
+    general: "",
   });
+  const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setRegister({
@@ -33,25 +36,31 @@ function Register() {
     e.preventDefault();
 
     const data = { ...register };
-    const baseUrl = "http://localhost:3000/api/users/signup";
+    const baseUrl =
+      "https://super-duper-robot-9q5jrvq5vjjhp96q-3000.app.github.dev/api/users/signup";
 
     if (data.password !== data.confirmPassword) {
       return setError({ ...error, password: "Passwords don't match" });
     }
 
     setLoading(true);
-    setError({ ...error, password: "", server: "" });
+    setError({ ...error, password: "", general: "" });
 
     try {
       await axios.post(baseUrl, data);
       setLoading(false);
       reset();
+      setSuccessMessage("Registered successfully!");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
       setLoading(false);
       if (error.response) {
-        setError({ ...error, server: error.response.data.message });
+        setError({ ...error, general: "User already exists!" });
       } else {
-        setError({ ...error, server: "An error occurred. Please try again." });
+        setError({ ...error, general: "An error occurred. Please try again." });
       }
     }
   };
@@ -64,6 +73,7 @@ function Register() {
     <>
       <div className="flex justify-start">
         <ArrowBackIcon
+          aria-label="back-button"
           className="text-white m-5 text-3xl cursor-pointer"
           onClick={() => window.history.back()}
         />
@@ -79,11 +89,21 @@ function Register() {
             />
           </Link>
           <h2 className="mt-10 text-white text-center font-bold">Sign up</h2>
+
+          {successMessage && (
+            <div className="flex justify-center gap-2">
+              <TaskAltIcon
+                aria-label="check-icon"
+                className="text-green-500 mt-2 text-sm/6"
+              />
+              <p className="text-green-500 mt-2 text-sm/6">{successMessage}</p>
+            </div>
+          )}
         </div>
 
         <div>
           {error && (
-            <p className="text-red-500 mt-2 text-sm/6">{error.server}</p>
+            <p className="text-red-500 mt-2 text-sm/6">{error.general}</p>
           )}
           {loading && <CircularProgress className="mt-2" role="progressbar" />}
         </div>
@@ -204,6 +224,9 @@ function Register() {
             <div>
               <button
                 type="submit"
+                data-testid="sign-up-button"
+                disabled={loading}
+                aria-label="sign-up-button"
                 className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-2 text-sm/6 text-white font-semibold hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:ouline-indigo-500 "
               >
                 Sign up
