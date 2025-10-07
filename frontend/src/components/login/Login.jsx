@@ -130,6 +130,7 @@ function Login() {
               <button
                 type="submit"
                 aria-label="sign-in-button"
+                data-testid="sign-in-button"
                 disabled={loading}
                 className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-2 text-sm/6 text-white font-semibold hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 "
               >
