@@ -119,7 +119,7 @@ const deleteAllInvites = async (req, res) => {
   try {
     await Invite.deleteMany();
 
-    res.status(204).json({ message: "Successlly deleted all invites!" });
+    res.status(204).send();
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -131,7 +131,7 @@ const deleteOneInvite = async (req, res) => {
 
     await Invite.findByIdAndDelete(inviteId);
 
-    res.status(204).json({ message: "Invite deleted!" });
+    res.status(204).send();
   } catch (error) {
     res.status(500).send(error.message);
   }
