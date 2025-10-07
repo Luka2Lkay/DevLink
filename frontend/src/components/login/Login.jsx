@@ -40,7 +40,7 @@ function Login() {
       reset();
     } catch (error) {
       setLoading(false);
-      if (error.response) {
+      if (error.response && error.response.status === 401) {
         setError(error.response.data.message);
       } else {
         setError("An error occurred. Please try again.");
@@ -56,6 +56,7 @@ function Login() {
     <>
       <div className="flex justify-start">
         <ArrowBackIcon
+          aria-label="back-button"
           className="text-white m-5 text-3xl cursor-pointer"
           onClick={() => window.history.back()}
         />
@@ -128,6 +129,8 @@ function Login() {
             <div>
               <button
                 type="submit"
+                aria-label="sign-in-button"
+                disabled={loading}
                 className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-2 text-sm/6 text-white font-semibold hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 "
               >
                 Sign in
