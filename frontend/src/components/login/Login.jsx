@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Login() {
@@ -13,6 +13,7 @@ function Login() {
   const [login, setLogin] = useState(initialFormFields);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setLogin({
@@ -25,7 +26,8 @@ function Login() {
     e.preventDefault();
 
     const data = { ...login };
-    const baseUrl = "http://localhost:3000/api/users/signin";
+    const baseUrl =
+      "https://super-duper-robot-9q5jrvq5vjjhp96q-3000.app.github.dev/api/users/signin";
 
     setLoading(true);
     setError("");
@@ -33,6 +35,8 @@ function Login() {
     try {
       await axios.post(baseUrl, data);
 
+      setLoading(false);
+      navigate("/feed");
       reset();
     } catch (error) {
       setLoading(false);
