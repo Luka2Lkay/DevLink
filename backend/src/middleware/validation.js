@@ -17,9 +17,19 @@ const validateSignup = [
   body("githubUsername").notEmpty().withMessage("githubUsername is required!"),
 ];
 
+const validateSignIn = [
+  body("email").notEmpty().withMessage("email is required!"),
+  body("password").notEmpty().withMessage("password is required!"),
+];
+
 const validateSendInvite = [
   param("id").notEmpty().withMessage("id is required!"),
   body("toUserId").notEmpty().withMessage("toUserId is required!"),
 ];
 
-module.exports = { validateCreateProject, validateSignup, validateSendInvite };
+module.exports = {
+  validateCreateProject,
+  validateSignIn,
+  validateSignup,
+  validateSendInvite,
+};

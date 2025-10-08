@@ -24,7 +24,7 @@ describe("Login Component", () => {
 
     const emailInput = screen.getByTestId("email-input");
     const passwordInput = screen.getByTestId("password-input");
-    const signInButton = screen.getByRole("button", { name: /Sign in/i });
+    const signInButton = screen.getByTestId("sign-in-button");
 
     await userEvent.type(emailInput, "luka@gmail.com");
     await userEvent.type(passwordInput, "password");
@@ -44,7 +44,7 @@ describe("Login Component", () => {
 
     const emailInput = screen.getByTestId("email-input");
     const passwordInput = screen.getByTestId("password-input");
-    const signInButton = screen.getByRole("button", { name: /Sign in/i });
+    const signInButton = screen.getByTestId("sign-in-button");
 
     await userEvent.type(emailInput, "luka@gmail.com");
     await userEvent.type(passwordInput, "password");
@@ -65,8 +65,6 @@ describe("Login Component", () => {
   });
 
   it("should have a submit button", () => {
-    expect(
-      screen.getByRole("button", { name: /Sign In/i })
-    ).toBeInTheDocument();
+    expect(screen.getByTestId("sign-in-button")).toBeInTheDocument();
   });
 });

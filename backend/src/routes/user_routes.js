@@ -1,19 +1,25 @@
 const express = require("express");
-const {signUp, deleteAllUsers, deleteOneUser, getAllUsers, getOneUser, signIn} = require("../controllers/user_controller")
-const {validateSignup} = require("../middleware/validation");
+const {
+  signUp,
+  deleteAllUsers,
+  deleteOneUser,
+  getAllUsers,
+  getOneUser,
+  signIn,
+} = require("../controllers/user_controller");
+const { validateSignup, validateSignIn } = require("../middleware/validation");
 
 const userRoutes = (app) => {
+  const router = express.Router();
 
-const router = express.Router();
+  router.post("/signup", validateSignup, signUp);
+  router.post("/signin", validateSignIn, signIn);
+  router.delete("/delete-user/:id", deleteOneUser);
+  router.delete("/delete-all-users", deleteAllUsers);
+  router.get("/get-all-users", getAllUsers);
+  router.get("/get-user/:id", getOneUser);
 
-router.post("/signup", validateSignup, signUp);
-router.post("/signin", signIn);
-router.delete("/delete-user/:id", deleteOneUser);
-router.delete("/delete-all-users", deleteAllUsers);
-router.get("/get-all-users", getAllUsers);
-router.get("/get-user/:id", getOneUser);
-
-app.use("/api/users", router);
+  app.use("/api/users", router);
 };
 
-module.exports = {userRoutes};
+module.exports = { userRoutes };

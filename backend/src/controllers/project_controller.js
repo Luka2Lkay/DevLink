@@ -50,7 +50,7 @@ const deleteOneProject = async (req, res) => {
 
     await Project.findByIdAndDelete(projectId);
 
-    res.status(204).json({ message: "Project successfully deleted!" });
+    res.status(204).send();
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -61,7 +61,7 @@ const deleteAllProjects = async (req, res) => {
     await Project.deleteMany();
     await Invite.deleteMany();
 
-    res.status(204).json({ message: "Successfully deleted all projects!" });
+    res.status(204).send();
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -111,7 +111,7 @@ const updateProject = async (req, res) => {
 
     await Project.findByIdAndUpdate(projectId, req.body);
 
-    res.status(204).json({ message: "Project successfully updated!" });
+    res.status(204).send();
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -143,8 +143,8 @@ const githubRepoCommits = async (req, res) => {
   try {
     const githubToken = process.env.GITHUB_TOKEN;
     const githubHeaders = {
-      Authorization: `token ${githubToken}`
-    }
+      Authorization: `token ${githubToken}`,
+    };
     const projectId = req.params.id;
     const project = await Project.findById(projectId);
 
@@ -157,7 +157,7 @@ const githubRepoCommits = async (req, res) => {
     const repo = splitUrl[splitUrl.length - 1].replace(".git", "");
 
     const repoUrl = `https://api.github.com/repos/${owner}/${repo}`;
-    const repoResponse = await axios.get(repoUrl, {headers: githubHeaders});
+    const repoResponse = await axios.get(repoUrl, { headers: githubHeaders });
 
     if (repoResponse.data.private === true) {
       return res
@@ -165,7 +165,9 @@ const githubRepoCommits = async (req, res) => {
         .json({ message: "Repository is private. Commits cannot be fetched." });
     }
 
-    const commitsResponse = await axios.get(`${repoUrl}/commits`, {headers: githubHeaders});
+    const commitsResponse = await axios.get(`${repoUrl}/commits`, {
+      headers: githubHeaders,
+    });
 
     const commits = commitsResponse.data.map((commit) => ({
       sha: commit.sha,

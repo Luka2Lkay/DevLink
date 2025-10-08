@@ -27,7 +27,7 @@ describe("Register Component", () => {
     const passwordInput = screen.getByTestId("password-id");
     const confirmPasswordInput = screen.getByTestId("confirm-password-id");
     const githubUsernameInput = screen.getByTestId("github-username-id");
-    const signUpButton = screen.getByRole("button", { name: /sign up/i });
+    const signUpButton = screen.getByTestId("sign-up-button");
 
     await userEvent.type(nameInput, "Luka");
     await userEvent.type(emailInput, "luka@gmail.com");
@@ -51,7 +51,7 @@ describe("Register Component", () => {
     const passwordInput = screen.getByTestId("password-id");
     const confirmPasswordInput = screen.getByTestId("confirm-password-id");
     const githubUsernameInput = screen.getByTestId("github-username-id");
-    const signUpButton = screen.getByRole("button", { name: /sign up/i });
+    const signUpButton = screen.getByTestId("sign-up-button");
 
     await userEvent.type(nameInput, "Luka");
     await userEvent.type(emailInput, "luka@mail.com");
@@ -78,9 +78,7 @@ describe("Register Component", () => {
   });
 
   it("has a submit button", () => {
-    expect(
-      screen.getByRole("button", { name: /sign up/i })
-    ).toBeInTheDocument();
+    expect(screen.getByTestId("sign-up-button")).toBeInTheDocument();
   });
 
   it("has a link to sign in", () => {

@@ -11,12 +11,11 @@ function LandingPage() {
         <div className="flex items-center justify-between">
           <img
             src="https://i.postimg.cc/wxSVR0jG/logo.png"
-            className="rounded-sm"
-            width="50"
+            className="rounded-sm w-10 sm:w-15"
             alt="logo"
           />
-          <div className="justify-end text-white hover:text-primary-variant hover:transition text-2xl">
-            <Link to={"/login"} className="mr-5">
+          <div className="justify-end">
+            <Link to={"/login"} className="mr-5 text-base text-white hover:text-primary-variant hover:transition sm:text-xl duration-200 transition-colors ease-in-out font-semibold">
               Login
             </Link>
           </div>
@@ -25,10 +24,10 @@ function LandingPage() {
 
       <main>
         <article className="text-white">
-          <h1 className="text-3xl font-semibold">
+          <h1 className="text-2xl font-semibold sm:text-3xl md:text-4xl lg:text-5xl">
             Build Your Portfolio. Grow Your Network. Land Your First Dev Job.
           </h1>
-          <p className="text-xl p-2 text-light">
+          <p className="text-lg p-2 text-light sm:text-xl md:text-2xl mt-5">
             Devlink is the all-in-one platform for early-career developers to
             showcase their work, collaborate on real projects, and connect with
             other developers.
@@ -37,7 +36,7 @@ function LandingPage() {
 
         <article className="mt-10">
           <h2 className="text-2xl text-white">Key Features</h2>
-          <ul className="grid grid-cols-4 p-2 text-left text-white mt-2">
+          <ul className="grid sm:grid-cols-4 sm:p-2 text-left text-white mt-2 gap-5">
             <li>
               <span className="text-primary-variant">
                 <strong>
@@ -81,7 +80,7 @@ function LandingPage() {
             </li>
           </ul>
 
-          <button className="text-white bg-primary p-2 rounded-lg cursor-pointer hover:bg-primary-variant">
+          <button className="text-white mt-5 bg-primary p-2 rounded-lg cursor-pointer hover:bg-primary-variant">
             Start Building Your Future
           </button>
         </article>

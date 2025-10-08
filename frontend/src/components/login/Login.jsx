@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Login() {
@@ -13,6 +13,7 @@ function Login() {
   const [login, setLogin] = useState(initialFormFields);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setLogin({
@@ -25,7 +26,8 @@ function Login() {
     e.preventDefault();
 
     const data = { ...login };
-    const baseUrl = "http://localhost:3000/api/users/signin";
+    const baseUrl =
+      "https://super-duper-robot-9q5jrvq5vjjhp96q-3000.app.github.dev/api/users/signin";
 
     setLoading(true);
     setError("");
@@ -33,10 +35,12 @@ function Login() {
     try {
       await axios.post(baseUrl, data);
 
+      setLoading(false);
+      navigate("/feed");
       reset();
     } catch (error) {
       setLoading(false);
-      if (error.response) {
+      if (error.response && error.response.status === 401) {
         setError(error.response.data.message);
       } else {
         setError("An error occurred. Please try again.");
@@ -52,6 +56,7 @@ function Login() {
     <>
       <div className="flex justify-start">
         <ArrowBackIcon
+          aria-label="back-button"
           className="text-white m-5 text-3xl cursor-pointer"
           onClick={() => window.history.back()}
         />
@@ -124,6 +129,9 @@ function Login() {
             <div>
               <button
                 type="submit"
+                aria-label="sign-in-button"
+                data-testid="sign-in-button"
+                disabled={loading}
                 className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-2 text-sm/6 text-white font-semibold hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 "
               >
                 Sign in

@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const { secretKey } = require("../config/auth_key_config");
 
 const verifyToken = (req, res, next) => {
-  const token = req.header("x-access-token");
+  const token = req.header("Authorization");
 
   if (!token) {
     return res.status(401).json({ message: "Access denied!" });
