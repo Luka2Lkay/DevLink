@@ -48,12 +48,12 @@
 `DELETE /api/users/delete-user/{id}`
 
 - **Request:** No body required.
-- **Response (204 No Content):** Outputs the message, `The user is successfully deleted!`.
+- **Response (204 No Content):** No output.
 
 `DELETE /api/users/delete-all-users`
 
 - **Request:** No body required.
-- **Response (204 No Content):** Outputs the message, `Successfully deleted all users!`
+- **Response (204 No Content):** No output.
 
 `GET /api/users/get-all-users`
 
@@ -75,12 +75,12 @@
 `DELETE /api/projects/delete-project/{id}`
 
 - **Request:** No body required.
-- **Response (204 No Content):** Outputs the message, `Project successfully deleted!`.
+- **Response (204 No Content):** No output.
 
 `DELETE /api/projects/delete-all-projects`
 
 **Request:** No body required.
-**Response (204 No Content):** Outputs the message, `Successfully deleted all projects!`.
+**Response (204 No Content):** No output.
 
 `GET /api/projects/get-project/{id}`
 
@@ -95,7 +95,7 @@
 `PUT /api/projects/update-project/{id}`
 
 - **Request Body:** A JSON object with the fields you want to update.
-- **Response (204 Ok):** Outputs the message, `successfully updated!`.
+- **Response (204 Ok):** No output.
 
 `GET /api/projects/projects-by-user/{id}`
 
@@ -117,12 +117,12 @@
 `DELETE /api/invites/delete-invite/{id}`
 
 - **Request:** No body required.
-- **Response (204 No Content):** Outputs the message, `Invite deleted!`.
+- **Response (204 No Content):** No output.
 
 `DELETE /api/invites/delete-all-invites`
 
 - **Request:** No body required.
-- **Response (204 No Content):** Outputs the message, `Successlly deleted all invites!`.
+- **Response (204 No Content):** No output.
 
 `PATCH /api/invites/:id`
 
