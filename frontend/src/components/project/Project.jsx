@@ -1,4 +1,4 @@
-function Project({ title, description, owner, contributors = [] }) {
+function Project({ title, description, owner, collaborators = [] }) {
   return (
     <div className="max-w-sm mx-auto bg-white rounded-xl shadow-lg overflow-hidden md:max-w-2xl transform hover:scale-[1.02] transition duration-3000 ease-in-out">
       <div className="p-6">
@@ -25,7 +25,12 @@ function Project({ title, description, owner, contributors = [] }) {
             <span className="text-xs font-semibold uppercase tracking-wider text-indigo-600 block mb-2">
               Collaborators:
             </span>
-            <div className="flex -space-x-2 overflow-hidden"></div>
+            <div className="flex -space-x-2 overflow-hidden">
+              {collaborators.map((collaborator, index) => (
+
+                <p>hey</p>
+              ))}
+            </div>
           </div>
         </div>
       </div>
