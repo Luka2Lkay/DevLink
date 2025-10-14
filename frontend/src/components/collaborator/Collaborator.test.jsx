@@ -1,7 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import Collaborator from './Collaborator';
 
-
 describe('Collaborator', () => {
     it('renders the initials correctly', () => {
         render(<Collaborator initials="AB" />);
