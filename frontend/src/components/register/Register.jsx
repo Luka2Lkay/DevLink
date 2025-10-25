@@ -37,7 +37,7 @@ function Register() {
 
     const data = { ...register };
     const baseUrl =
-      "https://super-duper-robot-9q5jrvq5vjjhp96q-3000.app.github.dev/api/users/signup";
+      "http://localhost:3000/api/users/signup";
 
     if (data.password !== data.confirmPassword) {
       return setError({ ...error, password: "Passwords don't match" });

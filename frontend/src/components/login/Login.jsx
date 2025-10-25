@@ -27,7 +27,7 @@ function Login() {
 
     const data = { ...login };
     const baseUrl =
-      "https://super-duper-robot-9q5jrvq5vjjhp96q-3000.app.github.dev/api/users/signin";
+      "http://localhost:3000/api/users/signin";
 
     setLoading(true);
     setError("");

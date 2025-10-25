@@ -12,7 +12,7 @@ const { inviteRoutes } = require("./src/routes/invite_routes");
 
 app.use(
   cors({
-    origin: "https://super-duper-robot-9q5jrvq5vjjhp96q-5173.app.github.dev",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 200,
