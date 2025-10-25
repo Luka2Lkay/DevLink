@@ -12,7 +12,7 @@ const { inviteRoutes } = require("./src/routes/invite_routes");
 
 app.use(
   cors({
-    origin: "https://scaling-happiness-4gvw54gvxgq3j546-5173.app.github.dev",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 200,

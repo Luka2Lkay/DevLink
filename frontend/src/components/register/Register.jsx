@@ -37,7 +37,7 @@ function Register() {
 
     const data = { ...register };
     const baseUrl =
-      "https://scaling-happiness-4gvw54gvxgq3j546-3000.app.github.dev/users/signup";
+      "http://localhost:3000/api/users/signup";
 
     if (data.password !== data.confirmPassword) {
       return setError({ ...error, password: "Passwords don't match" });
