@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 const User = require("../models/user_model");
 const Invite = require("../models/invite_model");
 const axios = require("axios");
+const { MongoMissingCredentialsError } = require("mongodb");
 require("dotenv").config();
 
 const createProject = async (req, res) => {
@@ -84,7 +85,7 @@ const getOneProject = async (req, res) => {
 
 const getAllProjects = async (req, res) => {
   try {
-    const projects = await Project.find();
+    const projects = await Project.find().populate("owner", "name").populate("collaborators", "username email");
 
     res.status(200).json({ projects });
   } catch (error) {
