@@ -3,6 +3,7 @@ import Project from "../project/Project";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjects } from "../../state/thunk/project_thunk.js";
 import { selectProjects } from "../../state/reducers/project_slice.js";
+import { Link } from "react-router-dom";
 
 function Feed() {
   const dispatch = useDispatch();
@@ -11,20 +12,22 @@ function Feed() {
 
   useEffect(() => {
     dispatch(fetchProjects());
-
-    console.log(projects);
-
   }, [dispatch]);
 
   return (
     <div>
-      <h1 className="text-white">Dashboard</h1>
+
+      <div className="flex justify-end text-red-500 mb-2">
+        <Link to={"/"} onClick={() => sessionStorage.clear()}>Logout</Link>
+      </div>
+
+      <p className="text-white mb-4">Welcome to your project dashboard! Here you can find all your projects and collaborate with your team.</p>
 
       {projects.length === 0 ? (
         <p className="text-white">No projects available.</p>
       ) : (
         projects.map((project) => (
-          <Project key={project.id} title={project.title} owner={project.owner.name} description={project.description} collaborators={project.collaborators} />
+          <Project key={project.id} project={project} />
         ))
       )
       }

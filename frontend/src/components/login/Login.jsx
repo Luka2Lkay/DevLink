@@ -35,7 +35,7 @@ function Login() {
     try {
       const response = await axios.post(baseUrl, data);
 
-      localStorage.setItem("token", response.data.token);
+      sessionStorage.setItem("user", JSON.stringify(response.data));
       setLoading(false);
       navigate("/feed");
       reset();

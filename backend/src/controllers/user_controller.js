@@ -62,7 +62,7 @@ const signIn = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
@@ -72,12 +72,12 @@ const signIn = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { userId: user.id, name: user.name, githubUsername: user.githubUsername },
+      { userId: user.id, name: user.name},
       secretKey.key,
       { expiresIn: "1h" }
     );
 
-    res.status(200).json({ token });
+    res.status(200).json({ token, userId: user.id, name: user.name, githubUsername: user.githubUsername });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

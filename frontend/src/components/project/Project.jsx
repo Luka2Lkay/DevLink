@@ -1,16 +1,17 @@
 import { v4 as uuidv4 } from 'uuid';
 import Collaborator from '../collaborator/Collaborator';
+import EditIcon from '@mui/icons-material/Edit';
 
-function Project({ title, description, owner, collaborators = [] }) {
+function Project({ project }) {
   return (
     <div className="max-w-sm mx-auto bg-white rounded-xl shadow-lg overflow-hidden md:max-w-2xl transform hover:scale-[1.02] transition duration-3000 ease-in-out mb-2">
       <div className="p-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">
-          {title || "Project Title"}
+          {project.title || "Project Title"}
         </h2>
 
         <p className="mt-2 text-gray-700 text-sm">
-          {description ||
+          {project.description ||
             "Project description goes here. This is a brief overview of what the project is about."}
         </p>
 
@@ -20,7 +21,7 @@ function Project({ title, description, owner, collaborators = [] }) {
           </span>
           <div className='mb-2'>
             <span className="text-sm font-medium text-gray-700">
-              {owner || "Owner Name"}
+              {project.owner.name || "Owner Name"}
             </span>
           </div>
 
@@ -29,14 +30,20 @@ function Project({ title, description, owner, collaborators = [] }) {
               Collaborators:
             </span>
             <div className="flex -space-x-2 overflow-hidden">
-              {collaborators.length === 0 ? (
+              {project.collaborators.length === 0 ? (
                 <span className="w-full text-sm text-gray-500 flex justify-center items-center">No collaborators</span>
               ) : (
-                collaborators.map((collaborator) => (
+                project.collaborators.map((collaborator) => (
                   <Collaborator key={uuidv4()} initials={collaborator.initials} />
                 ))
               )}
             </div>
+          </div>
+          <div className='flex'>
+
+            {project.owner._id === JSON.parse(sessionStorage.getItem("user")).userId && (
+              <EditIcon className='mt-4 cursor-pointer text-gray-600 hover:text-gray-800' />
+            )}
           </div>
         </div>
       </div>

@@ -6,9 +6,10 @@ export const fetchProjects = createAsyncThunk(
     'projects/fetchProjects',
     async (_, { dispatch }) => {
         try {
+            const user = sessionStorage.getItem('user');
             const response = await axios.get('http://localhost:3000/api/projects/get-all-projects', {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    Authorization: `Bearer ${JSON.parse(user).token}`,
                 },
             });
 
