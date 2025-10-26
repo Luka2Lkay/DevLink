@@ -37,3 +37,21 @@ export const updateProjectThunk = createAsyncThunk(
     }
 );
 
+export const deleteProjectThunk = createAsyncThunk(
+    'projects/deleteProject',
+    async (projectId, { rejectWithValue }) => {
+        try {
+            const user = sessionStorage.getItem('user');
+            const response = await axios.delete(`http://localhost:3000/api/projects/delete-project/${projectId}`, {
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(user).token}`,
+                },
+            });
+            
+            return response.data;
+        } catch (error) {
+            return rejectWithValue("Failed to delete project", error.response.data);
+        }
+    }
+);
+

@@ -29,10 +29,10 @@ function Feed() {
     setDeleteConfirmationOpen(true);
   }
 
-  const handleSave = async (payload) => {
+  const handleSave = async (project) => {
     try {
-      if (payload.id) {
-        await dispatch(updateProjectThunk(payload));
+      if (project.id) {
+        await dispatch(updateProjectThunk(project));
         await dispatch(fetchProjectsThunk());
       } else {
         // New project, add logic
@@ -42,6 +42,14 @@ function Feed() {
       dispatch(setCurrentProject(null));
     } catch (error) {
       console.error("Failed to update project:", error.message);
+    }
+  }
+
+  const handleDelete = (project) => {
+    try {
+console.log("Deleting project:", project);
+    } catch (error) {
+      console.error("Failed to delete project:", error.message);
     }
   }
 
@@ -80,6 +88,7 @@ function Feed() {
                   className="bg-red-500 text-white px-4 py-2 rounded-md"
                   onClick={() => {
                     setDeleteConfirmationOpen(false);
+                    handleDelete(currentProject);
                   }}
                 >
                   Delete
