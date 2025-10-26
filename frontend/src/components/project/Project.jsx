@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useState } from 'react';
 
-function Project({ project, handleClick = () => { } }) {
+function Project({ project, handleEditClick = () => { }, handleDeleteClick = () => { } }) {
   const [visible, setVisible] = useState("hidden");
 
   return (
@@ -52,7 +52,7 @@ function Project({ project, handleClick = () => { } }) {
                 <MoreVertIcon onClick={(() => visible === '' ? setVisible('hidden') : setVisible(''))} className="text-gray-600 float-right mb-2 mt-2 cursor-pointer" />
                 <button
                   type="button"
-                  onClick={handleClick}
+                  onClick={handleEditClick}
                   className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50`}
                 >
                   <EditIcon sx={{ fontSize: 20 }} className="text-gray-600 hover:text-blue-500" />
@@ -60,6 +60,7 @@ function Project({ project, handleClick = () => { } }) {
 
                 <button
                   type="button"
+                  onClick={handleDeleteClick}
                   className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50`}
                 >
                   <DeleteIcon sx={{ fontSize: 20 }} className="text-red-500 hover:text-red-700" />                </button>

@@ -13,6 +13,7 @@ function Feed() {
   const projects = useSelector(selectProjects);
   const currentProject = useSelector(selectCurrentProject);
   const [modalOpen, setModalOpen] = useState(false);
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchProjectsThunk());
@@ -21,6 +22,11 @@ function Feed() {
   const handleEditClick = (project) => {
     dispatch(setCurrentProject(project));
     setModalOpen(true);
+  }
+
+  const handleDeleteClick = (project) => {
+    dispatch(setCurrentProject(project));
+    setDeleteConfirmationOpen(true);
   }
 
   const handleSave = async (payload) => {
@@ -52,9 +58,36 @@ function Feed() {
         <p className="text-white">No projects available.</p>
       ) : (
         projects.map((project) => (
-          <Project key={project.id} project={project} handleClick={() => handleEditClick(project)} />
+          <Project key={project.id} project={project} handleEditClick={() => handleEditClick(project)} handleDeleteClick={() => handleDeleteClick(project)} />
         ))
       )
+      }
+
+      {
+        deleteConfirmationOpen && (
+          <Modal open={deleteConfirmationOpen} onClose={() => setDeleteConfirmationOpen(false)}>
+            <div className="bg-white p-6 rounded-md shadow-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <h2 className="text-lg font-semibold text-center mb-4">Confirm Deletion</h2>
+              <p className="mb-4">Are you sure you want to delete the project "{currentProject.title}"?</p>
+              <div className="flex justify-center">
+                <button
+                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md mr-2"
+                  onClick={() => setDeleteConfirmationOpen(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="bg-red-500 text-white px-4 py-2 rounded-md"
+                  onClick={() => {
+                    setDeleteConfirmationOpen(false);
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </Modal>
+        )
       }
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
