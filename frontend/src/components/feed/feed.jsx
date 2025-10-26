@@ -22,17 +22,20 @@ function Feed() {
     setShowForm(true);
   }
 
-  const handleSave = (payload) => {
-    if (payload.id) {
-      // Existing project, update logic
-      dispatch(updateProjectThunk(payload));
-      dispatch(fetchProjectsThunk());
-    } else {
-      // New project, add logic
-      // dispatch(addProjectThunk(payload));
+  const handleSave = async (payload) => {
+    try {
+      if (payload.id) {
+        await dispatch(updateProjectThunk(payload));
+        await dispatch(fetchProjectsThunk());
+      } else {
+        // New project, add logic
+        // dispatch(addProjectThunk(payload));
+      }
+      setShowForm(false);
+      dispatch(setCurrentProject(null));
+    } catch (error) {
+      console.error("Failed to update project:", error.message);
     }
-    setShowForm(false);
-    dispatch(setCurrentProject(null));
   }
 
   return (
