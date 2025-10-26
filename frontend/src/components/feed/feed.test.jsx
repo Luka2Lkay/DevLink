@@ -5,10 +5,6 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import projectReducer from '../../state/reducers/project_slice.js';
 
-vitest.mock('../../state/thunk/project_thunk.js', () => ({
-    fetchProjectsThunk: vitest.fn(() => () => Promise.resolve()),
-}));
-
 describe('Feed', () => {
     let store;
 
