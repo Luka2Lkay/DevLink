@@ -1,8 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
 import Collaborator from '../collaborator/Collaborator';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useState } from 'react';
 
 function Project({ project, handleClick = () => { } }) {
+  const [visible, setVisible] = useState("hidden");
 
   return (
     <div className="max-w-sm mx-auto bg-white rounded-xl shadow-lg overflow-hidden md:max-w-2xl transform hover:scale-[1.02] transition duration-3000 ease-in-out mb-2">
@@ -40,11 +44,29 @@ function Project({ project, handleClick = () => { } }) {
               )}
             </div>
           </div>
-          <div className='flex'>
+          <div className='flex flex-col justify-end'>
 
             {project && sessionStorage.getItem("user") && (project.owner._id === JSON.parse(sessionStorage.getItem("user")).userId) && (
-              <EditIcon className='mt-4 cursor-pointer text-gray-600 hover:text-blue-500' onClick={handleClick} />
+              <>
+
+                <MoreVertIcon onClick={(() => visible === '' ? setVisible('hidden') : setVisible(''))} className="text-gray-600 float-right mb-2 mt-2 cursor-pointer" />
+                <button
+                  type="button"
+                  onClick={handleClick}
+                  className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50`}
+                >
+                  <EditIcon sx={{ fontSize: 20 }} className="text-gray-600 hover:text-blue-500" />
+                </button>
+
+                <button
+                  type="button"
+                  className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50`}
+                >
+                  <DeleteIcon sx={{ fontSize: 20 }} className="text-red-500 hover:text-red-700" />                </button>
+              </>
+
             )}
+
           </div>
         </div>
       </div>
