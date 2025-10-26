@@ -20,6 +20,14 @@ const projectSlice = createSlice({
         setProjects(state, action) {
             state.projects = action.payload;
         },
+        updateProject(state, action) {
+            const index = state.projects.findIndex(
+                (project) => project.id === action.payload.id
+            );
+            if (index !== -1) {
+                state.projects[index] = action.payload;
+            }   
+        },
         setError(state, action) {
             state.error = action.payload;
         }
@@ -33,6 +41,7 @@ export const {
     setCurrentProject,
     addProject,
     setProjects,
+    updateProject,
     setError
 } = projectSlice.actions;
 

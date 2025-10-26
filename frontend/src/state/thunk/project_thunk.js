@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { setProjects, setError } from "../reducers/project_slice";
+import { setProjects, updateProject, setError } from "../reducers/project_slice";
 
-export const fetchProjects = createAsyncThunk(
+export const fetchProjectsThunk = createAsyncThunk(
     'projects/fetchProjects',
     async (_, { dispatch }) => {
         try {
@@ -21,3 +21,24 @@ export const fetchProjects = createAsyncThunk(
         }
     }
 );
+
+export const updateProjectThunk = createAsyncThunk(
+    'projects/updateProject',
+    async (projectData, { dispatch }) => {
+        try {
+            const user = sessionStorage.getItem('user');
+            const response = await axios.put(`http://localhost:3000/api/projects/update-project/${projectData.id}`, projectData, {
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(user).token}`,
+                },
+            });
+            console.log("Updated project response:", response.data);
+            // dispatch(updateProject(response.data));
+            return response.data;
+        } catch (error) {
+            dispatch(setError("Failed to update project"));
+            throw new Error(error.response.data);
+        }
+    }
+);
+
