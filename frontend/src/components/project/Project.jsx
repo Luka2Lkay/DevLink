@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Collaborator from '../collaborator/Collaborator';
 import EditIcon from '@mui/icons-material/Edit';
 
-function Project({ project, handleClick=()=>{} }) {
+function Project({ project, handleClick = () => { } }) {
 
   return (
     <div className="max-w-sm mx-auto bg-white rounded-xl shadow-lg overflow-hidden md:max-w-2xl transform hover:scale-[1.02] transition duration-3000 ease-in-out mb-2">
@@ -42,8 +42,8 @@ function Project({ project, handleClick=()=>{} }) {
           </div>
           <div className='flex'>
 
-            {project.owner._id === JSON.parse(sessionStorage.getItem("user")).userId && (
-              <EditIcon className='mt-4 cursor-pointer text-gray-600 hover:text-blue-500' onClick={handleClick}/>
+            {project && sessionStorage.getItem("user") && (project.owner._id === JSON.parse(sessionStorage.getItem("user")).userId) && (
+              <EditIcon className='mt-4 cursor-pointer text-gray-600 hover:text-blue-500' onClick={handleClick} />
             )}
           </div>
         </div>

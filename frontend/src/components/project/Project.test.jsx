@@ -8,11 +8,11 @@ describe("Project component", () => {
         render(
             <MemoryRouter>
                 <Project
-                    title="Test Project"
-                    description="This is a test project"
-                    owner="Test Owner"
-                    collaborators={[{ initials: "TP" }]}
-                />
+                    project={{
+                    title:"Test Project",
+                    description:"This is a test project",
+                    owner:{_id: "Test id", name: "Test Owner"},
+                    collaborators:[{ initials: "TP" }]}}/>
             </MemoryRouter>
         )
     })
