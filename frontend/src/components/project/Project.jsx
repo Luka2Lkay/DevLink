@@ -31,10 +31,10 @@ function Project({ project, handleClick = () => { } }) {
               Collaborators:
             </span>
             <div className="flex -space-x-2 overflow-hidden">
-              {project.collaborators.length === 0 ? (
+              {project.collaborators && project.collaborators.length === 0 ? (
                 <span className="w-full text-sm text-gray-500 flex justify-center items-center">No collaborators</span>
               ) : (
-                project.collaborators.map((collaborator) => (
+                project.collaborators && project.collaborators.map((collaborator) => (
                   <Collaborator key={uuidv4()} initials={collaborator.initials} />
                 ))
               )}
