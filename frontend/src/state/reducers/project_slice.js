@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchProjectsThunk, updateProjectThunk } from '../thunk/project_thunk';
 
 const initialState = {
     currentProject: null,
     projects: [],
     error: null,
-
+    loading: false,
 };
 
 const projectSlice = createSlice({
@@ -26,12 +27,27 @@ const projectSlice = createSlice({
             );
             if (index !== -1) {
                 state.projects[index] = action.payload;
-            }   
+            }
         },
         setError(state, action) {
             state.error = action.payload;
         }
     },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchProjectsThunk.pending, (state) => {
+                state.error = null;
+                state.loading = true;
+            })
+            .addCase(fetchProjectsThunk.fulfilled, (state, action) => {
+                state.projects = action.payload;
+                state.loading = false;
+            })
+            .addCase(fetchProjectsThunk.rejected, (state, action) => {
+                state.error = action.payload;
+                state.loading = false;
+            })
+    }
 });
 
 export const selectProjects = (state) => state.project.projects;

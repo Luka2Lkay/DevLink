@@ -39,7 +39,7 @@ function AddProject({ project = {}, onSave = () => { } }) {
 
   return (
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm bg-gray-800 p-4">
-      <h2 className="text-white">{project.id ? (isEditing ? "Edit Project" : "Project") : "Add New Project"}</h2>
+      <h2 className="text-white text-center">{project.id ? "Edit Project" : "Add New Project"}</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label

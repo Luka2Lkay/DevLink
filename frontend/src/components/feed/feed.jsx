@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProjectsThunk, updateProjectThunk } from "../../state/thunk/project_thunk.js";
 import { selectProjects, selectCurrentProject, setCurrentProject } from "../../state/reducers/project_slice.js";
 import { Link } from "react-router-dom";
+import Modal from "@mui/material/Modal";
 
 function Feed() {
   const dispatch = useDispatch();
 
   const projects = useSelector(selectProjects);
   const currentProject = useSelector(selectCurrentProject);
-  const [showForm, setShowForm] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchProjectsThunk());
@@ -19,7 +20,7 @@ function Feed() {
 
   const handleEditClick = (project) => {
     dispatch(setCurrentProject(project));
-    setShowForm(true);
+    setModalOpen(true);
   }
 
   const handleSave = async (payload) => {
@@ -31,7 +32,7 @@ function Feed() {
         // New project, add logic
         // dispatch(addProjectThunk(payload));
       }
-      setShowForm(false);
+      setModalOpen(false);
       dispatch(setCurrentProject(null));
     } catch (error) {
       console.error("Failed to update project:", error.message);
@@ -47,11 +48,6 @@ function Feed() {
 
       <p className="text-white mb-4">Welcome to your project dashboard! Here you can find all your projects and collaborate with your team.</p>
 
-      {showForm && (
-        <div className="mb-4 p-4 border border-gray-300 rounded-lg bg-white">
-          <AddProject project={currentProject || {}} onSave={handleSave} />
-        </div>)}
-
       {projects.length === 0 ? (
         <p className="text-white">No projects available.</p>
       ) : (
@@ -60,6 +56,10 @@ function Feed() {
         ))
       )
       }
+
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <AddProject project={currentProject || {}} onSave={handleSave} />
+      </Modal>
     </div>
   );
 }
