@@ -46,9 +46,9 @@ PORT=<PORT_NUMBER>
 
 `npm run dev`
 
-## Link to live deployments
+## Link to live deployment
 
-_COMMING SOON!_
+https://devlink-react-frontend.onrender.com/
 
 ## Database configuration
 
