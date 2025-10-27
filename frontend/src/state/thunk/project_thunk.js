@@ -14,7 +14,7 @@ export const fetchProjectsThunk = createAsyncThunk(
 
             return response.data.projects;
         } catch (error) {
-            return rejectWithValue("Failed to fetch projects", error.response.data);
+            return rejectWithValue("Failed to fetch projects: ", error.response.data);
         }
     }
 );
@@ -32,7 +32,7 @@ export const updateProjectThunk = createAsyncThunk(
 
             return response.data;
         } catch (error) {
-            return rejectWithValue("Failed to update project", error.response.data);
+            return rejectWithValue("Failed to update project: ", error.response.data);
         }
     }
 );
@@ -47,11 +47,30 @@ export const deleteProjectThunk = createAsyncThunk(
                     Authorization: `Bearer ${JSON.parse(user).token}`,
                 },
             });
-            
+
             return response.data;
         } catch (error) {
-            return rejectWithValue("Failed to delete project", error.response.data);
+            return rejectWithValue("Failed to delete project: ", error.response.data);
         }
     }
 );
+
+export const addProjectThunk = createAsyncThunk("projects/addProjects",
+    async (projectData, { rejectWithValue }) => {
+
+        try {
+
+            const user = sessionStorage.getItem("user");
+            const response = await axios.post("http://localhost:3000/api/projects/add-project", projectData, {
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(user).token}`
+                }
+            })
+
+            return response.data;
+
+        } catch (error) {
+            return rejectWithValue("Failed to add project: ", error.response.data)
+        }
+    })
 
