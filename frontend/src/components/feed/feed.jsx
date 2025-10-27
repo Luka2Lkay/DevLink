@@ -14,6 +14,7 @@ function Feed() {
   const currentProject = useSelector(selectCurrentProject);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     dispatch(fetchProjectsThunk());
@@ -21,6 +22,7 @@ function Feed() {
 
   const handleEditClick = (project) => {
     dispatch(setCurrentProject(project));
+    setIsEditing(true);
     setModalOpen(true);
   }
 
@@ -28,6 +30,13 @@ function Feed() {
     dispatch(setCurrentProject(project));
     setDeleteConfirmationOpen(true);
   }
+
+  const handleAddClick = () => { 
+    setModalOpen(true); 
+    setIsEditing(false); 
+    dispatch(setCurrentProject(null));
+    console.log("Add Project Clicked");
+  };
 
   const handleSave = async (project) => {
     try {
@@ -64,10 +73,11 @@ function Feed() {
         <Link to={"/"} onClick={() => sessionStorage.clear()}>Logout</Link>
       </div>
 
-      <p className="text-white mb-4">Welcome to your project dashboard! Here you can find all your projects and collaborate with your team.</p>
-
-      {/* 1 - Add an icon for adding projects here
-2 - It should have a click event for displaying a modal so the user can add a new project*/}
+      <button
+        className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4"
+        onClick={handleAddClick}>
+        Add Project
+      </button> 
 
       {projects.length === 0 ? (
         <p className="text-white">No projects available.</p>
@@ -107,7 +117,7 @@ function Feed() {
       }
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <AddProject project={currentProject || {}} onSave={handleSave} />
+        <AddProject project={currentProject || {}} onSave={handleSave} editing={isEditing}/>
       </Modal>
     </div>
   );
