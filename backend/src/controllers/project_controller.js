@@ -3,7 +3,6 @@ const { validationResult } = require("express-validator");
 const User = require("../models/user_model");
 const Invite = require("../models/invite_model");
 const axios = require("axios");
-const { MongoMissingCredentialsError } = require("mongodb");
 require("dotenv").config();
 
 const createProject = async (req, res) => {
@@ -43,7 +42,7 @@ const deleteOneProject = async (req, res) => {
       return res.status(404).json({ message: "Project not found!" });
     }
 
-    if (!project.owner.toString() !== user.userId) {
+    if (project.owner.toString() !== user.userId) {
       return res
         .status(401)
         .json({ message: "You are not authorised to delete this project!" });
@@ -71,7 +70,7 @@ const deleteAllProjects = async (req, res) => {
 const getOneProject = async (req, res) => {
   try {
     const projectId = req.params.id;
-    const project = await Project.findById(projectId);
+    const project = await Project.findById(projectId).populate("owner", "name").populate("collaborators", "name githubUsername");
 
     if (project) {
       res.status(200).json({ project });
@@ -85,7 +84,7 @@ const getOneProject = async (req, res) => {
 
 const getAllProjects = async (req, res) => {
   try {
-    const projects = await Project.find().populate("owner", "name").populate("collaborators", "username email");
+    const projects = await Project.find().populate("owner", "name").populate("collaborators", "name githubUsername");
 
     res.status(200).json({ projects });
   } catch (error) {

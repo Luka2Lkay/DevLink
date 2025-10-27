@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Project from "../project/Project";
 import AddProject from "../add_project/AddProject.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProjectsThunk, updateProjectThunk } from "../../state/thunk/project_thunk.js";
+import { fetchProjectsThunk, updateProjectThunk, deleteProjectThunk } from "../../state/thunk/project_thunk.js";
 import { selectProjects, selectCurrentProject, setCurrentProject } from "../../state/reducers/project_slice.js";
 import { Link } from "react-router-dom";
 import Modal from "@mui/material/Modal";
@@ -34,6 +34,7 @@ function Feed() {
       if (project.id) {
         await dispatch(updateProjectThunk(project));
         await dispatch(fetchProjectsThunk());
+        await dispatch(setCurrentProject(null));
       } else {
         // New project, add logic
         // dispatch(addProjectThunk(payload));
@@ -45,9 +46,11 @@ function Feed() {
     }
   }
 
-  const handleDelete = (project) => {
+  const handleDelete = async (project) => {
     try {
-console.log("Deleting project:", project);
+      await dispatch(deleteProjectThunk(project.id));
+      await dispatch(fetchProjectsThunk());
+      await dispatch(setCurrentProject(null));
     } catch (error) {
       console.error("Failed to delete project:", error.message);
     }
