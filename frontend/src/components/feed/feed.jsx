@@ -3,7 +3,7 @@ import Project from "../project/Project";
 import AddProject from "../add_project/AddProject.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjectsThunk, updateProjectThunk, deleteProjectThunk, addProjectThunk } from "../../state/thunk/project_thunk.js";
-import { selectProjects, selectCurrentProject, setCurrentProject, addProject } from "../../state/reducers/project_slice.js";
+import { selectProjects, selectCurrentProject, setCurrentProject, addProject, removeProject, updateProject } from "../../state/reducers/project_slice.js";
 import { Link } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 
@@ -31,17 +31,17 @@ function Feed() {
     setDeleteConfirmationOpen(true);
   }
 
-  const handleAddClick = () => { 
-    setModalOpen(true); 
-    setIsEditing(false); 
+  const handleAddClick = () => {
+    setModalOpen(true);
+    setIsEditing(false);
     dispatch(setCurrentProject(null));
-    console.log("Add Project Clicked");
   };
 
   const handleSave = async (project) => {
     try {
       if (project.id) {
         await dispatch(updateProjectThunk(project));
+        await dispatch(updateProject(project));
         await dispatch(fetchProjectsThunk());
 
       } else {
@@ -59,6 +59,7 @@ function Feed() {
   const handleDelete = async (project) => {
     try {
       await dispatch(deleteProjectThunk(project.id));
+      await dispatch(removeProject(project.id))
       await dispatch(fetchProjectsThunk());
       await dispatch(setCurrentProject(null));
     } catch (error) {
@@ -75,49 +76,53 @@ function Feed() {
 
       <button
         className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4"
+        data-testid="add-project-button"
         onClick={handleAddClick}>
         Add Project
-      </button> 
+      </button>
 
-      {projects.length === 0 ? (
-        <p className="text-white">No projects available.</p>
-      ) : (
-        projects.map((project) => (
-          <Project key={project.id} project={project} handleEditClick={() => handleEditClick(project)} handleDeleteClick={() => handleDeleteClick(project)} />
-        ))
-      )
-      }
-
-      {
-        deleteConfirmationOpen && (
-          <Modal open={deleteConfirmationOpen} onClose={() => setDeleteConfirmationOpen(false)}>
-            <div className="bg-white p-6 rounded-md shadow-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <h2 className="text-lg font-semibold text-center mb-4">Confirm Deletion</h2>
-              <p className="mb-4">Are you sure you want to delete the project "{currentProject.title}"?</p>
-              <div className="flex justify-center">
-                <button
-                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md mr-2"
-                  onClick={() => setDeleteConfirmationOpen(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="bg-red-500 text-white px-4 py-2 rounded-md"
-                  onClick={() => {
-                    setDeleteConfirmationOpen(false);
-                    handleDelete(currentProject);
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </Modal>
+      <div>
+        {projects.length === 0 ? (
+          <p className="text-white">No projects available.</p>
+        ) : (
+          projects.map((project, index) => (
+            <Project key={`${project.id}-${index}`} project={project} handleEditClick={() => handleEditClick(project)} handleDeleteClick={() => handleDeleteClick(project)} />
+          ))
         )
-      }
+        }
+      </div>
+      <div>
+        {
+          deleteConfirmationOpen && (
+            <Modal open={deleteConfirmationOpen} onClose={() => setDeleteConfirmationOpen(false)}>
+              <div className="bg-white p-6 rounded-md shadow-md fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <h2 className="text-lg font-semibold text-center mb-4">Confirm Deletion</h2>
+                <p className="mb-4">Are you sure you want to delete the project "{currentProject.title}"?</p>
+                <div className="flex justify-center">
+                  <button
+                    className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md mr-2"
+                    onClick={() => setDeleteConfirmationOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="bg-red-500 text-white px-4 py-2 rounded-md"
+                    onClick={() => {
+                      setDeleteConfirmationOpen(false);
+                      handleDelete(currentProject);
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </Modal>
+          )
+        }
+      </div>
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <AddProject project={currentProject || {}} onSave={handleSave} editing={isEditing}/>
+        <AddProject project={currentProject || {}} onSave={handleSave} editing={isEditing} />
       </Modal>
     </div>
   );

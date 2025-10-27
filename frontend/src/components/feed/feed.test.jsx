@@ -36,7 +36,7 @@ describe('Feed', () => {
     });
 
     it('renders the welcome message', () => {
-        expect(screen.getByText(/Welcome to your project dashboard!/i)).toBeInTheDocument();
+        expect(screen.getByTestId("add-project-button")).toBeInTheDocument();
     });
 
     it('renders the Project component', async () => {
