@@ -12,7 +12,7 @@ const { inviteRoutes } = require("./src/routes/invite_routes");
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://devlink-react-frontend.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 200,

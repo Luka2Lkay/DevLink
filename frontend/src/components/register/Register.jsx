@@ -37,7 +37,7 @@ function Register() {
 
     const data = { ...register };
     const baseUrl =
-      "http://localhost:3000/api/users/signup";
+      "https://devlink-9xp4.onrender.com/api/users/signup";
 
     if (data.password !== data.confirmPassword) {
       return setError({ ...error, password: "Passwords don't match" });
