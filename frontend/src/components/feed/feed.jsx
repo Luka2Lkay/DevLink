@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Project from "../project/Project";
 import AddProject from "../add_project/AddProject.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProjectsThunk, updateProjectThunk, deleteProjectThunk } from "../../state/thunk/project_thunk.js";
+import { fetchProjectsThunk, updateProjectThunk, deleteProjectThunk, addProjectThunk } from "../../state/thunk/project_thunk.js";
 import { selectProjects, selectCurrentProject, setCurrentProject } from "../../state/reducers/project_slice.js";
 import { Link } from "react-router-dom";
 import Modal from "@mui/material/Modal";
@@ -37,7 +37,8 @@ function Feed() {
         await dispatch(setCurrentProject(null));
       } else {
         // New project, add logic
-        // dispatch(addProjectThunk(payload));
+        dispatch(addProjectThunk(project));
+        await dispatch(fetchProjectsThunk());
       }
       setModalOpen(false);
       dispatch(setCurrentProject(null));
@@ -64,6 +65,9 @@ function Feed() {
       </div>
 
       <p className="text-white mb-4">Welcome to your project dashboard! Here you can find all your projects and collaborate with your team.</p>
+
+      {/* 1 - Add an icon for adding projects here
+2 - It should have a click event for displaying a modal so the user can add a new project*/}
 
       {projects.length === 0 ? (
         <p className="text-white">No projects available.</p>
