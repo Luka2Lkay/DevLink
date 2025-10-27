@@ -3,7 +3,7 @@ import Project from "../project/Project";
 import AddProject from "../add_project/AddProject.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjectsThunk, updateProjectThunk, deleteProjectThunk, addProjectThunk } from "../../state/thunk/project_thunk.js";
-import { selectProjects, selectCurrentProject, setCurrentProject } from "../../state/reducers/project_slice.js";
+import { selectProjects, selectCurrentProject, setCurrentProject, addProject } from "../../state/reducers/project_slice.js";
 import { Link } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 
@@ -36,8 +36,9 @@ function Feed() {
         await dispatch(fetchProjectsThunk());
         await dispatch(setCurrentProject(null));
       } else {
-        // New project, add logic
-        dispatch(addProjectThunk(project));
+        
+        await dispatch(addProjectThunk(project));
+        await dispatch(addProject(project))
         await dispatch(fetchProjectsThunk());
       }
       setModalOpen(false);
