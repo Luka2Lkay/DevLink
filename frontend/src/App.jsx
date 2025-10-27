@@ -4,7 +4,6 @@ import LandingPage from "./components/landing_page/LandingPage";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import Feed from "./components/feed/feed";
-import Project from "./components/project/Project";
 
 function App() {
   return (
