@@ -90,11 +90,12 @@ function Feed() {
         </div>
 
         {projects.length === 0 ? (
-          <p className="text-white">No projects available.</p>
-        ) : (
           projects.map((project, index) => (
             <Project key={`${project.id}-${index}`} project={project} handleEditClick={() => handleEditClick(project)} handleDeleteClick={() => handleDeleteClick(project)} />
           ))
+
+        ) : (
+          <p className="text-white">No projects available.</p>
         )
         }
       </div>
