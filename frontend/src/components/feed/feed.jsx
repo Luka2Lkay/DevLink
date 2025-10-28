@@ -93,15 +93,15 @@ function Feed() {
 
       <div>
 
-        {/* <div>
+       <div>
           {loading && projects.length === 0 && <CircularProgress className="mt-2" role="progressbar" />}
         </div>
 
-        {!loading && projects.length !== 0 && (
+        {/* {!loading && projects.length !== 0 && (
           projects.map((project, index) => (
             <Project key={`${project.id}-${index}`} project={project} handleEditClick={() => handleEditClick(project)} handleDeleteClick={() => handleDeleteClick(project)} />
           ))
-        )} */}
+        )}  */}
 
         {
           !loading && projects.length === 0 && (
