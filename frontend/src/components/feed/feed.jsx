@@ -3,15 +3,17 @@ import Project from "../project/Project";
 import AddProject from "../add_project/AddProject.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjectsThunk, updateProjectThunk, deleteProjectThunk, addProjectThunk } from "../../state/thunk/project_thunk.js";
-import { selectProjects, selectCurrentProject, setCurrentProject, addProject, removeProject, updateProject } from "../../state/reducers/project_slice.js";
+import { selectProjects, selectCurrentProject, selectLoading, setCurrentProject, addProject, removeProject, updateProject } from "../../state/reducers/project_slice.js";
 import { Link } from "react-router-dom";
 import Modal from "@mui/material/Modal";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Feed() {
   const dispatch = useDispatch();
 
   const projects = useSelector(selectProjects);
   const currentProject = useSelector(selectCurrentProject);
+  const loading = useSelector(selectLoading);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -82,6 +84,11 @@ function Feed() {
       </button>
 
       <div>
+
+        <div>
+          {loading && <CircularProgress className="mt-2" role="progressbar" />}
+        </div>
+
         {projects.length === 0 ? (
           <p className="text-white">No projects available.</p>
         ) : (

@@ -88,6 +88,7 @@ const projectSlice = createSlice({
 
 export const selectProjects = (state) => state.project.projects;
 export const selectCurrentProject = (state) => state.project.currentProject;
+export const selectLoading = (state) => state.project.loading;
 
 export const {
     setCurrentProject,
