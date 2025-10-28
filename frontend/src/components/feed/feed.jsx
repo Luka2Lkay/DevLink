@@ -19,15 +19,7 @@ function Feed() {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-
-    const fetchData = async () => {
-
-      await dispatch(fetchProjectsThunk());
-
-    }
-
-    fetchData();
-
+    dispatch(fetchProjectsThunk());
   }, [dispatch]);
 
   const handleEditClick = (project) => {
