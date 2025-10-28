@@ -86,7 +86,7 @@ function Feed() {
       <div>
 
         <div>
-          {loading && <CircularProgress className="mt-2" role="progressbar" />}
+          {loading && projects.length === 0 && <CircularProgress className="mt-2" role="progressbar" />}
         </div>
 
         {projects.length === 0 ? (
