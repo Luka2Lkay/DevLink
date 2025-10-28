@@ -89,7 +89,7 @@ function Feed() {
           {loading && projects.length === 0 && <CircularProgress className="mt-2" role="progressbar" />}
         </div>
 
-        {projects.length === 0 ? (
+        {projects.length !== 0 ? (
           projects.map((project, index) => (
             <Project key={`${project.id}-${index}`} project={project} handleEditClick={() => handleEditClick(project)} handleDeleteClick={() => handleDeleteClick(project)} />
           ))
