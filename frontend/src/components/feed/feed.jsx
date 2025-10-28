@@ -96,7 +96,7 @@ function Feed() {
         )} */}
 
         {
-          !loading && projects.length === 0(
+          !loading && projects.length === 0 && (
             <p className="text-white">No projects available!</p>
           )
         }
