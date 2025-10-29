@@ -4,8 +4,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useState } from 'react';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
-function Project({ project, handleEditClick = () => { }, handleDeleteClick = () => { } }) {
+function Project({ project, handleEditClick = () => { }, handleDeleteClick = () => { }, handleInviteClick = () => { } }) {
   const [visible, setVisible] = useState("hidden");
 
   return (
@@ -48,7 +49,6 @@ function Project({ project, handleEditClick = () => { }, handleDeleteClick = () 
 
             {project && sessionStorage.getItem("user") && (project.owner._id === JSON.parse(sessionStorage.getItem("user")).userId) && (
               <>
-
                 <MoreVertIcon onClick={(() => visible === '' ? setVisible('hidden') : setVisible(''))} className="text-gray-600 float-right mb-2 mt-2 cursor-pointer" />
                 <button
                   type="button"
@@ -58,6 +58,10 @@ function Project({ project, handleEditClick = () => { }, handleDeleteClick = () 
                   <EditIcon sx={{ fontSize: 20 }} className="text-gray-600 hover:text-blue-500" />
                 </button>
 
+                <button type="button" onclick={handleInviteClick} className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50`}>
+                  <PersonAddIcon sx={{ fontSize: 20 }} className="text-gary-600 hover:text-blue-500" />
+                </button>
+
                 <button
                   type="button"
                   onClick={handleDeleteClick}
@@ -65,9 +69,7 @@ function Project({ project, handleEditClick = () => { }, handleDeleteClick = () 
                 >
                   <DeleteIcon sx={{ fontSize: 20 }} className="text-red-500 hover:text-red-700" />                </button>
               </>
-
             )}
-
           </div>
         </div>
       </div>
