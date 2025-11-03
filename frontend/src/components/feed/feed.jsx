@@ -4,7 +4,8 @@ import AddProject from "../add_project/AddProject.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjectsThunk, updateProjectThunk, deleteProjectThunk, addProjectThunk } from "../../state/thunks/project_thunk.js";
 import { selectProjects, selectCurrentProject, selectLoading, setCurrentProject, addProject, removeProject, updateProject } from "../../state/reducers/project_slice.js";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Navigation from "../navigation/Navigation.jsx";
 import Modal from "@mui/material/Modal";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -79,9 +80,7 @@ function Feed() {
   return (
     <div>
 
-      <div className="flex justify-end text-red-500 mb-2">
-        <Link to={"/"} onClick={() => sessionStorage.clear()}>Logout</Link>
-      </div>
+      <Navigation />
 
       <button
         className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4"
