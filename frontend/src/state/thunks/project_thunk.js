@@ -73,4 +73,3 @@ export const addProjectThunk = createAsyncThunk("projects/addProjects",
             return rejectWithValue("Failed to add project: ", error.response.data)
         }
     })
-
