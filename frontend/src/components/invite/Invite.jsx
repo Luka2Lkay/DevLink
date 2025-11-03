@@ -18,7 +18,7 @@ function Invite() {
 
       <form onSubmit={sendInvite} className="space-y-6">
 
-        <div>
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <label
             htmlFor="email"
             className="text-left text-gray-100 block font-medium text-sm/6"
