@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Project from "../project/Project";
 import AddProject from "../add_project/AddProject.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProjectsThunk, updateProjectThunk, deleteProjectThunk, addProjectThunk } from "../../state/thunk/project_thunk.js";
+import { fetchProjectsThunk, updateProjectThunk, deleteProjectThunk, addProjectThunk } from "../../state/thunks/project_thunk.js";
 import { selectProjects, selectCurrentProject, selectLoading, setCurrentProject, addProject, removeProject, updateProject } from "../../state/reducers/project_slice.js";
 import { Link } from "react-router-dom";
 import Modal from "@mui/material/Modal";
