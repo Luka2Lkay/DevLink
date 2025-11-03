@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchProjectsThunk, updateProjectThunk } from '../thunk/project_thunk';
+import { fetchProjectsThunk, updateProjectThunk } from '../thunks/project_thunk';
 
 const initialState = {
     currentProject: null,
