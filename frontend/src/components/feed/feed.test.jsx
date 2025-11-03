@@ -31,15 +31,15 @@ describe('Feed', () => {
         );
     });
 
-    it('renders the Logout link', () => {
+    it('should render the Logout link', () => {
         expect(screen.getByText('Logout')).toBeInTheDocument();
     });
 
-    it('renders the welcome message', () => {
+    it('should render the welcome message', () => {
         expect(screen.getByTestId("add-project-button")).toBeInTheDocument();
     });
 
-    it('renders the Project component', async () => {
+    it('should render the Project component', async () => {
         await waitFor(() => {
             expect(screen.getByText(/Test project/i)).toBeInTheDocument();
         }, { timeout: 3000 });

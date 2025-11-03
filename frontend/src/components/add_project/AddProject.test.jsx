@@ -12,7 +12,7 @@ describe('AddProject', () => {
         );  
     })
 
-    it('renders the Add New Project title', () => {
+    it('should render the Add New Project title', () => {
         expect(screen.getByText('Add New Project')).toBeInTheDocument();
     });
 

@@ -4,11 +4,12 @@ import AddProject from "../add_project/AddProject.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjectsThunk, updateProjectThunk, deleteProjectThunk, addProjectThunk } from "../../state/thunks/project_thunk.js";
 import { selectProjects, selectCurrentProject, selectLoading, setCurrentProject, addProject, removeProject, updateProject } from "../../state/reducers/project_slice.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import CircularProgress from "@mui/material/CircularProgress";
 
 function Feed() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const projects = useSelector(selectProjects);
@@ -40,8 +41,7 @@ function Feed() {
   };
 
   const handleInviteClick = (project) => {
-    setModalOpen(true)
-    console.log(project.id)
+    navigate(`invite-a-contributor/${project.id}`)
   }
 
   const handleSave = async (project) => {
