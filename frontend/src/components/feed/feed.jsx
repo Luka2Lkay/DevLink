@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Project from "../project/Project";
+import Project from "../project/Project.jsx";
 import AddProject from "../add_project/AddProject.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProjectsThunk, updateProjectThunk, deleteProjectThunk, addProjectThunk } from "../../state/thunks/project_thunk.js";

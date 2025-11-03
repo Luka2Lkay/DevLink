@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import Feed from './feed';
+import Feed from './Feed.jsx';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
