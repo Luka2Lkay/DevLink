@@ -58,8 +58,8 @@ function Project({ project, handleEditClick = () => { }, handleDeleteClick = () 
                   <EditIcon sx={{ fontSize: 20 }} className="text-gray-600 hover:text-blue-500" />
                 </button>
 
-                <button type="button" onclick={handleInviteClick} className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50`}>
-                  <PersonAddIcon sx={{ fontSize: 20 }} className="text-gary-600 hover:text-blue-500" />
+                <button type="button" onClick={handleInviteClick} className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50`}>
+                  <PersonAddIcon sx={{ fontSize: 20 }} className="text-gray-600 hover:text-blue-500" />
                 </button>
 
                 <button
@@ -67,7 +67,8 @@ function Project({ project, handleEditClick = () => { }, handleDeleteClick = () 
                   onClick={handleDeleteClick}
                   className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50`}
                 >
-                  <DeleteIcon sx={{ fontSize: 20 }} className="text-red-500 hover:text-red-700" />                </button>
+                  <DeleteIcon sx={{ fontSize: 20 }} className="text-red-500 hover:text-red-700" />
+                </button>
               </>
             )}
           </div>
