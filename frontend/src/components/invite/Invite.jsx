@@ -24,7 +24,7 @@ function Invite() {
     }
 
     try {
-      await dispatch(sendInviteThunk(id, email))
+      await dispatch(sendInviteThunk({id, email}))
       dispatch(setError(""));
     } catch (error) {
       dispatch(setError("Failed to send an invite."))
