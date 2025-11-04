@@ -18,7 +18,7 @@ function Invite() {
     const checkEmail = validator.isEmail(email);
 
     if (!checkEmail) {
-      dispatch(setError("Invalid Email"));
+     return dispatch(setError("Invalid Email"));
     }
 
     console.log(checkEmail);
