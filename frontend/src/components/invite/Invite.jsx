@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Invite() {
 
-  const currentInvite = useSelector(selectCurrentInvite);
+  const currentInvite = useSelector(selectCurrentInvite) ?? "";
 
   const dispatch = useDispatch();
 
-  const sendInvite = () => {
-
+  const sendInvite = (e) => {
+e.preventDefault()
   }
 
   return (
