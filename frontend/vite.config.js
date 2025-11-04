@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   test: {
     globals: true,
-    enviro, nment: 'jsdom',
+    environment: 'jsdom',
     setupFiles: './src/setupTests.js',
   },
   build: {
