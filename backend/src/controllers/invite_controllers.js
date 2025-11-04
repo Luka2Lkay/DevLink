@@ -13,28 +13,28 @@ const sendInvite = async (req, res) => {
 
   try {
     const projectId = req.params.id;
-    const { toUserId } = req.body;
+    const { toEmail } = req.body;
     const { user } = req;
 
-    const project = await Project.findById(projectId);
+    const project = await Project.findById(projectId).populate("owner", "email");
 
     if (!project) {
       return res.status(404).json({ message: "Project not found!" });
     }
 
-    if (project.owner.toString() !== user.userId) {
+    if (project.owner.email !== user.email) {
       return res.status(401).json({ message: "You don't own this project." });
     }
 
-    const toUser = await User.findById(toUserId);
+    const toUser = await User.findOne({ email: toEmail })
 
     if (!toUser) {
       return res.status(404).json({ message: "User to invite not found!" });
     }
 
     if (
-      project.owner.toString() === toUserId ||
-      project.collaborators.includes(toUserId)
+      project.owner._id === toUser.id ||
+      project.collaborators.includes(toUser.id)
     ) {
       return res.status(400).json({
         message: "The user owns the project or is already a collaborator!",
@@ -42,7 +42,7 @@ const sendInvite = async (req, res) => {
     }
 
     const existingInvite = await Invite.findOne({
-      toUser: toUserId,
+      toUser: toUser.id,
       projectId,
       status: "pending",
     });
@@ -55,7 +55,7 @@ const sendInvite = async (req, res) => {
 
     const newInvite = new Invite({
       fromUser: user.userId,
-      toUser: toUserId,
+      toUser: toUser.id,
       projectId,
     });
 

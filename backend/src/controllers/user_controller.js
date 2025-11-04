@@ -72,7 +72,7 @@ const signIn = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { userId: user.id, name: user.name},
+      { userId: user.id, name: user.name, email: user.email },
       secretKey.key,
       { expiresIn: "1h" }
     );
