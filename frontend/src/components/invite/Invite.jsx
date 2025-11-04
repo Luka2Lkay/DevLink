@@ -8,9 +8,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 function Invite() {
   const { id } = useParams();
-  const email = useSelector(selectCurrentInvite);
-  const error = useSelector(selectError);
-  const loading = useSelector(selectLoading)
+  const email = useSelector(selectCurrentInvite) ?? "";
+  const error = useSelector(selectError) ?? "";
+  const loading = useSelector(selectLoading) ?? false
 
   const dispatch = useDispatch();
 
@@ -23,9 +23,15 @@ function Invite() {
       return dispatch(setError("Invalid Email"));
     }
 
-    await dispatch(sendInviteThunk(id, email))
+    try {
 
-    dispatch(setError(""));
+
+      await dispatch(sendInviteThunk(id, email))
+      dispatch(setError(""));
+    } catch (error) {
+      dispatch(setError("Failed to send an invite."))
+    }
+
   }
 
   return (

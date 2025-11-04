@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios"
 
 export const sendInviteThunk = createAsyncThunk(
-    "invite/sendInvite", async (id, email, { rejectWithValue }) => {
+    "invite/sendInvite", async ({id, email}, { rejectWithValue }) => {
 
         try {
             console.log(id)
