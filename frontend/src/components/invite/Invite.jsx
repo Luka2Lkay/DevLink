@@ -21,8 +21,7 @@ function Invite() {
      return dispatch(setError("Invalid Email"));
     }
 
-    console.log(checkEmail);
-    // dispatch(sendInviteThunk(id, checkEmail))
+    dispatch(sendInviteThunk(id, email))
 
     dispatch(setError(""));
   }

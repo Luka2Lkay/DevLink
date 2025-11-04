@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { sendInviteThunk } from "../thunks/invite_thunk";
 
 const initialState = {
-    currentInvite: "",
+    currentInvite: null,
     invites: [],
-    loading: "",
-    error: ""
+    loading: false,
+    error: null
 }
 
 const inviteSlice = createSlice({
@@ -20,6 +21,18 @@ const inviteSlice = createSlice({
         setError(state, action) {
             state.error = action.payload
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(sendInviteThunk.pending, (state) => {
+            state.error = null;
+            state.loading = true;
+        }).addCase(sendInviteThunk.rejected, (state, action) => {
+            state.error = action.payload;
+            state.loading = false;
+        }).addCase(sendInviteThunk.fulfilled, (state) => {
+            state.error = null;
+            state.loading = false;
+        })
     }
 })
 

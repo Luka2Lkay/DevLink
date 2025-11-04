@@ -56,7 +56,7 @@ const projectSlice = createSlice({
         setError(state, action) {
             state.error = action.payload;
         }
-    }, // Add more and revise the extra reducers when implementing the logic for displaying loading spinner and error messages.
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchProjectsThunk.pending, (state) => {
@@ -71,7 +71,7 @@ const projectSlice = createSlice({
                 state.error = action.payload;
                 state.loading = false;
             })
-            .addCase(updateProjectThunk.fulfilled, (state, action) => {
+            .addCase(updateProjectThunk.fulfilled, (state) => {
                 state.error = null
                 state.loading = false;
             })
@@ -79,7 +79,7 @@ const projectSlice = createSlice({
                 state.error = action.payload;
                 state.loading = false;
             })
-            .addCase(updateProjectThunk.pending, (state, action) => {
+            .addCase(updateProjectThunk.pending, (state) => {
                 state.error = null;
                 state.loading = true;
             })
