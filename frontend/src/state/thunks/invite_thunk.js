@@ -5,7 +5,7 @@ export const sendInviteThunk = createAsyncThunk(
     "invite/sendInvite", async ({id, email}, { rejectWithValue }) => {
 
         try {
-            console.log(id)
+            console.log(email)
             const user = sessionStorage.getItem("user");
             const response = await axios.post(`https://devlink-9xp4.onrender.com/api/invites/send-invite/${id}`, email, {
                 headers: {
