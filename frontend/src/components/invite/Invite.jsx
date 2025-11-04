@@ -1,16 +1,26 @@
 import Navigation from "../navigation/Navigation"
-import { selectCurrentInvite, setCurrentInvite } from "../../state/reducers/invite_slice";
+import { selectCurrentInvite, setCurrentInvite, selectError, setError } from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import validator from "validator"
 
 function Invite() {
 
-  const currentInvite = useSelector(selectCurrentInvite) ?? "";
+  const email = useSelector(selectCurrentInvite) ?? "";
+  const error = useSelector(selectError);
 
   const dispatch = useDispatch();
 
   const sendInvite = (e) => {
-e.preventDefault()
-console.log(currentInvite)
+    e.preventDefault()
+
+    const { id } = useParams();
+
+    const checkEmail = validator.isEmail(email);
+
+    if (!checkEmail) {
+      setError("Invalid Email")
+    }
   }
 
   return (
@@ -20,6 +30,7 @@ console.log(currentInvite)
       <div className="flex flex-col justify-center px-6 py-12 lg:px-8">
         <h1 className="text-white">Invite a contributor</h1>
 
+        {error !== "" && (<p className="text-red text-center">{error}</p>)}
         <form onSubmit={sendInvite} className="space-y-6 mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
           <div>
@@ -34,7 +45,7 @@ console.log(currentInvite)
                 id="email"
                 name="email"
                 type="email"
-                value={currentInvite}
+                value={email}
                 onChange={(e) => dispatch(setCurrentInvite(e.target.value))}
                 data-testid="email-input"
                 autoComplete="email"
