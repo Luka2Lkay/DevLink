@@ -39,6 +39,7 @@ const inviteSlice = createSlice({
 export const selectCurrentInvite = (state) => state.invite.currentInvite;
 export const selectInvites = (state) => state.invite.invites;
 export const selectError = (state) => state.invite.error;
+export const selectLoading = (state) => state.invite.loading;
 
 export const { setCurrentInvite, addInvite, setError } = inviteSlice.actions;
 export default inviteSlice.reducer; 

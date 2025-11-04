@@ -1,18 +1,20 @@
 import Navigation from "../navigation/Navigation"
-import { selectCurrentInvite, setCurrentInvite, selectError, setError } from "../../state/reducers/invite_slice";
+import { selectCurrentInvite, setCurrentInvite, selectError, setError, selectLoading } from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import validator from "validator"
 import { sendInviteThunk } from "../../state/thunks/invite_thunk";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Invite() {
   const { id } = useParams();
-  const email = useSelector(selectCurrentInvite) ?? "";
-  const error = useSelector(selectError) ?? "";
+  const email = useSelector(selectCurrentInvite);
+  const error = useSelector(selectError);
+  const loading = useSelector(selectLoading)
 
   const dispatch = useDispatch();
 
-  const sendInvite = (e) => {
+  const sendInvite = async (e) => {
     e.preventDefault()
 
     const checkEmail = validator.isEmail(email);
@@ -21,7 +23,7 @@ function Invite() {
      return dispatch(setError("Invalid Email"));
     }
 
-    dispatch(sendInviteThunk(id, email))
+    await dispatch(sendInviteThunk(id, email))
 
     dispatch(setError(""));
   }
@@ -34,6 +36,9 @@ function Invite() {
         <h1 className="text-white">Invite a contributor</h1>
 
         {error !== "" && (<p className="text-red-500 text-center">{error}</p>)}
+
+        {loading && (<CircularProgress className="mt-2" role="progressbar"/>)}
+
         <form onSubmit={sendInvite} className="space-y-6 mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
           <div>
