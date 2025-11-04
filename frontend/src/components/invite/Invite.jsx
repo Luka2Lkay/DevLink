@@ -24,8 +24,6 @@ function Invite() {
     }
 
     try {
-
-
       await dispatch(sendInviteThunk(id, email))
       dispatch(setError(""));
     } catch (error) {
