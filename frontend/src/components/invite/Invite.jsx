@@ -58,7 +58,7 @@ function Invite() {
             <div className="mt-2">
               <input
                 id="email"
-                name="email"
+                name="toEmail"
                 type="email"
                 value={email}
                 onChange={(e) => dispatch(setCurrentInvite(e.target.value))}
