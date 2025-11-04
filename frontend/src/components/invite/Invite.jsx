@@ -28,7 +28,8 @@ function Invite() {
       await dispatch(sendInviteThunk({ id, trimmedEmail }))
       dispatch(setError(""));
     } catch (error) {
-     return dispatch(setError("Failed to send an invite."))
+      console.log("hello world!")
+      dispatch(setError("Failed to send an invite."))
     }
 
   }
