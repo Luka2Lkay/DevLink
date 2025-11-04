@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import validator from "validator"
 
 function Invite() {
-
+  const { id } = useParams();
   const email = useSelector(selectCurrentInvite) ?? "";
   const error = useSelector(selectError) ?? "";
 
@@ -14,12 +14,10 @@ function Invite() {
   const sendInvite = (e) => {
     e.preventDefault()
 
-    const { id } = useParams();
-
     const checkEmail = validator.isEmail(email);
 
     if (!checkEmail) {
-      setError("Invalid Email")
+      dispatch(setError("Invalid Email"));
     }
   }
 
@@ -30,7 +28,7 @@ function Invite() {
       <div className="flex flex-col justify-center px-6 py-12 lg:px-8">
         <h1 className="text-white">Invite a contributor</h1>
 
-        {error !== "" && (<p className="text-red text-center">{error}</p>)}
+        {error !== "" && (<p className="text-red-500 text-center">{error}</p>)}
         <form onSubmit={sendInvite} className="space-y-6 mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
           <div>
