@@ -7,7 +7,7 @@ import validator from "validator"
 function Invite() {
 
   const email = useSelector(selectCurrentInvite) ?? "";
-  const error = useSelector(selectError);
+  const error = useSelector(selectError) ?? "";
 
   const dispatch = useDispatch();
 
