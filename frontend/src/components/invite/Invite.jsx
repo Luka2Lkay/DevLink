@@ -49,7 +49,7 @@ function Invite() {
 
           <div>
             <label
-              htmlFor="email"
+              htmlFor="toEmail"
               className="text-left text-gray-100 block font-medium text-sm/6"
             >
               Email address
