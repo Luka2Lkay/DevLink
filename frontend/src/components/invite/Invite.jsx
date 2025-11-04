@@ -20,7 +20,7 @@ function Invite() {
     const checkEmail = validator.isEmail(email);
 
     if (!checkEmail) {
-     return dispatch(setError("Invalid Email"));
+      return dispatch(setError("Invalid Email"));
     }
 
     await dispatch(sendInviteThunk(id, email))
@@ -35,9 +35,10 @@ function Invite() {
       <div className="flex flex-col justify-center px-6 py-12 lg:px-8">
         <h1 className="text-white">Invite a contributor</h1>
 
-        {error !== "" && (<p className="text-red-500 text-center">{error}</p>)}
-
-        {loading && (<CircularProgress className="mt-2" role="progressbar"/>)}
+        <div className="flex justify-center">
+          {error !== "" && (<p className="text-red-500">{error}</p>)}
+          {loading && (<CircularProgress className="mt-2" role="progressbar" />)}
+        </div>
 
         <form onSubmit={sendInvite} className="space-y-6 mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
@@ -68,6 +69,7 @@ function Invite() {
               type="submit"
               aria-label="send-invite-button"
               data-testid="send-invite-button"
+              disabled={loading}
               className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-2 text-sm/6 text-white font-semibold hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 "
             >
               Send Invite
