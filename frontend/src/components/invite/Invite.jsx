@@ -3,6 +3,7 @@ import { selectCurrentInvite, setCurrentInvite, selectError, setError } from "..
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import validator from "validator"
+import { sendInviteThunk } from "../../state/thunks/invite_thunk";
 
 function Invite() {
   const { id } = useParams();
@@ -19,6 +20,11 @@ function Invite() {
     if (!checkEmail) {
       dispatch(setError("Invalid Email"));
     }
+
+    console.log(checkEmail);
+    // dispatch(sendInviteThunk(id, checkEmail))
+
+    dispatch(setError(""));
   }
 
   return (
