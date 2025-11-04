@@ -6,7 +6,10 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   test: {
     globals: true,
-    environment: 'jsdom',
+    enviro, nment: 'jsdom',
     setupFiles: './src/setupTests.js',
+  },
+  build: {
+    chunkSizeWarningLimit: 1000,
   }
 },)
