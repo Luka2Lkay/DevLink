@@ -17,17 +17,18 @@ function Invite() {
   const sendInvite = async (e) => {
     e.preventDefault()
 
-    const checkEmail = validator.isEmail(email);
+    const trimmedEmail = email.trim();
+    const checkEmail = validator.isEmail(trimmedEmail);
 
     if (!checkEmail) {
       return dispatch(setError("Invalid Email"));
     }
 
     try {
-      await dispatch(sendInviteThunk({id, email}))
+      await dispatch(sendInviteThunk({ id, trimmedEmail }))
       dispatch(setError(""));
     } catch (error) {
-      dispatch(setError("Failed to send an invite."))
+     return dispatch(setError("Failed to send an invite."))
     }
 
   }
@@ -41,7 +42,7 @@ function Invite() {
 
         <div className="flex justify-center">
           {error !== "" && (<p className="text-red-500">{error}</p>)}
-          {loading && (<CircularProgress className="mt-2" role="progressbar" />)}
+          {loading && (<CircularProgress className="mt-4" role="progressbar" />)}
         </div>
 
         <form onSubmit={sendInvite} className="space-y-6 mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
