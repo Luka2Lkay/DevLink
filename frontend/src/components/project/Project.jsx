@@ -53,19 +53,19 @@ function Project({ project, handleEditClick = () => { }, handleDeleteClick = () 
                 <button
                   type="button"
                   onClick={handleEditClick}
-                  className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50`}
+                  className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50 cursor-pointer`}
                 >
                   <EditIcon sx={{ fontSize: 20 }} className="text-gray-600 hover:text-blue-500" />
                 </button>
 
-                <button type="button" onClick={handleInviteClick} className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50`}>
+                <button type="button" onClick={handleInviteClick} className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50 cursor-pointer`}>
                   <PersonAddIcon sx={{ fontSize: 20 }} className="text-gray-600 hover:text-blue-500" />
                 </button>
 
                 <button
                   type="button"
                   onClick={handleDeleteClick}
-                  className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50`}
+                  className={`p-2 ${visible} rounded-md w-16 bg-white hover:bg-gray-50 cursor-pointer`}
                 >
                   <DeleteIcon sx={{ fontSize: 20 }} className="text-red-500 hover:text-red-700" />
                 </button>
