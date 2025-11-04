@@ -10,6 +10,7 @@ function Invite() {
 
   const sendInvite = (e) => {
 e.preventDefault()
+console.log(currentInvite)
   }
 
   return (
