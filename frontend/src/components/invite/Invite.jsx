@@ -28,7 +28,6 @@ function Invite() {
       await dispatch(sendInviteThunk({ id, trimmedEmail }))
       dispatch(setError(""));
     } catch (error) {
-      console.log("hello world!")
       dispatch(setError("Failed to send an invite."))
     }
 
@@ -57,7 +56,7 @@ function Invite() {
             </label>
             <div className="mt-2">
               <input
-                id="email"
+                id="toEmail"
                 name="toEmail"
                 type="email"
                 value={email}
