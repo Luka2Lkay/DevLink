@@ -23,7 +23,7 @@ const projectSlice = createSlice({
             if (index !== -1) {
                 state.projects[index] = action.payload
             } else {
-                state.projects.push(action.payload);
+                state.projects.unshift(action.payload);
             }
         },
         setProjects(state, action) {
