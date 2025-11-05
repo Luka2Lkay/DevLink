@@ -12,8 +12,6 @@ export const sendInviteThunk = createAsyncThunk(
             }
 
             const { token, email: loggedInUserEmail } = JSON.parse(userString);
-            console.log('loggedin', loggedInUserEmail)
-            console.log("toEmail", email)
 
             if (loggedInUserEmail === email) {
                 return rejectWithValue("You own this project!")
