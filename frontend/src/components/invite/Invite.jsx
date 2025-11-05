@@ -1,11 +1,12 @@
 import Navigation from "../navigation/Navigation"
-import { selectCurrentInvite, setCurrentInvite, selectErrorMessage, setErrorMessage, selectLoading, setSuccessMessage, selectSuccessMessage } from "../../state/reducers/invite_slice";
+import { selectCurrentInvite, resetInvites, setCurrentInvite, selectErrorMessage, setErrorMessage, selectLoading, setSuccessMessage, selectSuccessMessage } from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import validator from "validator"
 import { sendInviteThunk } from "../../state/thunks/invite_thunk";
 import CircularProgress from "@mui/material/CircularProgress";
 import TaskAltIcon from "@mui/icons-material/TaskAlt"
+import { useEffect } from "react";
 
 function Invite() {
   const { id } = useParams();
@@ -15,6 +16,10 @@ function Invite() {
   const successMessage = useSelector(selectSuccessMessage) ?? ""
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(resetInvites())
+  }, [])
 
   const sendInvite = async (e) => {
     e.preventDefault()
@@ -27,19 +32,13 @@ function Invite() {
     }
 
     try {
-
-
-
       const result = await dispatch(sendInviteThunk({ id, email: trimmedEmail }));
-
-      console.log(result)
 
       if (result.payload) {
         return await dispatch(setErrorMessage(result.payload));
       }
 
       await dispatch(setCurrentInvite(""));
-
 
     } catch (error) {
       await dispatch(setErrorMessage(error))

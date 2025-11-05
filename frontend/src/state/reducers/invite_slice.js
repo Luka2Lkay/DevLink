@@ -24,7 +24,8 @@ const inviteSlice = createSlice({
         },
         setSuccessMessage(state, action) {
             state.success = action.payload
-        }
+        },
+        resetInvites: () => initialState
     },
     extraReducers: (builder) => {
         builder.addCase(sendInviteThunk.pending, (state) => {
@@ -49,5 +50,5 @@ export const selectErrorMessage = (state) => state.invite.error;
 export const selectLoading = (state) => state.invite.loading;
 export const selectSuccessMessage = (state) => state.invite.success;
 
-export const { setCurrentInvite, addInvite, setErrorMessage, setSuccessMessage } = inviteSlice.actions;
+export const { setCurrentInvite, addInvite, setErrorMessage, setSuccessMessage, resetInvites } = inviteSlice.actions;
 export default inviteSlice.reducer; 
