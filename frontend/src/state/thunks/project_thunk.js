@@ -6,15 +6,19 @@ export const fetchProjectsThunk = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const user = sessionStorage.getItem('user');
+
+            if (!user) rejectWithValue("User not authenticated!")
+
+            const { token } = JSON.parse(user);
             const response = await axios.get('https://devlink-9xp4.onrender.com/api/projects/get-all-projects', {
                 headers: {
-                    Authorization: `Bearer ${JSON.parse(user).token}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
 
             return response.data.projects;
         } catch (error) {
-            return rejectWithValue("Failed to fetch projects: ", error.response.data);
+            return rejectWithValue(error.response?.data?.message || "Failed to fetch projects");
         }
     }
 );
@@ -24,15 +28,19 @@ export const updateProjectThunk = createAsyncThunk(
     async (projectData, { rejectWithValue }) => {
         try {
             const user = sessionStorage.getItem('user');
+
+            if (!user) rejectWithValue("User not authenticated!")
+
+            const { token } = JSON.parse(user)
             const response = await axios.put(`https://devlink-9xp4.onrender.com/api/projects/update-project/${projectData.id}`, projectData, {
                 headers: {
-                    Authorization: `Bearer ${JSON.parse(user).token}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
 
             return response.data;
         } catch (error) {
-            return rejectWithValue("Failed to update project: ", error.response.data);
+            return rejectWithValue(error.response?.data?.message || "Failed to update project");
         }
     }
 );
@@ -42,15 +50,19 @@ export const deleteProjectThunk = createAsyncThunk(
     async (projectId, { rejectWithValue }) => {
         try {
             const user = sessionStorage.getItem('user');
+
+            if (!user) rejectWithValue("User not authenticated!")
+
+            const { token } = JSON.parse(user);
             const response = await axios.delete(`https://devlink-9xp4.onrender.com/api/projects/delete-project/${projectId}`, {
                 headers: {
-                    Authorization: `Bearer ${JSON.parse(user).token}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
 
             return response.data;
         } catch (error) {
-            return rejectWithValue("Failed to delete project: ", error.response.data);
+            return rejectWithValue(error.response?.data?.message || "Failed to delete project");
         }
     }
 );
@@ -61,15 +73,19 @@ export const addProjectThunk = createAsyncThunk("projects/addProjects",
         try {
 
             const user = sessionStorage.getItem("user");
+
+            if (!user) rejectWithValue("User not authenticated!")
+
+            const { token } = JSON.parse(user);
             const response = await axios.post("https://devlink-9xp4.onrender.com/api/projects/add-project", projectData, {
                 headers: {
-                    Authorization: `Bearer ${JSON.parse(user).token}`
+                    Authorization: `Bearer ${token}`
                 }
             })
 
             return response.data.project;
 
         } catch (error) {
-            return rejectWithValue("Failed to add project: ", error.response.data)
+            return rejectWithValue(error.response?.data?.message || "Failed to add project")
         }
     })
