@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios"
 
 export const sendInviteThunk = createAsyncThunk(
-    "invite/sendInvite", async ({ id, toEmail }, { rejectWithValue }) => {
+    "invite/sendInvite", async ({ id, email }, { rejectWithValue }) => {
 
         try {
             const userString = sessionStorage.getItem("user");
@@ -11,10 +11,11 @@ export const sendInviteThunk = createAsyncThunk(
 
             const { token, email: loggedInUserEmail } = JSON.parse(userString);
             console.log('loggedin', loggedInUserEmail)
-            console.log("toEmail", toEmail)
+            console.log("toEmail", email)
+
             if (loggedInUserEmail === loggedInUserEmail) rejectWithValue("You own this project!")
 
-            const response = await axios.post(`https://devlink-9xp4.onrender.com/api/invites/send-invite/${id}`, { toEmail }, {
+            const response = await axios.post(`https://devlink-9xp4.onrender.com/api/invites/send-invite/${id}`, { email }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
