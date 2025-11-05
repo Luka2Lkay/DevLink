@@ -7,13 +7,19 @@ export const sendInviteThunk = createAsyncThunk(
         try {
             const userString = sessionStorage.getItem("user");
 
-            if (!userString) rejectWithValue("User not authenticated!")
+            if (!userString){
+                return rejectWithValue("User not authenticated!")
+            }
 
             const { token, email: loggedInUserEmail } = JSON.parse(userString);
             console.log('loggedin', loggedInUserEmail)
             console.log("toEmail", email)
 
-            if (loggedInUserEmail === loggedInUserEmail) rejectWithValue("You own this project!")
+            console.log(loggedInUserEmail === email)
+
+            if (loggedInUserEmail === email) {
+                return rejectWithValue("You own this project!")
+            }
 
             const response = await axios.post(`https://devlink-9xp4.onrender.com/api/invites/send-invite/${id}`, { email }, {
                 headers: {
