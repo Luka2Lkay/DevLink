@@ -94,16 +94,16 @@ function Register() {
             <div className="flex justify-center gap-2">
               <TaskAltIcon
                 aria-label="check-icon"
-                className="text-green-500 mt-2 text-sm/6"
+                className="text-green-500 mt-2 text-sm"
               />
-              <p className="text-green-500 mt-2 text-sm/6">{successMessage}</p>
+              <p className="text-green-500 mt-2 text-sm">{successMessage}</p>
             </div>
           )}
         </div>
 
         <div>
           {error && (
-            <p className="text-red-500 mt-2 text-sm/6">{error.general}</p>
+            <p className="text-red-500 mt-2 text-sm">{error.general}</p>
           )}
           {loading && <CircularProgress className="mt-2" role="progressbar" />}
         </div>
@@ -113,7 +113,7 @@ function Register() {
             <div>
               <label
                 htmlFor="name"
-                className="text-left text-gray-100 block font-medium text-sm/6"
+                className="text-left text-gray-100 block font-medium text-sm"
               >
                 Name
               </label>
@@ -127,7 +127,7 @@ function Register() {
                   onChange={handleChange}
                   autoComplete="name"
                   required
-                  className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 -outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:-outline-offset-2 sm:text-sm/6"
+                  className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 -outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:-outline-offset-2 sm:text-sm"
                 />
               </div>
             </div>
@@ -135,7 +135,7 @@ function Register() {
             <div>
               <label
                 htmlFor="email"
-                className="text-left text-gray-100 block font-medium text-sm/6"
+                className="text-left text-gray-100 block font-medium text-sm"
               >
                 Email address
               </label>
@@ -149,7 +149,7 @@ function Register() {
                   onChange={handleChange}
                   autoComplete="email"
                   required
-                  className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 -outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:-outline-offset-2 sm:text-sm/6"
+                  className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 -outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:-outline-offset-2 sm:text-sm"
                 />
               </div>
             </div>
@@ -157,7 +157,7 @@ function Register() {
             <div>
               <label
                 htmlFor="password"
-                className="text-left text-gray-100 block font-medium text-sm/6"
+                className="text-left text-gray-100 block font-medium text-sm"
               >
                 Password
               </label>
@@ -171,7 +171,7 @@ function Register() {
                   onChange={handleChange}
                   autoComplete="new-password"
                   required
-                  className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
+                  className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm"
                 />
               </div>
             </div>
@@ -179,7 +179,7 @@ function Register() {
             <div>
               <label
                 htmlFor="confirm-password"
-                className="text-left text-gray-100 block font-medium text-sm/6"
+                className="text-left text-gray-100 block font-medium text-sm"
               >
                 Confirm Password
               </label>
@@ -193,16 +193,16 @@ function Register() {
                   onChange={handleChange}
                   autoComplete="new-password"
                   required
-                  className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
+                  className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm"
                 />
-                <p className="text-red-500 mt-2 text-sm/6">{error.password}</p>
+                <p className="text-red-500 mt-2 text-sm">{error.password}</p>
               </div>
             </div>
 
             <div>
               <label
                 htmlFor="github-username"
-                className="text-left text-gray-100 block font-medium text-sm/6"
+                className="text-left text-gray-100 block font-medium text-sm"
               >
                 Github Username
               </label>
@@ -216,7 +216,7 @@ function Register() {
                   onChange={handleChange}
                   autoComplete="github-username"
                   required
-                  className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 -outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:-outline-offset-2 sm:text-sm/6"
+                  className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 -outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:-outline-offset-2 sm:text-sm"
                 />
               </div>
             </div>
@@ -234,7 +234,7 @@ function Register() {
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm/6 text-gray-400">
+          <p className="mt-10 text-center text-sm text-gray-400">
             Already have an account?{" "}
             <Link
               to={"/login"}

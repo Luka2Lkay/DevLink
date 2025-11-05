@@ -60,8 +60,8 @@ function Invite() {
         <div className="flex justify-center mt-4">
           {loading ? (<CircularProgress role="progressbar" />) : successMessage ? (
             <div className="flex justify-center gap-2">
-              <TaskAltIcon aria-label="success-check-icon" className="text-green-500 mt-2 text-sm" />
-              <p role="alert" className="text-green-500 text-sm/6">{successMessage}</p>
+              <TaskAltIcon aria-label="success-check-icon" className="text-green-500 text-sm" />
+              <p role="alert" className="text-green-500 text-sm">{successMessage}</p>
             </div>
           ) : errorMessage && (
             <div className="flex justify-center gap-2">
