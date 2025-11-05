@@ -27,14 +27,14 @@ function Invite() {
     }
 
     try {
-      const result = await dispatch(sendInviteThunk({ id, email: trimmedEmail })).unwrap();
-      dispatch(setCurrentInvite(""));
-      dispatch(setErrorMessage(result));
-      dispatch(setSuccessMessage(result));
+      const result = await dispatch(sendInviteThunk({ id, email: trimmedEmail }));
+      await dispatch(setCurrentInvite(""));
+      await dispatch(setErrorMessage(result));
+      await dispatch(setSuccessMessage(result));
 
     } catch (error) {
-      dispatch(setErrorMessage(error))
-      dispatch(setSuccessMessage(""))
+      await dispatch(setErrorMessage(error))
+      await dispatch(setSuccessMessage(""))
     }
   }
 
