@@ -27,7 +27,7 @@ function Invite() {
     }
 
     try {
-      const result = await dispatch(sendInviteThunk({ id, email: trimmedEmail }))
+      const result = await dispatch(sendInviteThunk({ id, email: trimmedEmail })).unwrap();
       dispatch(setCurrentInvite(""));
       dispatch(setErrorMessage(result));
       dispatch(setSuccessMessage(result));
