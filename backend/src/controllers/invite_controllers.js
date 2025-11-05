@@ -13,7 +13,7 @@ const sendInvite = async (req, res) => {
 
   try {
     const projectId = req.params.id;
-    const { toEmail } = req.body;
+    const { email } = req.body;
     const { user } = req;
 
     const project = await Project.findById(projectId).populate("owner", "email");
@@ -26,7 +26,7 @@ const sendInvite = async (req, res) => {
       return res.status(401).json({ message: "You don't own this project." });
     }
 
-    const toUser = await User.findOne({ email: toEmail })
+    const toUser = await User.findOne({ email })
 
     if (!toUser) {
       return res.status(404).json({ message: "User to invite not found!" });
