@@ -54,7 +54,7 @@ https://devlink-react-frontend.onrender.com/
 
 1. Open your browser and enter the address to log in/ sign up: **https://account.mongodb.com/account/login**
 2. Create a new project
-3. Fill the **Name Your Projec** field and click next.
+3. Fill the **Name Your Project** field and click next.
 4. Click the **Create Project** button and you'll be redirected to the **Overview** page.
 5. Click the **Create** button to create a cluster.
 6. Choose the free plan, rename the cluster, and click the **Create Deployment** button.
