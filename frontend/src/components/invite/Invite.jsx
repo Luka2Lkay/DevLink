@@ -30,7 +30,7 @@ function Invite() {
 
 
 
-      const result = await dispatch(sendInviteThunk({ id, email: trimmedEmail }));
+      const result = await dispatch(sendInviteThunk({ id, toEmail: trimmedEmail }));
 
       console.log(result)
 
