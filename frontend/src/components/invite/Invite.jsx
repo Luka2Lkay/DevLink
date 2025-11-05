@@ -27,6 +27,9 @@ function Invite() {
     }
 
     try {
+
+      
+
       const result = await dispatch(sendInviteThunk({ id, email: trimmedEmail }));
 
       console.log(result)
@@ -37,7 +40,6 @@ function Invite() {
 
       await dispatch(setCurrentInvite(""));
 
-      await dispatch(setSuccessMessage("hello"));
 
     } catch (error) {
       await dispatch(setErrorMessage(error))
