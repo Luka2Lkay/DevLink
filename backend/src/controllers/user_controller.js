@@ -77,7 +77,7 @@ const signIn = async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.status(200).json({ token, userId: user.id, name: user.name, githubUsername: user.githubUsername });
+    res.status(200).json({ token, email, userId: user.id, name: user.name, githubUsername: user.githubUsername });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
