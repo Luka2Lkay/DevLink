@@ -33,7 +33,7 @@ function Invite() {
 
       await dispatch(setCurrentInvite(""));
       // await dispatch(setErrorMessage(""));
-      await dispatch(setSuccessMessage(result.payload.message));
+      await dispatch(setSuccessMessage("hello"));
 
     } catch (error) {
       await dispatch(setErrorMessage(error))
