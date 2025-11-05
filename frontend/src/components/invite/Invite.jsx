@@ -35,6 +35,11 @@ function Invite() {
     }
   }
 
+  const handleChange = (e) => {
+    if (errorMessage) dispatch(setErrorMessage(""))
+    dispatch(setCurrentInvite(e.target.value))
+  }
+
   return (
     <div>
       <Navigation />
@@ -66,7 +71,7 @@ function Invite() {
                 name="email"
                 type="email"
                 value={email}
-                onChange={(e) => dispatch(setCurrentInvite(e.target.value))}
+                onChange={handleChange}
                 data-testid="email-input"
                 autoComplete="email"
                 required
