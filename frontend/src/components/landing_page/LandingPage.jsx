@@ -81,7 +81,9 @@ function LandingPage() {
           </ul>
 
           <button className="text-white mt-5 bg-primary p-2 rounded-lg cursor-pointer hover:bg-primary-variant">
+            <Link to={"/login"}>
             Start Building Your Future
+            </Link>
           </button>
         </article>
       </main>
