@@ -16,6 +16,11 @@ export const sendInviteThunk = createAsyncThunk(
                 }
             })
 
+
+            if(response.data.status === 409 || response.data.status === 404){
+                return response.data.message
+            }
+
             return response.data;
         } catch (error) {
             console.log("there is an error")
