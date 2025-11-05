@@ -30,7 +30,7 @@ function Invite() {
       const result = await dispatch(sendInviteThunk({ id, email: trimmedEmail })).unwrap()
       dispatch(setCurrentInvite(""));
       dispatch(setErrorMessage(result));
-      dispatch(setSuccessMessage("Invite sent successfully!"))
+      dispatch(setSuccessMessage("Invite sent!"))
     } catch (error) {
       dispatch(setErrorMessage(error))
       dispatch(setSuccessMessage(""))
