@@ -16,7 +16,7 @@ export const sendInviteThunk = createAsyncThunk(
                 }
             })
 
-            return response.data;
+            return response.data.message;
         } catch (error) {
             return rejectWithValue(error.response?.data?.message || "Failed to send an invite")
         }
