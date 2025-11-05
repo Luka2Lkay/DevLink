@@ -51,7 +51,7 @@ function Notifications() {
           notifications.map((notification) => (
             <MenuItem
               key={notification.id}
-              onClick={() => handleClick(notification.id)}
+              onClick={() => handleMarkAsRead(notification.id)}
             >
               {notification.message}
             </MenuItem>
