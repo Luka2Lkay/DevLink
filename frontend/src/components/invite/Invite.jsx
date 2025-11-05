@@ -1,16 +1,18 @@
 import Navigation from "../navigation/Navigation"
-import { selectCurrentInvite, setCurrentInvite, selectError, setError, selectLoading } from "../../state/reducers/invite_slice";
+import { selectCurrentInvite, setCurrentInvite, selectError, setErrorMessage, selectLoading, setSuccessMessage } from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import validator from "validator"
 import { sendInviteThunk } from "../../state/thunks/invite_thunk";
 import CircularProgress from "@mui/material/CircularProgress";
+import TaskAltIcon from "@mui/icons-material/TaskAlt"
 
 function Invite() {
   const { id } = useParams();
   const email = useSelector(selectCurrentInvite) ?? "";
-  const error = useSelector(selectError) ?? "";
+  const errorMessage = useSelector(selectError) ?? "";
   const loading = useSelector(selectLoading) ?? false
+  const successMessage = useSelector() ?? ""
 
   const dispatch = useDispatch();
 
@@ -21,16 +23,16 @@ function Invite() {
     const checkEmail = validator.isEmail(trimmedEmail);
 
     if (!checkEmail) {
-      return dispatch(setError("Invalid Email"));
+      return dispatch(setErrorMessage("Invalid Email"));
     }
 
     try {
       await dispatch(sendInviteThunk({ id, email: trimmedEmail }))
-      dispatch(setError(""));
+      dispatch(setErrorMessage(""));
+      dispatch(setSuccessMessage("Invite sent successfully!"))
     } catch (error) {
-      dispatch(setError("Failed to send an invite."))
+      dispatch(setErrorMessage("Failed to send an invite."))
     }
-
   }
 
   return (
@@ -41,7 +43,11 @@ function Invite() {
         <h1 className="text-white">Invite a contributor</h1>
 
         <div className="flex justify-center">
-          {error !== "" && (<p className="text-red-500">{error}</p>)}
+          {errorMessage && (<p className="text-red-500">{errorMessage}</p>)}
+          {successMessage && (<div className="flex justify-center gap-2">
+            <TaskAltIcon arial-label="check-icon" className="text-green-500 mt-2 text-sm/6" />
+            <p className="text-green-500 mt-2 text-sm/6">{successMessage}</p>
+          </div>)}
           {loading && (<CircularProgress className="mt-4" role="progressbar" />)}
         </div>
 

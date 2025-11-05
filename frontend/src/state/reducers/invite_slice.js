@@ -5,7 +5,8 @@ const initialState = {
     currentInvite: null,
     invites: [],
     loading: false,
-    error: null
+    error: null,
+    success: null
 }
 
 const inviteSlice = createSlice({
@@ -18,28 +19,35 @@ const inviteSlice = createSlice({
         addInvite(state, action) {
             state.invites.push(action.payload);
         },
-        setError(state, action) {
+        setErrorMessage(state, action) {
             state.error = action.payload
+        },
+        setSuccessMessage(state, action) {
+            state.success = action.payload
         }
     },
     extraReducers: (builder) => {
         builder.addCase(sendInviteThunk.pending, (state) => {
             state.error = null;
             state.loading = true;
+            state.success = null
         }).addCase(sendInviteThunk.rejected, (state, action) => {
             state.error = action.payload;
             state.loading = false;
-        }).addCase(sendInviteThunk.fulfilled, (state) => {
+            state.success = null
+        }).addCase(sendInviteThunk.fulfilled, (state, action) => {
             state.error = null;
             state.loading = false;
+            state.success = action.payload
         })
     }
 })
 
 export const selectCurrentInvite = (state) => state.invite.currentInvite;
 export const selectInvites = (state) => state.invite.invites;
-export const selectError = (state) => state.invite.error;
+export const selectErrorMessage = (state) => state.invite.error;
 export const selectLoading = (state) => state.invite.loading;
+export const selectSuccessMessage = (state) => state.invite.success;
 
-export const { setCurrentInvite, addInvite, setError } = inviteSlice.actions;
+export const { setCurrentInvite, addInvite, setErrorMessage, setSuccessMessage } = inviteSlice.actions;
 export default inviteSlice.reducer; 
