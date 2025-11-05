@@ -30,8 +30,7 @@ function Notifications() {
   return (
     <>
       <IconButton
-        sx={{ marginBottom: "5px" }}
-        color="white"
+        sx={{color: "white" }}
         onClick={handleClick}
         data-testid="icon-button"
       >
