@@ -49,15 +49,15 @@ function Invite() {
 
           <div>
             <label
-              htmlFor="toEmail"
+              htmlFor="email"
               className="text-left text-gray-100 block font-medium text-sm/6"
             >
               Email address
             </label>
             <div className="mt-2">
               <input
-                id="toEmail"
-                name="toEmail"
+                id="email"
+                name="email"
                 type="email"
                 value={email}
                 onChange={(e) => dispatch(setCurrentInvite(e.target.value))}
