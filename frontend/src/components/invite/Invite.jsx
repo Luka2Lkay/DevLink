@@ -28,7 +28,7 @@ function Invite() {
 
     try {
 
-      
+
 
       const result = await dispatch(sendInviteThunk({ id, email: trimmedEmail }));
 
@@ -49,6 +49,8 @@ function Invite() {
 
   const handleChange = (e) => {
     if (errorMessage) dispatch(setErrorMessage(""))
+    if (successMessage) dispatch(setSuccessMessage(""))
+
     dispatch(setCurrentInvite(e.target.value))
   }
 
