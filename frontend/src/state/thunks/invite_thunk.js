@@ -9,7 +9,7 @@ export const sendInviteThunk = createAsyncThunk(
 
             if (!userString) rejectWithValue("User not authenticated!")
 
-            const { token, email: loggedInUserEmail } = JSON.parse(userString);
+            const { token, loggedInUserEmail: email } = JSON.parse(userString);
             console.log('loggedin', loggedInUserEmail)
             console.log("toEmail", email)
             if (loggedInUserEmail === email) rejectWithValue("You own this project!")
