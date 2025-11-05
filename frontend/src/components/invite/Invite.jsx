@@ -31,8 +31,12 @@ function Invite() {
 
       console.log(result)
 
+      if (result.payload) {
+        return await dispatch(setErrorMessage(result.payload));
+      }
+
       await dispatch(setCurrentInvite(""));
-      await dispatch(setErrorMessage(""));
+
       await dispatch(setSuccessMessage("hello"));
 
     } catch (error) {
