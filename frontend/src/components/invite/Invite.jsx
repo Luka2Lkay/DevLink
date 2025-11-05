@@ -1,5 +1,5 @@
 import Navigation from "../navigation/Navigation"
-import { selectCurrentInvite, setCurrentInvite, selectError, setErrorMessage, selectLoading, setSuccessMessage } from "../../state/reducers/invite_slice";
+import { selectCurrentInvite, setCurrentInvite, selectErrorMessage, setErrorMessage, selectLoading, setSuccessMessage, selectSuccessMessage } from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import validator from "validator"
@@ -10,9 +10,9 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt"
 function Invite() {
   const { id } = useParams();
   const email = useSelector(selectCurrentInvite) ?? "";
-  const errorMessage = useSelector(selectError) ?? "";
+  const errorMessage = useSelector(selectErrorMessage) ?? "";
   const loading = useSelector(selectLoading) ?? false
-  const successMessage = useSelector() ?? ""
+  const successMessage = useSelector(selectSuccessMessage) ?? ""
 
   const dispatch = useDispatch();
 
