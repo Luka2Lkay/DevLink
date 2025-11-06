@@ -26,8 +26,8 @@ export const sendInviteThunk = createAsyncThunk(
           },
         }
       );
-console.log(response.data)
-      return response.data;
+console.log(response.data.newInvite)
+      return response.data.newInvite;
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.message || "Failed to send an invite"
