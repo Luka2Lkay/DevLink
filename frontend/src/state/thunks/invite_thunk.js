@@ -1,9 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { addInvite } from "../reducers/invite_slice";
 import axios from "axios";
 
 export const sendInviteThunk = createAsyncThunk(
   "invite/sendInvite",
-  async ({ id, email }, { rejectWithValue }) => {
+  async ({ id, email }, { getState, dispatch, rejectWithValue }) => {
     try {
       const userString = sessionStorage.getItem("user");
 
@@ -26,8 +27,12 @@ export const sendInviteThunk = createAsyncThunk(
           },
         }
       );
-console.log(response.data.newInvite)
-      return response.data;
+
+      dispatch(addInvite(response.data.newInvite));
+
+      console.log("current state", getState());
+
+      return response.data.message;
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.message || "Failed to send an invite"

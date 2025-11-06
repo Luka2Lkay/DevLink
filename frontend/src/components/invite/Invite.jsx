@@ -1,28 +1,37 @@
-import Navigation from "../navigation/Navigation"
-import { selectCurrentInvite, resetInvites, setCurrentInvite, selectErrorMessage, setErrorMessage, selectLoading, setSuccessMessage, selectSuccessMessage } from "../../state/reducers/invite_slice";
+import Navigation from "../navigation/Navigation";
+import {
+  selectCurrentInvite,
+  resetInvites,
+  setCurrentInvite,
+  selectErrorMessage,
+  setErrorMessage,
+  selectLoading,
+  setSuccessMessage,
+  selectSuccessMessage,
+} from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import validator from "validator"
+import validator from "validator";
 import { sendInviteThunk } from "../../state/thunks/invite_thunk";
 import CircularProgress from "@mui/material/CircularProgress";
-import TaskAltIcon from "@mui/icons-material/TaskAlt"
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useEffect } from "react";
 
 function Invite() {
   const { id } = useParams();
   const email = useSelector(selectCurrentInvite) ?? "";
-  const errorMessage = useSelector(selectErrorMessage) ?? null;
-  const loading = useSelector(selectLoading) ?? false
-  const successMessage = useSelector(selectSuccessMessage) ?? null
+  const errorMessage = useSelector(selectErrorMessage) ?? "";
+  const loading = useSelector(selectLoading) ?? false;
+  const successMessage = useSelector(selectSuccessMessage) ?? "";
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(resetInvites())
-  }, [])
+    dispatch(resetInvites());
+  }, []);
 
   const sendInvite = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const trimmedEmail = email.trim();
     const checkEmail = validator.isEmail(trimmedEmail);
@@ -32,28 +41,27 @@ function Invite() {
     }
 
     try {
-      const result = await dispatch(sendInviteThunk({ id, email: trimmedEmail }));
-    // console.log("test1", result.payload)
-    // console.log("test2", result)
-      // if (!result.payload) {
-      //   console.log("hello", result)
-      //   return await dispatch(setErrorMessage(result.payload));
-      // }
+      const result = await dispatch(
+        sendInviteThunk({ id, email: trimmedEmail })
+      );
+
+      if (result.payload) {
+        return await dispatch(setErrorMessage(result.payload));
+      }
 
       await dispatch(setCurrentInvite(""));
-
     } catch (error) {
-      await dispatch(setErrorMessage(error))
-      await dispatch(setSuccessMessage(""))
+      await dispatch(setErrorMessage(error));
+      await dispatch(setSuccessMessage(""));
     }
-  }
+  };
 
   const handleChange = (e) => {
-    if (errorMessage) dispatch(setErrorMessage(""))
-    if (successMessage) dispatch(setSuccessMessage(""))
+    if (errorMessage) dispatch(setErrorMessage(""));
+    if (successMessage) dispatch(setSuccessMessage(""));
 
-    dispatch(setCurrentInvite(e.target.value))
-  }
+    dispatch(setCurrentInvite(e.target.value));
+  };
 
   return (
     <div>
@@ -62,20 +70,31 @@ function Invite() {
         <h1 className="text-white">Invite a contributor</h1>
 
         <div className="flex justify-center mt-4">
-          {loading ? (<CircularProgress role="progressbar" />) : successMessage ? (
+          {loading ? (
+            <CircularProgress role="progressbar" />
+          ) : successMessage ? (
             <div className="flex justify-center gap-2">
-              <TaskAltIcon aria-label="success-check-icon" className="text-green-500 text-sm" />
-              <p role="alert" className="text-green-500 text-sm">{successMessage}</p>
+              <TaskAltIcon
+                aria-label="success-check-icon"
+                className="text-green-500 text-sm"
+              />
+              <p role="alert" className="text-green-500 text-sm">
+                {successMessage}
+              </p>
             </div>
-          ) : errorMessage && (
-            <div className="flex justify-center gap-2">
-              <p className="text-red-500">{errorMessage}</p>
-            </div>
+          ) : (
+            errorMessage && (
+              <div className="flex justify-center gap-2">
+                <p className="text-red-500">{errorMessage}</p>
+              </div>
+            )
           )}
         </div>
 
-        <form onSubmit={sendInvite} className="space-y-6 mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-
+        <form
+          onSubmit={sendInvite}
+          className="space-y-6 mt-10 sm:mx-auto sm:w-full sm:max-w-sm"
+        >
           <div>
             <label
               htmlFor="email"
@@ -112,7 +131,7 @@ function Invite() {
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default Invite
+export default Invite;
