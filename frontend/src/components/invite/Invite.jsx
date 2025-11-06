@@ -56,7 +56,6 @@ function Invite() {
   return (
     <div>
       <Navigation />
-
       <div className="flex flex-col justify-center px-6 py-12 lg:px-8">
         <h1 className="text-white">Invite a contributor</h1>
 
