@@ -35,6 +35,7 @@ function Invite() {
       const result = await dispatch(sendInviteThunk({ id, email: trimmedEmail }));
     console.log(result.payload.message)
       if (result.payload.message) {
+        console.log("hello world!")
         return await dispatch(setErrorMessage(result.payload.message));
       }
 
