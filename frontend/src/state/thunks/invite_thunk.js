@@ -30,8 +30,6 @@ export const sendInviteThunk = createAsyncThunk(
 
       dispatch(addInvite(response.data.newInvite));
 
-      console.log("current state", getState());
-
       return response.data.message;
     } catch (error) {
       return rejectWithValue(
