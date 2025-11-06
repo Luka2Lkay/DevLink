@@ -11,9 +11,9 @@ import { useEffect } from "react";
 function Invite() {
   const { id } = useParams();
   const email = useSelector(selectCurrentInvite) ?? "";
-  const errorMessage = useSelector(selectErrorMessage) ?? "";
+  const errorMessage = useSelector(selectErrorMessage) ?? null;
   const loading = useSelector(selectLoading) ?? false
-  const successMessage = useSelector(selectSuccessMessage) ?? ""
+  const successMessage = useSelector(selectSuccessMessage) ?? null
 
   const dispatch = useDispatch();
 
