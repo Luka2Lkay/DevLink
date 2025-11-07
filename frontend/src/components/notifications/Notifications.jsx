@@ -3,18 +3,17 @@ import IconButton from "@mui/material/IconButton";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { recieveInvite } from "../../state/thunks/invite_thunk";
+import { recievedInvites } from "../../state/thunks/invite_thunk";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 function Notifications() {
-  const [notifications, setNotification] = useState([
-    { id: 1, message: "New message received!" },
-    { id: 2, message: "Your order has shipped." },
-  ]);
+  const dispatch = useDispatch();
+
+  const invites = dispatch(recievedInvites());
+  const [notifications, setNotification] = useState(invites);
   const [anchorElement, setAnchorElement] = useState(null);
   const open = Boolean(anchorElement);
-  const dispatch = useDispatch();
 
   const handleClick = (e) => {
     setAnchorElement(e.currentTarget);
@@ -32,11 +31,11 @@ function Notifications() {
 
   const viewNotification = async (notification) => {
     handleMarkAsRead(notification.id);
-    console.log(notification.message);
+    console.log(`New invite! from ${notification.fromUser.name}`);
 
-    const result = await dispatch(recieveInvite());
+    const result = await dispatch(recievedInvites());
 
-    console.log("length", result.payload.length)
+    console.log("length", result.payload.length);
   };
 
   return (
@@ -60,7 +59,10 @@ function Notifications() {
       >
         {notifications.length > 0 ? (
           notifications.map((notification) => (
-            <MenuItem key={notification.id} onClick={() => viewNotification(notification)}>
+            <MenuItem
+              key={notification.id}
+              onClick={() => viewNotification(notification)}
+            >
               {notification.message}
             </MenuItem>
           ))

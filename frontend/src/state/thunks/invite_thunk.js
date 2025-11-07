@@ -39,7 +39,7 @@ export const sendInviteThunk = createAsyncThunk(
   }
 );
 
-export const recieveInvite = createAsyncThunk(
+export const recievedInvites = createAsyncThunk(
   "invite/receiveInvite",
   async (_, { rejectWithValue }) => {
     try {
