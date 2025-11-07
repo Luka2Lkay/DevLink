@@ -33,7 +33,7 @@ function Notifications() {
   };
 
   const handleMarkAsRead = (id) => {
-    notifications.filter((notification) => notification.id !== id);
+    notifications = notifications.filter((notification) => notification.id !== id);
 
     console.log(notifications.length);
   };
