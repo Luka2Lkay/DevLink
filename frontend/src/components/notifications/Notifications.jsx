@@ -28,13 +28,16 @@ function Notifications() {
   };
 
   const numberOfUnhandledInvites = () => {
-    console.log(notifications)
-    return 10;
-    // const unhandleInvites = notifications.filter(notification => )
+    const pendingInvites = notifications.filter(
+      (notification) => notification.status === "pending"
+    );
+
+    return pendingInvites.length;
   };
 
   const handleMarkAsRead = (id) => {
-    
+
+    //Consider reworking this 
     dispatch(removeInvite(id));
   };
 
