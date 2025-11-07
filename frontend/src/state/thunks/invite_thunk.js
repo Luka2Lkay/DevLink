@@ -64,9 +64,9 @@ export const recievedInvites = createAsyncThunk(
 
       dispatch(setInvites(invites))
 
-      console.log(response.data['received invites'])
+      // console.log(response.data['received invites'])
 
-      console.log('current state: ', getState())
+      // console.log('current state: ', getState())
       return response.data['received invites'];
     } catch (error) {
       return rejectWithValue(
