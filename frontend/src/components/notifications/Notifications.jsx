@@ -4,7 +4,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { recievedInvites } from "../../state/thunks/invite_thunk";
-import { selectInvites } from "../../state/reducers/invite_slice";
+import { selectInvites, removeInvite } from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
@@ -21,12 +21,6 @@ function Notifications() {
 
   useEffect(() => {
     dispatch(recievedInvites());
-    // const dispatchThunk = async () => {
-    //   const result = await dispatch(recievedInvites());
-    //   notifications = result.payload.invite.invites;
-    // };
-
-    // dispatchThunk();
   }, [dispatch]);
 
   const handleClose = () => {
@@ -34,10 +28,11 @@ function Notifications() {
   };
 
   const handleMarkAsRead = (id) => {
-    notifications = notifications.filter(
-      (notification) => notification.id !== id
-    );
+    // notifications = notifications.filter(
+    //   (notification) => notification.id !== id
+    // );
 
+    dispatch(recievedInvites(id));
     console.log(notifications.length);
   };
 

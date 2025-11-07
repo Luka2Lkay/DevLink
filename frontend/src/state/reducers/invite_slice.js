@@ -28,6 +28,11 @@ const inviteSlice = createSlice({
     setSuccessMessage(state, action) {
       state.success = action.payload;
     },
+    removeInvite(state, action) {
+      const inviteId = action.payload ?? null;
+
+      state.invites = state.invites.filter((invite) => invite.id !== inviteId);
+    },
     resetInvites: () => initialState,
   },
   extraReducers: (builder) => {
@@ -62,6 +67,7 @@ export const {
   setInvites,
   setErrorMessage,
   setSuccessMessage,
+  removeInvite,
   resetInvites,
 } = inviteSlice.actions;
 export default inviteSlice.reducer;
