@@ -21,7 +21,11 @@ function Notifications() {
   };
 
   useEffect(() => {
-    dispatch(recievedInvites())
+    const dispatchThunk = async () => {
+      return await dispatch(recievedInvites());
+    };
+
+    dispatchThunk();
     console.log(notifications);
   }, []);
 
@@ -30,7 +34,6 @@ function Notifications() {
   };
 
   const handleMarkAsRead = (id) => {
-
     // setNotification(
     //   notifications.filter((notification) => notification.id !== id)
     // );
