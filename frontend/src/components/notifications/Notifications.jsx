@@ -34,7 +34,9 @@ function Notifications() {
     handleMarkAsRead(notification.id);
     console.log(notification.message);
 
-    await dispatch(recieveInvite());
+    const result = await dispatch(recieveInvite());
+
+    console.log("length", result.length)
   };
 
   return (
