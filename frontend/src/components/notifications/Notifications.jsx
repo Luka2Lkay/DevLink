@@ -58,7 +58,7 @@ function Notifications() {
       >
         {notifications.length > 0 ? (
           notifications.map((notification) => (
-            <MenuItem key={notification.id} onClick={() => viewNotification(notification.id)}>
+            <MenuItem key={notification.id} onClick={() => viewNotification(notification)}>
               {notification.message}
             </MenuItem>
           ))
