@@ -23,9 +23,6 @@ function Notifications() {
     const dispatchThunk = async () => {
       const result = await dispatch(recievedInvites());
       notifications = result.payload.invite.invites;
-
-      console.log("result: ", notifications);
-      return notifications;
     };
 
     dispatchThunk();
@@ -36,19 +33,10 @@ function Notifications() {
   };
 
   const handleMarkAsRead = (id) => {
-    notifications.filter((notification) => {
-      console.log(notification.id);
-      console.log(id);
-      console.log(notification.id !== id);
-      return notification.id !== id;
-    });
+    notifications.filter((notification) => notification.id !== id);
+
+    console.log(notifications.length++)
   };
-
-  // const viewNotification = async (notification) => {
-  //   handleMarkAsRead(notification.id);
-
-  //   const result = await dispatch(recievedInvites());
-  // };
 
   return (
     <>
