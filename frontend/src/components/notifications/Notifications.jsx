@@ -38,9 +38,7 @@ function Notifications() {
 
   const handleMarkAsRead = (id) => {
     console.log("notifications", notifications);
-    // setNotification(
-    //   notifications.filter((notification) => notification.id !== id)
-    // );
+      notifications.filter((notification) => notification.id !== id)
   };
 
   const viewNotification = async (notification) => {
@@ -77,7 +75,7 @@ function Notifications() {
               key={notification.id}
               onClick={() => viewNotification(notification)}
             >
-              {notification.message}
+              {notification.id}
             </MenuItem>
           ))
         ) : (
