@@ -60,8 +60,7 @@ export const recieveInvite = createAsyncThunk(
         }
       );
 
-      console.log(response.data);
-      return response.data;
+      return response.data.recievedInvites;
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.message || "Failed to receive invite"
