@@ -5,7 +5,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { recievedInvites } from "../../state/thunks/invite_thunk";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Notifications() {
   const dispatch = useDispatch();
@@ -18,6 +18,10 @@ function Notifications() {
   const handleClick = (e) => {
     setAnchorElement(e.currentTarget);
   };
+
+  useEffect(() => {
+    console.log(notifications);
+  }, [notifications]);
 
   const handleClose = () => {
     setAnchorElement(null);
