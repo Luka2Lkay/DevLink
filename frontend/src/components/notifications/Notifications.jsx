@@ -32,7 +32,7 @@ function Notifications() {
     //   (notification) => notification.id !== id
     // );
 
-    dispatch(recievedInvites(id));
+    dispatch(removeInvite(id));
     console.log(notifications.length);
   };
 
