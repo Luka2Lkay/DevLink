@@ -20,19 +20,20 @@ function Notifications() {
     setAnchorElement(e.currentTarget);
   };
 
-  // useEffect(() => {
-  //   setNotification(dispatch(recievedInvites()));
-  //   console.log(notifications);
-  // }, []);
+  useEffect(() => {
+    dispatch(recievedInvites())
+    console.log(notifications);
+  }, []);
 
   const handleClose = () => {
     setAnchorElement(null);
   };
 
   const handleMarkAsRead = (id) => {
-    setNotification(
-      notifications.filter((notification) => notification.id !== id)
-    );
+
+    // setNotification(
+    //   notifications.filter((notification) => notification.id !== id)
+    // );
   };
 
   const viewNotification = async (notification) => {
