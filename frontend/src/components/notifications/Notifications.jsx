@@ -36,9 +36,12 @@ function Notifications() {
   };
 
   const handleMarkAsRead = (id) => {
-    notifications = notifications.filter((notification) => notification.id !== id);
-
-    return notifications;
+    notifications.filter((notification) => {
+      console.log(notification.id);
+      console.log(id);
+      console.log(notification.id !== id);
+      return notification.id !== id;
+    });
   };
 
   // const viewNotification = async (notification) => {
