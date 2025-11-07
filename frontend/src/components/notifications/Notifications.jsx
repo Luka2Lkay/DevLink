@@ -12,7 +12,6 @@ function Notifications() {
   const dispatch = useDispatch();
 
   let notifications = useSelector(selectInvites) ?? [];
-  // const [notifications, setNotification] = useState([]);
   const [anchorElement, setAnchorElement] = useState(null);
   const open = Boolean(anchorElement);
 
@@ -30,7 +29,7 @@ function Notifications() {
     };
 
     dispatchThunk();
-    console.log("notifications", notifications);
+   
   }, []);
 
   const handleClose = () => {
@@ -38,6 +37,7 @@ function Notifications() {
   };
 
   const handleMarkAsRead = (id) => {
+    console.log("notifications", notifications);
     // setNotification(
     //   notifications.filter((notification) => notification.id !== id)
     // );
