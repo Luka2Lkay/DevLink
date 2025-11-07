@@ -60,6 +60,8 @@ export const recieveInvite = createAsyncThunk(
         }
       );
 
+      console.log(response)
+
       return response;
     } catch (error) {
       return rejectWithValue(
