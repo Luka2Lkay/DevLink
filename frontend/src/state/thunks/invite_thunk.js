@@ -60,7 +60,7 @@ export const recieveInvite = createAsyncThunk(
         }
       );
 
-      console.log(response.data.recievedInvites)
+      console.log(response.data)
 
       return response;
     } catch (error) {
