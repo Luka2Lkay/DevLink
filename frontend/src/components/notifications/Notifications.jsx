@@ -3,6 +3,8 @@ import IconButton from "@mui/material/IconButton";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { recieveInvite } from "../../state/thunks/invite_thunk";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 function Notifications() {
@@ -12,6 +14,7 @@ function Notifications() {
   ]);
   const [anchorElement, setAnchorElement] = useState(null);
   const open = Boolean(anchorElement);
+  const dispatch = useDispatch();
 
   const handleClick = (e) => {
     setAnchorElement(e.currentTarget);
@@ -27,10 +30,19 @@ function Notifications() {
     );
   };
 
+  const viewNotification = async (notification) => {
+    handleMarkAsRead(notification.id);
+    console.log(notification.message);
+
+    const result = await dispatch(recieveInvite());
+
+    console.log("results: ", result);
+  };
+
   return (
     <>
       <IconButton
-        sx={{color: "white" }}
+        sx={{ color: "white" }}
         onClick={handleClick}
         data-testid="icon-button"
       >
@@ -48,13 +60,7 @@ function Notifications() {
       >
         {notifications.length > 0 ? (
           notifications.map((notification) => (
-            <MenuItem
-              key={notification.id}
-              onClick={() => {
-                handleMarkAsRead(notification.id);
-                console.log(notification.message);
-              }}
-            >
+            <MenuItem key={notification.id} onClick={viewNotification}>
               {notification.message}
             </MenuItem>
           ))
