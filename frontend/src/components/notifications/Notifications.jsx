@@ -37,7 +37,9 @@ function Notifications() {
   };
 
   const handleMarkAsRead = (id) => {
-      notifications.filter((notification) => notification.id !== id)
+
+
+    return notifications.filter((notification) => notification.id !== id)
 
       console.log("id arg", id)
   };
