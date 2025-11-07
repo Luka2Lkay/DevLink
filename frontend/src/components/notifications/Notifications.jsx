@@ -37,17 +37,17 @@ function Notifications() {
   };
 
   const handleMarkAsRead = (id) => {
-    console.log("notifications", notifications);
       notifications.filter((notification) => notification.id !== id)
+
+      console.log("id arg", id)
   };
 
   const viewNotification = async (notification) => {
     handleMarkAsRead(notification.id);
-    console.log(`New invite! from ${notification.fromUser.name}`);
 
     const result = await dispatch(recievedInvites());
 
-    console.log("length", result.payload.length);
+    console.log("length", result.payload.invite.invites.length);
   };
 
   return (
@@ -75,7 +75,7 @@ function Notifications() {
               key={notification.id}
               onClick={() => viewNotification(notification)}
             >
-              {notification.id}
+              <p>New invite! from {notification.fromUser.name}</p>
             </MenuItem>
           ))
         ) : (
