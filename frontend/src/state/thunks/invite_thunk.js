@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { addInvite } from "../reducers/invite_slice";
+import { setInvites } from "../reducers/invite_slice";
 import axios from "axios";
 
 export const sendInviteThunk = createAsyncThunk(
@@ -28,7 +28,7 @@ export const sendInviteThunk = createAsyncThunk(
         }
       );
 
-      dispatch(addInvite(response.data.newInvite));
+      // dispatch(addInvite(response.data.newInvite));
 
       return response.data.message;
     } catch (error) {
@@ -41,7 +41,7 @@ export const sendInviteThunk = createAsyncThunk(
 
 export const recievedInvites = createAsyncThunk(
   "invite/receiveInvite",
-  async (_, { rejectWithValue }) => {
+  async (_, { getState, dispatch, rejectWithValue }) => {
     try {
       const userString = sessionStorage.getItem("user");
 
@@ -60,8 +60,13 @@ export const recievedInvites = createAsyncThunk(
         }
       );
 
+      const invites = response.data['received invites']
+
+      dispatch(setInvites(invites))
+
       console.log(response.data['received invites'])
 
+      console.log('current state: ', getState())
       return response.data['received invites'];
     } catch (error) {
       return rejectWithValue(

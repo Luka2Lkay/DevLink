@@ -4,14 +4,15 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { recievedInvites } from "../../state/thunks/invite_thunk";
-import { useDispatch } from "react-redux";
+import { selectInvites } from "../../state/reducers/invite_slice";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
 function Notifications() {
   const dispatch = useDispatch();
 
-  const invites = dispatch(recievedInvites());
-  const [notifications, setNotification] = useState([]);
+  const notifications = useSelector(selectInvites);
+  // const [notifications, setNotification] = useState([]);
   const [anchorElement, setAnchorElement] = useState(null);
   const open = Boolean(anchorElement);
 
@@ -19,10 +20,10 @@ function Notifications() {
     setAnchorElement(e.currentTarget);
   };
 
-  useEffect(() => {
-    setNotification(dispatch(recievedInvites()));
-    console.log(notifications);
-  }, [notifications]);
+  // useEffect(() => {
+  //   setNotification(dispatch(recievedInvites()));
+  //   console.log(notifications);
+  // }, []);
 
   const handleClose = () => {
     setAnchorElement(null);
