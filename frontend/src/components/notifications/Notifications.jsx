@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 function Notifications() {
   const dispatch = useDispatch();
 
-  const notifications = useSelector(selectInvites) ?? [];
+  let notifications = useSelector(selectInvites) ?? [];
   // const [notifications, setNotification] = useState([]);
   const [anchorElement, setAnchorElement] = useState(null);
   const open = Boolean(anchorElement);
@@ -23,9 +23,10 @@ function Notifications() {
   useEffect(() => {
     const dispatchThunk = async () => {
       const result = await dispatch(recievedInvites());
+      notifications = result.payload.invite.invites;
 
-      console.log("result: ", result);
-      return result;
+      console.log("result: ", notifications);
+      return notifications;
     };
 
     dispatchThunk();
