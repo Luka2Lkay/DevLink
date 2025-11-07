@@ -11,7 +11,7 @@ function Notifications() {
   const dispatch = useDispatch();
 
   const invites = dispatch(recievedInvites());
-  const [notifications, setNotification] = useState(invites);
+  const [notifications, setNotification] = useState([]);
   const [anchorElement, setAnchorElement] = useState(null);
   const open = Boolean(anchorElement);
 
@@ -20,6 +20,7 @@ function Notifications() {
   };
 
   useEffect(() => {
+    setNotification(dispatch(recievedInvites()));
     console.log(notifications);
   }, [notifications]);
 
