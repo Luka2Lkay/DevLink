@@ -35,7 +35,7 @@ function Notifications() {
   const handleMarkAsRead = (id) => {
     notifications.filter((notification) => notification.id !== id);
 
-    console.log(notifications.length++)
+    console.log(notifications.length);
   };
 
   return (
