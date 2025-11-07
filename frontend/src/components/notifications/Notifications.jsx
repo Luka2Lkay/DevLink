@@ -36,7 +36,7 @@ function Notifications() {
 
     const result = await dispatch(recieveInvite());
 
-    console.log("length", result.length)
+    console.log("length", result)
   };
 
   return (
