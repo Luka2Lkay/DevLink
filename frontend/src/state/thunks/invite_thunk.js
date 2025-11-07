@@ -62,7 +62,7 @@ export const recievedInvites = createAsyncThunk(
 
       const invites = response.data['received invites']
 
-      dispatch(setInvites(invites))
+      await dispatch(setInvites(invites))
 
       // console.log(response.data['received invites'])
 

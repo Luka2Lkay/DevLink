@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 function Notifications() {
   const dispatch = useDispatch();
 
-  const notifications = useSelector(selectInvites);
+  const notifications = useSelector(selectInvites) ?? [];
   // const [notifications, setNotification] = useState([]);
   const [anchorElement, setAnchorElement] = useState(null);
   const open = Boolean(anchorElement);
@@ -22,11 +22,14 @@ function Notifications() {
 
   useEffect(() => {
     const dispatchThunk = async () => {
-      return await dispatch(recievedInvites());
+      const result = await dispatch(recievedInvites());
+
+      console.log("result: ", result);
+      return result;
     };
 
     dispatchThunk();
-    console.log(notifications);
+    console.log("notifications", notifications);
   }, []);
 
   const handleClose = () => {
