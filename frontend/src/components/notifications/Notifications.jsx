@@ -29,7 +29,6 @@ function Notifications() {
     };
 
     dispatchThunk();
-   
   }, []);
 
   const handleClose = () => {
@@ -37,20 +36,14 @@ function Notifications() {
   };
 
   const handleMarkAsRead = (id) => {
-
-
-    return notifications.filter((notification) => notification.id !== id)
-
-      console.log("id arg", id)
+    return notifications.filter((notification) => notification.id !== id);
   };
 
-  const viewNotification = async (notification) => {
-    handleMarkAsRead(notification.id);
+  // const viewNotification = async (notification) => {
+  //   handleMarkAsRead(notification.id);
 
-    const result = await dispatch(recievedInvites());
-
-    console.log("length", result.payload.invite.invites.length);
-  };
+  //   const result = await dispatch(recievedInvites());
+  // };
 
   return (
     <>
@@ -75,7 +68,7 @@ function Notifications() {
           notifications.map((notification) => (
             <MenuItem
               key={notification.id}
-              onClick={() => viewNotification(notification)}
+              onClick={() => handleMarkAsRead(notification.id)}
             >
               <p>New invite! from {notification.fromUser.name}</p>
             </MenuItem>
