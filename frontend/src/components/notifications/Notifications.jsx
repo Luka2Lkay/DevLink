@@ -36,7 +36,9 @@ function Notifications() {
   };
 
   const handleMarkAsRead = (id) => {
-    return notifications.filter((notification) => notification.id !== id);
+    notifications = notifications.filter((notification) => notification.id !== id);
+
+    return notifications;
   };
 
   // const viewNotification = async (notification) => {
