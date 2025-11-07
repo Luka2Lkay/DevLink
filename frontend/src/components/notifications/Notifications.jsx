@@ -27,13 +27,15 @@ function Notifications() {
     setAnchorElement(null);
   };
 
-  const handleMarkAsRead = (id) => {
-    // notifications = notifications.filter(
-    //   (notification) => notification.id !== id
-    // );
+  const numberOfUnhandledInvites = () => {
+    console.log(notifications)
+    return 10;
+    // const unhandleInvites = notifications.filter(notification => )
+  };
 
+  const handleMarkAsRead = (id) => {
+    
     dispatch(removeInvite(id));
-    console.log(notifications.length);
   };
 
   return (
@@ -43,7 +45,7 @@ function Notifications() {
         onClick={handleClick}
         data-testid="icon-button"
       >
-        <Badge badgeContent={notifications.length} color="error">
+        <Badge badgeContent={numberOfUnhandledInvites()} color="error">
           <NotificationsIcon />
         </Badge>
       </IconButton>

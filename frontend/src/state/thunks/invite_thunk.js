@@ -28,8 +28,6 @@ export const sendInviteThunk = createAsyncThunk(
         }
       );
 
-      // dispatch(addInvite(response.data.newInvite));
-
       return response.data.message;
     } catch (error) {
       return rejectWithValue(
@@ -40,7 +38,7 @@ export const sendInviteThunk = createAsyncThunk(
 );
 
 export const recievedInvites = createAsyncThunk(
-  "invite/receiveInvite",
+  "invite/receivedInvites",
   async (_, { getState, dispatch, rejectWithValue }) => {
     try {
       const userString = sessionStorage.getItem("user");
@@ -64,9 +62,6 @@ export const recievedInvites = createAsyncThunk(
 
       await dispatch(setInvites(invites))
 
-      // console.log(response.data['received invites'])
-
-      console.log('current state: ', getState())
       return getState();
     } catch (error) {
       return rejectWithValue(
