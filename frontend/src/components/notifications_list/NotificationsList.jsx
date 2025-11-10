@@ -17,14 +17,12 @@ function NotificationsList() {
       <Navigation />
       <button className="text-white">All</button>
 
-      <div className="flex">
         {notitifications.length > 0 &&
           notitifications.map((notification) => (
-            <div className="flex">
+            <div>
               <p className="text-white">{notification.fromUser.name}</p>
             </div>
           ))}
-      </div>
     </div>
   );
 }
