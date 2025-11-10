@@ -16,7 +16,7 @@ export const fetchProjectsThunk = createAsyncThunk(
                 },
             });
 
-            return response.data.projects;
+            return response.data.projects.reverse();
         } catch (error) {
             return rejectWithValue(error.response?.data?.message || "Failed to fetch projects");
         }
