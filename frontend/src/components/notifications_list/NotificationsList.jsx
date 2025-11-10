@@ -15,7 +15,6 @@ function NotificationsList() {
   return (
     <div>
       <Navigation />
-      <button className="text-white">All</button>
       <div>
         {notitifications.length > 0 &&
           notitifications.map((notification) => (
