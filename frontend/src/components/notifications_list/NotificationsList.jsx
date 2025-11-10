@@ -19,8 +19,8 @@ function NotificationsList() {
       <div>
         {notitifications.length > 0 &&
           notitifications.map((notification) => (
-            <div className="flex text-lg items-center justify-between max-w-sm mx-auto bg-white rounded-xl shadow-lg overflow-hidden md:max-w-2xl transform hover:scale-[1.02] transition duration-3000 ease-in-out p-2 mb-2">
-              <p className="mt-2 text-gray-700 text-sm">
+            <div className="flex items-center justify-between max-w-sm mx-auto bg-white rounded-xl overflow-hidden md:max-w-2xl p-2 mb-2">
+              <p className="mt-2 text-gray-700 text-lg">
                 New invite! from {notification.fromUser.name}
               </p>
               <div className="flex flex-items gap-2">
