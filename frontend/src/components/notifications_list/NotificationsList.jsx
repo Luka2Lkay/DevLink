@@ -23,16 +23,16 @@ function NotificationsList() {
               <p className="mt-2 text-gray-700 text-sm">
                 New invite! from {notification.fromUser.name}
               </p>
-              <div className="flex flex-items gap-2 border radius-md">
+              <div className="flex flex-items gap-2">
                 <button
                   onClick={() => {}}
-                  className="bg-green-500 text-white cursor-pointer"
+                  className="bg-green-500 text-white cursor-pointer border border-gray-700 p-2 radius-md"
                 >
                   Accept
                 </button>
                 <button
                   onClick={() => {}}
-                  className="bg-red-500 text-white cursor-pointer"
+                  className="bg-red-500 text-white cursor-pointer border border-gray-700 p-2 radius-md"
                 >
                   Reject
                 </button>
