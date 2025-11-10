@@ -19,7 +19,7 @@ function NotificationsList() {
       <div>
         {notitifications.length > 0 &&
           notitifications.map((notification) => (
-            <div className="flex items-center justify-between max-w-96 mx-auto bg-white rounded-xl shadow-lg overflow-hidden md:max-w-2xl transform hover:scale-[1.02] transition duration-3000 ease-in-out p-2 mb-2">
+            <div className="flex items-center justify-between max-w-48 mx-auto bg-white rounded-xl shadow-lg overflow-hidden md:max-w-2xl transform hover:scale-[1.02] transition duration-3000 ease-in-out p-2 mb-2">
               <p className="mt-2 text-gray-700 text-sm">
                 New collaboration invite! from {notification.fromUser.name}
               </p>
