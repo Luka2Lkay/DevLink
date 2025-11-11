@@ -12,6 +12,14 @@ function NotificationsList() {
     dispatch(recievedInvites());
   });
 
+  const acceptInvite = () => {
+
+  }
+
+  const rejectInvite = () => {
+
+  }
+
   return (
     <div>
       <Navigation />
@@ -24,13 +32,13 @@ function NotificationsList() {
               </p>
               <div className="flex flex-items gap-2">
                 <button
-                  onClick={() => {}}
+                  onClick={acceptInvite}
                   className="bg-green-500 text-white cursor-pointer border border-gray-700 p-2 rounded-md"
                 >
                   Accept
                 </button>
                 <button
-                  onClick={() => {}}
+                  onClick={rejectInvite}
                   className="bg-red-500 text-white cursor-pointer border border-gray-700 p-2 rounded-md"
                 >
                   Reject
