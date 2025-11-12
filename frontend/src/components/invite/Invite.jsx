@@ -29,7 +29,7 @@ function Invite() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const isLoggedIn = session.getItem("user") !== null;
+    const isLoggedIn = sessionStorage.getItem("user") !== null;
     if (!isLoggedIn) {
       navigate("/login");
     } else {
