@@ -37,13 +37,13 @@ function NotificationsList() {
               <div className="flex flex-items gap-2">
                 <button
                   onClick={acceptInvite}
-                  className="bg-green-500 text-white cursor-pointer border border-gray-700 p-2 rounded-md"
+                  className="bg-green-500 text-sm text-white cursor-pointer border border-gray-700 p-2 rounded-md"
                 >
                   Accept
                 </button>
                 <button
                   onClick={rejectInvite}
-                  className="bg-red-500 text-white cursor-pointer border border-gray-700 p-2 rounded-md"
+                  className="bg-red-500 text-sm text-white cursor-pointer border border-gray-700 p-2 rounded-md"
                 >
                   Reject
                 </button>
