@@ -3,22 +3,26 @@ import { recievedInvites } from "../../state/thunks/invite_thunk";
 import { selectInvites, removeInvite } from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function NotificationsList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const notitifications = useSelector(selectInvites) ?? [];
 
   useEffect(() => {
+    const isLoggedIn = sessionStorage.getItem("user") !== null;
+    if (!isLoggedIn) {
+      navigate("/login");
+    } else {
+      dispatch(recievedInvites());
+    }
     dispatch(recievedInvites());
   });
 
-  const acceptInvite = () => {
+  const acceptInvite = () => {};
 
-  }
-
-  const rejectInvite = () => {
-
-  }
+  const rejectInvite = () => {};
 
   return (
     <div>
