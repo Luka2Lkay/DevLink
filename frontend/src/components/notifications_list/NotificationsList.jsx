@@ -2,13 +2,16 @@ import Navigation from "../navigation/Navigation";
 import { recievedInvites } from "../../state/thunks/invite_thunk";
 import { selectInvites, removeInvite } from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function NotificationsList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const notitifications = useSelector(selectInvites) ?? [];
+
+  const [isAccepted, setIsAccepted] = useState(false);
+  const [isRejected, setIsRejected] = useState(false);
 
   useEffect(() => {
     const isLoggedIn = sessionStorage.getItem("user") !== null;
@@ -32,7 +35,14 @@ function NotificationsList() {
           notitifications.map((notification) => (
             <div className="flex items-center justify-between max-w-sm mx-auto bg-white rounded-xl overflow-hidden md:max-w-2xl p-2 mb-2">
               <p className="mt-2 text-gray-700 text-base">
-                New invite! from {notification.fromUser.name}
+                {isAccepted ? (
+                  <p>
+                    invite from {notification.fromUser.name} for{" "}
+                    {notification.projectId.title}
+                  </p>
+                ) : (
+                  <p>New invite! from {notification.fromUser.name}</p>
+                )}
               </p>
               <div className="flex flex-items gap-2">
                 <button
