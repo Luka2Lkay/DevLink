@@ -32,9 +32,9 @@ function Invite() {
     const isLoggedIn = session.getItem("user") !== null;
     if (!isLoggedIn) {
       navigate("/login");
+    } else {
+      dispatch(resetInvites());
     }
-
-    dispatch(resetInvites());
   }, []);
 
   const sendInvite = async (e) => {
