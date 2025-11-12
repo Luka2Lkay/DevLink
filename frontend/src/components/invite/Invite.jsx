@@ -16,6 +16,7 @@ import { sendInviteThunk } from "../../state/thunks/invite_thunk";
 import CircularProgress from "@mui/material/CircularProgress";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Invite() {
   const { id } = useParams();
@@ -25,11 +26,12 @@ function Invite() {
   const successMessage = useSelector(selectSuccessMessage) ?? "";
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const isLoggedIn = session.getItem("user") !== null;
     if (!isLoggedIn) {
-      window.location.href = "/login";
+      navigate("/login");
     }
 
     dispatch(resetInvites());
