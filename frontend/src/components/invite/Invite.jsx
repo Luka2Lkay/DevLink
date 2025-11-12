@@ -27,6 +27,11 @@ function Invite() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const isLoggedIn = session.getItem("user") !== null;
+    if (!isLoggedIn) {
+      window.location.href = "/login";
+    }
+
     dispatch(resetInvites());
   }, []);
 
