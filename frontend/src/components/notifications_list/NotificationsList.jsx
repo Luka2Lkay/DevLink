@@ -25,6 +25,7 @@ function NotificationsList() {
 
   const acceptInvite = () => {
     setIsAccepted(true);
+    console.log("accepted");
   };
 
   const rejectInvite = () => {};
