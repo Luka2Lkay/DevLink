@@ -47,8 +47,7 @@ function NotificationsList() {
                   <p>New invite! from {notification.fromUser.name}</p>
                 )}
               </p>
-              {!isAccepted ||
-                (!isRejected && (
+              {isAccepted || isRejected && (
                   <div className="flex flex-items gap-2">
                     <button
                       onClick={acceptInvite}
@@ -63,7 +62,7 @@ function NotificationsList() {
                       Reject
                     </button>
                   </div>
-                ))}
+                )}
             </div>
           ))}
       </div>
