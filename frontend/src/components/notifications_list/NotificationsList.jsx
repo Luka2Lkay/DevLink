@@ -40,27 +40,30 @@ function NotificationsList() {
               <p className="mt-2 text-gray-700 text-base">
                 {isAccepted ? (
                   <p>
-                    invite from {notification.fromUser.name} for{" "}
+                    Accepted invite from {notification.fromUser.name} for{" "}
                     {notification.projectId.title}
                   </p>
                 ) : (
                   <p>New invite! from {notification.fromUser.name}</p>
                 )}
               </p>
-              <div className="flex flex-items gap-2">
-                <button
-                  onClick={acceptInvite}
-                  className="bg-green-500 text-sm text-white cursor-pointer border border-gray-700 p-2 rounded-md"
-                >
-                  Accept
-                </button>
-                <button
-                  onClick={rejectInvite}
-                  className="bg-red-500 text-sm text-white cursor-pointer border border-gray-700 p-2 rounded-md"
-                >
-                  Reject
-                </button>
-              </div>
+              {!isAccepted ||
+                (!isRejected && (
+                  <div className="flex flex-items gap-2">
+                    <button
+                      onClick={acceptInvite}
+                      className="bg-green-500 text-sm text-white cursor-pointer border border-gray-700 p-2 rounded-md"
+                    >
+                      Accept
+                    </button>
+                    <button
+                      onClick={rejectInvite}
+                      className="bg-red-500 text-sm text-white cursor-pointer border border-gray-700 p-2 rounded-md"
+                    >
+                      Reject
+                    </button>
+                  </div>
+                ))}
             </div>
           ))}
       </div>
