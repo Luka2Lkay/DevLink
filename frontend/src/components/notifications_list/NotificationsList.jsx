@@ -14,7 +14,6 @@ function NotificationsList() {
   const [isRejected, setIsRejected] = useState(false);
 
   useEffect(() => {
-    console.log("acc", isAccepted);
     const isLoggedIn = sessionStorage.getItem("user") !== null;
     if (!isLoggedIn) {
       navigate("/login");
@@ -26,7 +25,6 @@ function NotificationsList() {
 
   const acceptInvite = () => {
     setIsAccepted(true);
-    console.log("accepted");
   };
 
   const rejectInvite = () => {};
@@ -48,7 +46,7 @@ function NotificationsList() {
                   <p>New invite! from {notification.fromUser.name}</p>
                 )}
               </p>
-              {isAccepted === false && (
+              {isAccepted && (
                 <div className="flex flex-items gap-2">
                   <button
                     onClick={acceptInvite}
