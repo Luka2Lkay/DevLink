@@ -46,7 +46,7 @@ function NotificationsList() {
                   <p>New invite! from {notification.fromUser.name}</p>
                 )}
               </p>
-              {isAccepted && (
+              {isAccepted === false && (
                 <div className="flex flex-items gap-2">
                   <button
                     onClick={acceptInvite}
