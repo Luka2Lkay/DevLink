@@ -23,7 +23,9 @@ function NotificationsList() {
     dispatch(recievedInvites());
   });
 
-  const acceptInvite = () => {};
+  const acceptInvite = () => {
+    setIsAccepted(true);
+  };
 
   const rejectInvite = () => {};
 
