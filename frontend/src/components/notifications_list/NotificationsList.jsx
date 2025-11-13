@@ -14,6 +14,7 @@ function NotificationsList() {
   const [isRejected, setIsRejected] = useState(false);
 
   useEffect(() => {
+    console.log("acc", isAccepted);
     const isLoggedIn = sessionStorage.getItem("user") !== null;
     if (!isLoggedIn) {
       navigate("/login");
