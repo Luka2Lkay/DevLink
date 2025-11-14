@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 function NotificationsList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const notitifications = useSelector(selectInvites) ?? [];
+  const notifications = useSelector(selectInvites) ?? [];
 
   const [isAccepted, setIsAccepted] = useState(false);
   const [isRejected, setIsRejected] = useState(false);
@@ -21,9 +21,10 @@ function NotificationsList() {
       dispatch(recievedInvites());
     }
     dispatch(recievedInvites());
-  });
+  }, [dispatch]);
 
-  const acceptInvite = () => {
+  const acceptInvite = (inviteId) => {
+    console.log("Accepted invite with id:", inviteId);
     setIsAccepted(true);
   };
 
@@ -33,8 +34,8 @@ function NotificationsList() {
     <div>
       <Navigation />
       <div>
-        {notitifications.length > 0 &&
-          notitifications.map((notification) => (
+        {notifications.length > 0 &&
+          notifications.map((notification) => (
             <div className="flex items-center justify-between max-w-sm mx-auto bg-white rounded-xl overflow-hidden md:max-w-2xl p-2 mb-2">
               <p className="mt-2 text-gray-700 text-base">
                 {isAccepted ? (
@@ -49,7 +50,7 @@ function NotificationsList() {
               {isAccepted === false && (
                 <div className="flex flex-items gap-2">
                   <button
-                    onClick={acceptInvite}
+                    onClick={() => acceptInvite(notification.id)}
                     className="bg-green-500 text-sm text-white cursor-pointer border border-gray-700 p-2 rounded-md"
                   >
                     Accept
