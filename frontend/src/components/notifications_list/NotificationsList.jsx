@@ -26,7 +26,6 @@ function NotificationsList() {
       dispatch(recievedInvites());
     }
   }, [dispatch]);
-
   const handleAcceptInvite = async (inviteId) => {
     console.log("Accepted invite with id:", inviteId);
     await dispatch(inviteResponseThunk({ inviteId, status: "accepted" }));
