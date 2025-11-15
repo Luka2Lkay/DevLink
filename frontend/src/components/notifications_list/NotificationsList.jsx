@@ -9,6 +9,7 @@ function NotificationsList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const notifications = useSelector(selectInvites) ?? [];
+  const [processedInvites, setProcessedInvites] = useState(new Set());
 
   useEffect(() => {
     const isLoggedIn = sessionStorage.getItem("user") !== null;
@@ -21,7 +22,7 @@ function NotificationsList() {
 
   const handleAcceptInvite = (inviteId) => {
     console.log("Accepted invite with id:", inviteId);
-    console.log("hello")
+    setProcessedInvites((prev) => new Set(prev).add(inviteId));
     console.log("Current notifications:", notifications);
   };
 
@@ -42,14 +43,14 @@ function NotificationsList() {
                   Accepted invite from {notification.fromUser.name} for{" "}
                   {notification.projectId.title}
                 </p>
-                {/* {isAccepted ? (
+                {processedInvites.has(notification.id) ? (
                   <p>
                     Accepted invite from {notification.fromUser.name} for{" "}
                     {notification.projectId.title}
                   </p>
                 ) : (
                   <p>New invite! from {notification.fromUser.name}</p>
-                )} */}
+                )}
               </p>
               <div className="flex flex-items gap-2">
                 <button
