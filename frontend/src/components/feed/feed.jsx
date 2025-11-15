@@ -61,7 +61,7 @@ function Feed() {
 
   const handleInviteClick = (project) => {
     console.log("Inviting to project:", project);
-    navigate(`/invite-a-contributor/${project.id}`);
+    // navigate(`/invite-a-contributor/${project.id}`);
   };
 
   const handleSave = async (project) => {
@@ -117,7 +117,7 @@ function Feed() {
               project={project}
               handleEditClick={() => handleEditClick(project)}
               handleDeleteClick={() => handleDeleteClick(project)}
-              handleInviteClick={() => handleInviteClick(project)}
+              handleInviteClick={() => handleInviteClick(project.id)}
             />
           ))
         ) : (
