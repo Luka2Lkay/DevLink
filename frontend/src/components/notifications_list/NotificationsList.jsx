@@ -69,7 +69,7 @@ function NotificationsList() {
                 </button>
               </div>
             </div>
-          )): (<p>No notification invites</p>)}
+          )): (<p className="text-white">No invitations</p>)}
       </div>
     </div>
   );
