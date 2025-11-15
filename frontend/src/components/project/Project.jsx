@@ -49,7 +49,7 @@ function Project({ project, handleEditClick = () => { }, handleDeleteClick = () 
 
             {project && sessionStorage.getItem("user") && (project.owner._id === JSON.parse(sessionStorage.getItem("user")).userId) && (
               <>
-                <MoreVertIcon onClick={(() => visible === '' ? setVisible('hidden') : setVisible(''))} className="text-gray-600 float-right mb-2 mt-2 cursor-pointer" />
+                <MoreVertIcon onClick={() => visible === '' ? setVisible('hidden') : setVisible('')} className="text-gray-600 float-right mb-2 mt-2 cursor-pointer" />
                 <button
                   type="button"
                   onClick={handleEditClick}
