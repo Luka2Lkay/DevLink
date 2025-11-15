@@ -91,7 +91,6 @@ export const inviteResponseThunk = createAsyncThunk(
         }
       );
 
-      console.log("Accept Invite Response:", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(
