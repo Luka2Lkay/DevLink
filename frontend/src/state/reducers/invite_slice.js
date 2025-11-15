@@ -9,8 +9,8 @@ const initialState = {
   currentInvite: null,
   invites: [],
   loading: false,
-  error: null,
-  success: null,
+  error: "",
+  success: "",
 };
 
 const inviteSlice = createSlice({
@@ -32,8 +32,8 @@ const inviteSlice = createSlice({
     setSuccessMessage(state, action) {
       state.success = action.payload;
     },
-    setLoading(state) {
-      state.loading = !state.loading;
+    setLoading(state, action) {
+      state.loading = action.payload;
     },
     removeInvite(state, action) {
       const inviteId = action.payload ?? null;
