@@ -23,10 +23,11 @@ function NotificationsList() {
     }
   }, [dispatch]);
 
-  const handleAcceptInvite = (inviteId) => {
+  const handleAcceptInvite = async (inviteId) => {
     console.log("Accepted invite with id:", inviteId);
     // setProcessedInvites((prev) => new Set(prev).add(inviteId));
-    dispatch(acceptInviteThunk({ inviteId, status: "accepted" }));
+    await dispatch(acceptInviteThunk({ inviteId, status: "accepted" }));
+    await dispatch(recievedInvites());
     console.log("Current notifications:", notifications);
   };
 
