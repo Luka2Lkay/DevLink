@@ -40,7 +40,7 @@ function Project({ project, handleEditClick = () => { }, handleDeleteClick = () 
                 <span className="w-full text-sm text-gray-500 flex justify-center items-center">No collaborators</span>
               ) : (
                 project.collaborators && project.collaborators.map((collaborator) => (
-                  <Collaborator key={uuidv4()} initials={collaborator.initials} />
+                  <Collaborator key={uuidv4()} initials={collaborator} />
                 ))
               )}
             </div>
