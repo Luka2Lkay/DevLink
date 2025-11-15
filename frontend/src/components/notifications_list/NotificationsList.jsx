@@ -37,13 +37,13 @@ function NotificationsList() {
     <div>
       <Navigation />
       <div>
-        {notifications.length > 0 &&
+        {notifications.length > 0 ?
           notifications.map((notification) => (
             <div
               key={notification.id}
               className="flex items-center justify-between max-w-sm mx-auto bg-white rounded-xl overflow-hidden md:max-w-2xl p-2 mb-2"
             >
-              <p className="mt-2 text-gray-700 text-base">
+              <div className="mt-2 text-gray-700 text-base">
                 { notification.status === "accepted" ? (
                   <p>
                     Accepted invite from {notification.fromUser.name} for{" "}
@@ -52,7 +52,7 @@ function NotificationsList() {
                 ) : (
                   <p>New invite! from {notification.fromUser.name}</p>
                 )}
-              </p>
+              </div>
               <div className="flex flex-items gap-2">
                 <button
                   onClick={() => handleAcceptInvite(notification.id)}
@@ -69,7 +69,7 @@ function NotificationsList() {
                 </button>
               </div>
             </div>
-          ))}
+          )): (<p>No notification invites</p>)}
       </div>
     </div>
   );
