@@ -78,7 +78,7 @@ function Invite() {
       <div className="flex flex-col justify-center px-6 py-12 lg:px-8">
         <h1 className="text-white">Invite a contributor</h1>
         
-        {/* <div className="flex justify-center mt-4">
+        <div className="flex justify-center mt-4">
           {loading ? (
             <CircularProgress role="progressbar" />
           ) : successMessage ? (
@@ -88,7 +88,7 @@ function Invite() {
                 className="text-green-500 text-sm"
               />
               <p role="alert" className="text-green-500 text-sm">
-                {successMessage}
+                Invite Successful!
               </p>
             </div>
           ) : (
@@ -98,7 +98,7 @@ function Invite() {
               </div>
             )
           )}
-        </div> */}
+        </div>
 
         <form
           onSubmit={sendInvite}
