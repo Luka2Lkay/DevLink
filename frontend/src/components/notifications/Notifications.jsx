@@ -1,12 +1,12 @@
 import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+// import Menu from "@mui/material/Menu";
+// import MenuItem from "@mui/material/MenuItem";
 import { receivedInvitesThunk } from "../../state/thunks/invite_thunk";
-import { selectInvites, removeInvite } from "../../state/reducers/invite_slice";
+import { selectInvites } from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Notifications() {
@@ -14,8 +14,8 @@ function Notifications() {
   const navigate = useNavigate();
 
   const notifications = useSelector(selectInvites) ?? [];
-  const [anchorElement, setAnchorElement] = useState(null);
-  const open = Boolean(anchorElement);
+  // const [anchorElement, setAnchorElement] = useState(null);
+  // const open = Boolean(anchorElement);
 
   const handleClick = (e) => {
     navigate("/notifications-list");
@@ -25,9 +25,9 @@ function Notifications() {
     dispatch(receivedInvitesThunk());
   }, [dispatch]);
 
-  const handleClose = () => {
-    setAnchorElement(null);
-  };
+  // const handleClose = () => {
+  //   setAnchorElement(null);
+  // };
 
   const numberOfUnhandledInvites = () => {
     const pendingInvites = notifications.filter(
@@ -37,10 +37,10 @@ function Notifications() {
     return pendingInvites.length;
   };
 
-  const handleMarkAsRead = (id) => {
-    //Consider reworking this
-    dispatch(removeInvite(id));
-  };
+  // const handleMarkAsRead = (id) => {
+  //   //Consider reworking this
+  //   dispatch(removeInvite(id));
+  // };
 
   return (
     <>
@@ -54,7 +54,7 @@ function Notifications() {
         </Badge>
       </IconButton>
 
-      <Menu
+      {/* <Menu
         id="notification-menu"
         open={open}
         anchorEl={anchorElement}
@@ -73,7 +73,7 @@ function Notifications() {
         ) : (
           <MenuItem onClick={handleClose}>No new notifications</MenuItem>
         )}
-      </Menu>
+      </Menu> */}
     </>
   );
 }
