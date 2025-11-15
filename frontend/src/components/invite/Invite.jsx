@@ -15,7 +15,7 @@ import validator from "validator";
 import { sendInviteThunk } from "../../state/thunks/invite_thunk";
 import CircularProgress from "@mui/material/CircularProgress";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Invite() {
@@ -26,16 +26,16 @@ function Invite() {
   const successMessage = useSelector(selectSuccessMessage) ?? "";
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    const isLoggedIn = sessionStorage.getItem("user") !== null;
-    if (!isLoggedIn) {
-      navigate("/login");
-    } else {
-      dispatch(resetInvites());
-    }
-  }, []);
+  // useEffect(() => {
+  //   const isLoggedIn = sessionStorage.getItem("user") !== null;
+  //   if (!isLoggedIn) {
+  //     navigate("/login");
+  //   } else {
+  //     dispatch(resetInvites());
+  //   }
+  // }, []);
 
   const sendInvite = async (e) => {
     e.preventDefault();
