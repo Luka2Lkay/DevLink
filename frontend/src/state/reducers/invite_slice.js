@@ -98,6 +98,8 @@ export const selectErrorMessage = (state) => state.invite.error;
 export const selectLoading = (state) => state.invite.loading;
 export const selectSuccessMessage = (state) => state.invite.success;
 
+console.log(selectSuccessMessage);
+
 export const {
   setCurrentInvite,
   addInvite,

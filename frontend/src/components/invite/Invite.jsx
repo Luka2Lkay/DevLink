@@ -94,7 +94,7 @@ function Invite() {
           ) : (
             errorMessage && (
               <div className="flex justify-center gap-2">
-                <p className="text-red-500">{errorMessage}</p>
+                <p className="text-red-500">error</p>
               </div>
             )
           )}
