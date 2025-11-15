@@ -12,7 +12,7 @@ function NotificationsList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const notifications = useSelector(selectInvites) ?? [];
-  const [processedInvites, setProcessedInvites] = useState(new Set());
+  // const [processedInvites, setProcessedInvites] = useState(new Set());
 
   useEffect(() => {
     const isLoggedIn = sessionStorage.getItem("user") !== null;
@@ -25,7 +25,7 @@ function NotificationsList() {
 
   const handleAcceptInvite = (inviteId) => {
     console.log("Accepted invite with id:", inviteId);
-    setProcessedInvites((prev) => new Set(prev).add(inviteId));
+    // setProcessedInvites((prev) => new Set(prev).add(inviteId));
     dispatch(acceptInviteThunk({ inviteId, status: "accepted" }));
     console.log("Current notifications:", notifications);
   };
@@ -43,8 +43,7 @@ function NotificationsList() {
               className="flex items-center justify-between max-w-sm mx-auto bg-white rounded-xl overflow-hidden md:max-w-2xl p-2 mb-2"
             >
               <p className="mt-2 text-gray-700 text-base">
-                {processedInvites.has(notification.id) ||
-                notification.status === "accepted" ? (
+                { notification.status === "accepted" ? (
                   <p>
                     Accepted invite from {notification.fromUser.name} for{" "}
                     {notification.projectId.title}
