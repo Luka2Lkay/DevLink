@@ -1,6 +1,7 @@
 import Navigation from "../navigation/Navigation";
 import {
   selectCurrentInvite,
+  resetInvites,
   setCurrentInvite,
   selectErrorMessage,
   setErrorMessage,
@@ -14,8 +15,8 @@ import validator from "validator";
 import { sendInviteThunk } from "../../state/thunks/invite_thunk";
 import CircularProgress from "@mui/material/CircularProgress";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
-// import { useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Invite() {
   const { id } = useParams();
@@ -25,16 +26,16 @@ function Invite() {
   const successMessage = useSelector(selectSuccessMessage) ?? "";
 
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const isLoggedIn = sessionStorage.getItem("user") !== null;
-  //   if (!isLoggedIn) {
-  //     navigate("/login");
-  //   } else {
-  //     dispatch(resetInvites());
-  //   }
-  // }, []);
+  useEffect(() => {
+    const isLoggedIn = sessionStorage.getItem("user") !== null;
+    if (!isLoggedIn) {
+      navigate("/login");
+    } else {
+      dispatch(resetInvites());
+    }
+  }, []);
 
   const sendInvite = async (e) => {
     e.preventDefault();
@@ -54,7 +55,13 @@ function Invite() {
       if (result.payload) {
         return await dispatch(setErrorMessage(result.payload));
       }
-
+      const payload = await dispatch(
+        sendInviteThunk({ id, email: trimmedEmail })
+      ).unwrap();
+      const successText = payload?.message ?? "Invite sent successfully";
+      dispatch(setSuccessMessage(successText));
+      dispatch(setErrorMessage(""));
+      dispatch(setCurrentInvite(""));
       await dispatch(setCurrentInvite(""));
     } catch (error) {
       await dispatch(setErrorMessage(error));
