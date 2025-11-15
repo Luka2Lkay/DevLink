@@ -60,7 +60,8 @@ function Feed() {
   };
 
   const handleInviteClick = (projectId) => {
-    navigate(`/invite-a-contributor/${projectId}`);
+    navigate(`/login`);
+    // navigate(`/invite-a-contributor/${projectId}`);
   };
 
   const handleSave = async (project) => {
