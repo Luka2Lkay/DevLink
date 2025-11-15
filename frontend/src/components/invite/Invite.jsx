@@ -35,38 +35,31 @@ function Invite() {
     } else {
       dispatch(resetInvites());
     }
-  }, []);
+  }, [dispatch, navigate]);
 
   const sendInvite = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
-    const trimmedEmail = email.trim();
-    const checkEmail = validator.isEmail(trimmedEmail);
+    // const trimmedEmail = email.trim();
+    // const checkEmail = validator.isEmail(trimmedEmail);
 
-    if (!checkEmail) {
-      return dispatch(setErrorMessage("Invalid Email"));
-    }
+    // if (!checkEmail) {
+    //   return dispatch(setErrorMessage("Invalid Email"));
+    // }
 
-    try {
-      const result = await dispatch(
-        sendInviteThunk({ id, email: trimmedEmail })
-      );
+    // try {
+    //   const result = await dispatch(
+    //     sendInviteThunk({ id, email: trimmedEmail })
+    //   );
 
-      if (result.payload) {
-        return await dispatch(setErrorMessage(result.payload));
-      }
-      const payload = await dispatch(
-        sendInviteThunk({ id, email: trimmedEmail })
-      ).unwrap();
-      const successText = payload?.message ?? "Invite sent successfully";
-      dispatch(setSuccessMessage(successText));
-      dispatch(setErrorMessage(""));
-      dispatch(setCurrentInvite(""));
-      await dispatch(setCurrentInvite(""));
-    } catch (error) {
-      await dispatch(setErrorMessage(error));
-      await dispatch(setSuccessMessage(""));
-    }
+    //   if (result.payload) {
+    //     return await dispatch(setErrorMessage(result.payload));
+    //   }
+    //   await dispatch(setCurrentInvite(""));
+    // } catch (error) {
+    //   await dispatch(setErrorMessage(error));
+    //   await dispatch(setSuccessMessage(""));
+    // }
   };
 
   const handleChange = (e) => {
