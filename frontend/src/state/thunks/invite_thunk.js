@@ -71,9 +71,9 @@ export const recievedInvites = createAsyncThunk(
   }
 );
 
-export const acceptInviteThunk = createAsyncThunk(
-  "invite/acceptInvite",
-  async ({ inviteId, status }, { dispatch, rejectWithValue }) => {
+export const inviteResponseThunk = createAsyncThunk(
+  "invite/inviteResponse",
+  async ({ inviteId, status }, {rejectWithValue }) => {
     try {
       const userString = sessionStorage.getItem("user");
       if (!userString) {
