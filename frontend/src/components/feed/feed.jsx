@@ -59,8 +59,8 @@ function Feed() {
     dispatch(setCurrentProject(null));
   };
 
-  const handleInviteClick = (project) => {
-    // navigate(`/invite-a-contributor/${project.id}`);
+  const handleInviteClick = (projectId) => {
+    navigate(`/invite-a-contributor/${projectId}`);
   };
 
   const handleSave = async (project) => {
