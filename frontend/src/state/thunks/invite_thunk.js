@@ -73,7 +73,7 @@ export const recievedInvites = createAsyncThunk(
 
 export const acceptInviteThunk = createAsyncThunk(
   "invite/acceptInvite",
-  async (inviteId, { dispatch, rejectWithValue }) => {
+  async ({ inviteId, status }, { dispatch, rejectWithValue }) => {
     try {
       const userString = sessionStorage.getItem("user");
       if (!userString) {
@@ -83,7 +83,7 @@ export const acceptInviteThunk = createAsyncThunk(
 
       const response = await axios.post(
         `https://devlink-9xp4.onrender.com/api/invites/invite-response/${inviteId}`,
-        { inviteId },
+        { status },
         {
           headers: {
             Authorization: `Bearer ${token}`,

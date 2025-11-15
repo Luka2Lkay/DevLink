@@ -1,5 +1,8 @@
 import Navigation from "../navigation/Navigation";
-import { recievedInvites } from "../../state/thunks/invite_thunk";
+import {
+  recievedInvites,
+  acceptInviteThunk,
+} from "../../state/thunks/invite_thunk";
 import { selectInvites, removeInvite } from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -23,6 +26,7 @@ function NotificationsList() {
   const handleAcceptInvite = (inviteId) => {
     console.log("Accepted invite with id:", inviteId);
     setProcessedInvites((prev) => new Set(prev).add(inviteId));
+    dispatch(acceptInviteThunk({inviteId, status: "accepted"}));
     console.log("Current notifications:", notifications);
   };
 
