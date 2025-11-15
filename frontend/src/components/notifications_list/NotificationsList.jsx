@@ -21,6 +21,7 @@ function NotificationsList() {
 
   const handleAcceptInvite = (inviteId) => {
     console.log("Accepted invite with id:", inviteId);
+    console.log("hello")
     console.log("Current notifications:", notifications);
   };
 
