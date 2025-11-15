@@ -1,6 +1,6 @@
 import Navigation from "../navigation/Navigation";
 import {
-  recievedInvites,
+  receivedInvitesThunk,
   inviteResponseThunk,
 } from "../../state/thunks/invite_thunk";
 import {
@@ -23,13 +23,13 @@ function NotificationsList() {
     if (!isLoggedIn) {
       navigate("/login");
     } else {
-      dispatch(recievedInvites());
+      dispatch(receivedInvitesThunk());
     }
   }, [dispatch]);
   const handleAcceptInvite = async (inviteId) => {
     console.log("Accepted invite with id:", inviteId);
     await dispatch(inviteResponseThunk({ inviteId, status: "accepted" }));
-    await dispatch(recievedInvites());
+    await dispatch(receivedInvitesThunk());
     console.log("Current notifications:", notifications);
   };
 

@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   sendInviteThunk,
   inviteResponseThunk,
-  receivedInvites,
-} from "./thunks/invite_thunk";
+  receivedInvitesThunk,
+} from "../thunks/invite_thunk";
 
 const initialState = {
   currentInvite: null,
@@ -74,17 +74,17 @@ const inviteSlice = createSlice({
         state.loading = false;
         state.success = action.payload;
       })
-      .addCase(receivedInvites.pending, (state) => {
+      .addCase(receivedInvitesThunk.pending, (state) => {
         state.error = null;
         state.loading = true;
         state.success = null;
       })
-      .addCase(receivedInvites.rejected, (state, action) => {
+      .addCase(receivedInvitesThunk.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
         state.success = null;
       })
-      .addCase(receivedInvites.fulfilled, (state, action) => {
+      .addCase(receivedInvitesThunk.fulfilled, (state, action) => {
         state.error = null;
         state.loading = false;
         state.success = action.payload;
