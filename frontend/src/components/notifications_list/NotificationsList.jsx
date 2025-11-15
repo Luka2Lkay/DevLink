@@ -39,10 +39,6 @@ function NotificationsList() {
               className="flex items-center justify-between max-w-sm mx-auto bg-white rounded-xl overflow-hidden md:max-w-2xl p-2 mb-2"
             >
               <p className="mt-2 text-gray-700 text-base">
-                <p>
-                  Accepted invite from {notification.fromUser.name} for{" "}
-                  {notification.projectId.title}
-                </p>
                 {processedInvites.has(notification.id) ? (
                   <p>
                     Accepted invite from {notification.fromUser.name} for{" "}
