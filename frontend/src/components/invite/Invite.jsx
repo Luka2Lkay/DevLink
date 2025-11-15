@@ -97,7 +97,7 @@ function Invite() {
           )}
         </div> */}
 
-        {/* <form
+        <form
           onSubmit={sendInvite}
           className="space-y-6 mt-10 sm:mx-auto sm:w-full sm:max-w-sm"
         >
@@ -134,7 +134,7 @@ function Invite() {
               Send Invite
             </button>
           </div>
-        </form> */}
+        </form>
       </div>
     </div>
   );
