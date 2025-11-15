@@ -58,14 +58,44 @@ export const recievedInvites = createAsyncThunk(
         }
       );
 
-      const invites = response.data['received invites']
+      const invites = response.data["received invites"];
 
-      await dispatch(setInvites(invites))
+      await dispatch(setInvites(invites));
 
       return getState();
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.message || "Failed to receive invite"
+      );
+    }
+  }
+);
+
+export const acceptInviteThunk = createAsyncThunk(
+  "invite/acceptInvite",
+  async (inviteId, { dispatch, rejectWithValue }) => {
+    try {
+      const userString = sessionStorage.getItem("user");
+      if (!userString) {
+        return rejectWithValue("User not authenticated!");
+      }
+      const { token } = JSON.parse(userString);
+
+      const response = await axios.post(
+        `https://devlink-9xp4.onrender.com/api/invites/invite-response/${inviteId}`,
+        { inviteId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log("Accept Invite Response:", response.data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to accept invite"
       );
     }
   }
