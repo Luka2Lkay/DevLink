@@ -16,7 +16,10 @@ const sendInvite = async (req, res) => {
     const { email } = req.body;
     const { user } = req;
 
-    const project = await Project.findById(projectId).populate("owner", "email");
+    const project = await Project.findById(projectId).populate(
+      "owner",
+      "email"
+    );
 
     if (!project) {
       return res.status(404).json({ message: "Project not found!" });
@@ -26,7 +29,7 @@ const sendInvite = async (req, res) => {
       return res.status(401).json({ message: "You don't own this project." });
     }
 
-    const toUser = await User.findOne({ email })
+    const toUser = await User.findOne({ email });
 
     if (!toUser) {
       return res.status(404).json({ message: "User to invite not found!" });
@@ -119,6 +122,13 @@ const deleteAllInvites = async (req, res) => {
   try {
     await Invite.deleteMany();
 
+    const projects = await Project.find();
+
+    for (const project of projects) {
+      project.collaborators = [];
+      await project.save();
+    }
+    
     res.status(204).send();
   } catch (error) {
     res.status(500).send(error.message);
