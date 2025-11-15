@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { sendInviteThunk } from "../thunks/invite_thunk";
-import { inviteResponseThunk } from "../thunks/invite_thunk";
+import {
+  sendInviteThunk,
+  inviteResponseThunk,
+  receivedInvites,
+} from "./thunks/invite_thunk";
 
 const initialState = {
   currentInvite: null,
@@ -30,7 +33,7 @@ const inviteSlice = createSlice({
       state.success = action.payload;
     },
     setLoading(state) {
-      state.loading = !state.loading
+      state.loading = !state.loading;
     },
     removeInvite(state, action) {
       const inviteId = action.payload ?? null;
@@ -55,15 +58,33 @@ const inviteSlice = createSlice({
         state.error = null;
         state.loading = false;
         state.success = action.payload;
-      }).addCase(inviteResponseThunk.pending, (state) => {
+      })
+      .addCase(inviteResponseThunk.pending, (state) => {
         state.error = null;
         state.loading = true;
         state.success = null;
-      }).addCase(inviteResponseThunk.rejected, (state, action) => {
+      })
+      .addCase(inviteResponseThunk.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
         state.success = null;
-      }).addCase(inviteResponseThunk.fulfilled, (state, action) => {
+      })
+      .addCase(inviteResponseThunk.fulfilled, (state, action) => {
+        state.error = null;
+        state.loading = false;
+        state.success = action.payload;
+      })
+      .addCase(receivedInvites.pending, (state) => {
+        state.error = null;
+        state.loading = true;
+        state.success = null;
+      })
+      .addCase(receivedInvites.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+        state.success = null;
+      })
+      .addCase(receivedInvites.fulfilled, (state, action) => {
         state.error = null;
         state.loading = false;
         state.success = action.payload;
