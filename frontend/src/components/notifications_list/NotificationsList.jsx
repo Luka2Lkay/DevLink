@@ -1,18 +1,22 @@
 import Navigation from "../navigation/Navigation";
 import {
   recievedInvites,
-  acceptInviteThunk,
+  inviteResponseThunk,
 } from "../../state/thunks/invite_thunk";
-import { selectInvites, removeInvite } from "../../state/reducers/invite_slice";
+import {
+  selectInvites,
+  selectLoading,
+} from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function NotificationsList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const notifications = useSelector(selectInvites) ?? [];
-  // const [processedInvites, setProcessedInvites] = useState(new Set());
+  const loading = useSelector(selectLoading) ?? false;
 
   useEffect(() => {
     const isLoggedIn = sessionStorage.getItem("user") !== null;
@@ -25,8 +29,7 @@ function NotificationsList() {
 
   const handleAcceptInvite = async (inviteId) => {
     console.log("Accepted invite with id:", inviteId);
-    // setProcessedInvites((prev) => new Set(prev).add(inviteId));
-    await dispatch(acceptInviteThunk({ inviteId, status: "accepted" }));
+    await dispatch(inviteResponseThunk({ inviteId, status: "accepted" }));
     await dispatch(recievedInvites());
     console.log("Current notifications:", notifications);
   };
@@ -36,6 +39,11 @@ function NotificationsList() {
   return (
     <div>
       <Navigation />
+      {loading && (
+        <div className="flex justify-center items-center h-screen">
+          <CircularProgress role="progress-bar" />
+        </div>
+      )}
       <div>
         {notifications.length > 0 ? (
           notifications.map((notification) => (
