@@ -37,44 +37,44 @@ function Invite() {
     }
   }, [dispatch, navigate]);
 
-  // const sendInvite = async (e) => {
-    // e.preventDefault();
+  const sendInvite = async (e) => {
+    e.preventDefault();
 
-    // const trimmedEmail = email.trim();
-    // const checkEmail = validator.isEmail(trimmedEmail);
+    const trimmedEmail = email.trim();
+    const checkEmail = validator.isEmail(trimmedEmail);
 
-    // if (!checkEmail) {
-    //   return dispatch(setErrorMessage("Invalid Email"));
-    // }
+    if (!checkEmail) {
+      return dispatch(setErrorMessage("Invalid Email"));
+    }
 
-    // try {
-    //   const result = await dispatch(
-    //     sendInviteThunk({ id, email: trimmedEmail })
-    //   );
+    try {
+      const result = await dispatch(
+        sendInviteThunk({ id, email: trimmedEmail })
+      );
 
-    //   if (result.payload) {
-    //     return await dispatch(setErrorMessage(result.payload));
-    //   }
-    //   await dispatch(setCurrentInvite(""));
-    // } catch (error) {
-    //   await dispatch(setErrorMessage(error));
-    //   await dispatch(setSuccessMessage(""));
-    // }
-  // };
+      if (result.payload) {
+        return await dispatch(setErrorMessage(result.payload));
+      }
+      await dispatch(setCurrentInvite(""));
+    } catch (error) {
+      await dispatch(setErrorMessage(error));
+      await dispatch(setSuccessMessage(""));
+    }
+  };
 
-  // const handleChange = (e) => {
-  //   if (errorMessage) dispatch(setErrorMessage(""));
-  //   if (successMessage) dispatch(setSuccessMessage(""));
+  const handleChange = (e) => {
+    if (errorMessage) dispatch(setErrorMessage(""));
+    if (successMessage) dispatch(setSuccessMessage(""));
 
-  //   dispatch(setCurrentInvite(e.target.value));
-  // };
+    dispatch(setCurrentInvite(e.target.value));
+  };
 
   return (
     <div>
       <Navigation />
       <div className="flex flex-col justify-center px-6 py-12 lg:px-8">
         <h1 className="text-white">Invite a contributor</h1>
-{/* 
+        {/* 
         <div className="flex justify-center mt-4">
           {loading ? (
             <CircularProgress role="progressbar" />
