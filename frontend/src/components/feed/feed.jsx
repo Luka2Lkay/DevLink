@@ -60,6 +60,7 @@ function Feed() {
   };
 
   const handleInviteClick = (project) => {
+    console.log("Inviting to project:", project);
     navigate(`/invite-a-contributor/${project.id}`);
   };
 
