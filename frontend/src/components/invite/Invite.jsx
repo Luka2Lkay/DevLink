@@ -1,7 +1,6 @@
 import Navigation from "../navigation/Navigation";
 import {
   selectCurrentInvite,
-  resetInvites,
   setCurrentInvite,
   selectErrorMessage,
   setErrorMessage,
@@ -16,7 +15,7 @@ import { sendInviteThunk } from "../../state/thunks/invite_thunk";
 import CircularProgress from "@mui/material/CircularProgress";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 // import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function Invite() {
   const { id } = useParams();
