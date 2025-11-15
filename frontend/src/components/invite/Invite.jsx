@@ -35,7 +35,10 @@ function Invite() {
     } else {
       dispatch(resetInvites());
     }
-  }, [dispatch, navigate]);
+
+    console.log("Success Message:", successMessage);
+    console.log("Error Message:", errorMessage);
+  }, [dispatch, navigate, successMessage, errorMessage]);
 
   const sendInvite = async (e) => {
     e.preventDefault();
