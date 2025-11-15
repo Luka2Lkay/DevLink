@@ -37,14 +37,14 @@ function NotificationsList() {
     <div>
       <Navigation />
       <div>
-        {notifications.length > 0 ?
+        {notifications.length > 0 ? (
           notifications.map((notification) => (
             <div
               key={notification.id}
               className="flex items-center justify-between max-w-sm mx-auto bg-white rounded-xl overflow-hidden md:max-w-2xl p-2 mb-2"
             >
               <div className="mt-2 text-gray-700 text-base">
-                { notification.status === "accepted" ? (
+                {notification.status === "accepted" ? (
                   <p>
                     Accepted invite from {notification.fromUser.name} for{" "}
                     {notification.projectId.title}
@@ -53,23 +53,28 @@ function NotificationsList() {
                   <p>New invite! from {notification.fromUser.name}</p>
                 )}
               </div>
-              <div className="flex flex-items gap-2">
-                <button
-                  onClick={() => handleAcceptInvite(notification.id)}
-                  aria-label="accept-button"
-                  className="bg-green-500 text-sm text-white cursor-pointer border border-gray-700 p-2 rounded-md"
-                >
-                  Accept
-                </button>
-                <button
-                  onClick={() => handleRejectInvite(notification.id)}
-                  className="bg-red-500 text-sm text-white cursor-pointer border border-gray-700 p-2 rounded-md"
-                >
-                  Reject
-                </button>
-              </div>
+              {notification.status === "pending" && (
+                <div className="flex flex-items gap-2">
+                  <button
+                    onClick={() => handleAcceptInvite(notification.id)}
+                    aria-label="accept-button"
+                    className="bg-green-500 text-sm text-white cursor-pointer border border-gray-700 p-2 rounded-md"
+                  >
+                    Accept
+                  </button>
+                  <button
+                    onClick={() => handleRejectInvite(notification.id)}
+                    className="bg-red-500 text-sm text-white cursor-pointer border border-gray-700 p-2 rounded-md"
+                  >
+                    Reject
+                  </button>
+                </div>
+              )}
             </div>
-          )): (<p className="text-white">No invitations</p>)}
+          ))
+        ) : (
+          <p className="text-white">No invitations</p>
+        )}
       </div>
     </div>
   );
