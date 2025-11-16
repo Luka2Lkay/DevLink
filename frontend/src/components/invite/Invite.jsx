@@ -55,9 +55,6 @@ function Invite() {
         sendInviteThunk({ id, email: trimmedEmail })
       );
 
-      console.log("Send Invite Result:", result);
-      console.log("Result Payload:", result.payload);
-      console.log("Success Message after dispatch:", successMessage); 
       if (result.payload) {
         return await dispatch(setErrorMessage(result.payload));
       }
