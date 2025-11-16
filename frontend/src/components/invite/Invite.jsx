@@ -38,7 +38,7 @@ function Invite() {
 
     console.log("Success Message:", successMessage);
     console.log("Error Message:", errorMessage);
-  }, [dispatch, navigate, successMessage, errorMessage]);
+  }, [dispatch, navigate]);
 
   const sendInvite = async (e) => {
     e.preventDefault();
@@ -77,7 +77,7 @@ function Invite() {
       <Navigation />
       <div className="flex flex-col justify-center px-6 py-12 lg:px-8">
         <h1 className="text-white">Invite a contributor</h1>
-        
+
         <div className="flex justify-center mt-4">
           {loading ? (
             <CircularProgress role="progressbar" />
