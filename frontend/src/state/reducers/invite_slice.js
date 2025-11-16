@@ -93,11 +93,10 @@ const inviteSlice = createSlice({
         state.loading = false;
         state.successMessage = "";
       })
-      .addCase(receivedInvitesThunk.fulfilled, (state, action) => {
+      .addCase(receivedInvitesThunk.fulfilled, (state) => {
         state.errorMessage = "";
         state.loading = false;
-        state.successMessage =
-          action.payload ?? "Invites fetched successfully!";
+        state.successMessage = "";
       });
   },
 });
