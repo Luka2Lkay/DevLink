@@ -9,8 +9,8 @@ const initialState = {
   currentInvite: null,
   invites: [],
   loading: false,
-  error: "",
-  success: "",
+  errorMessage: "",
+  successMessage: "",
 };
 
 const inviteSlice = createSlice({
@@ -27,10 +27,16 @@ const inviteSlice = createSlice({
       state.invites.push(action.payload) ?? null;
     },
     setErrorMessage(state, action) {
-      state.error = action.payload ?? "";
+      state.errorMessage =
+        typeof action.payload === "string"
+          ? action.payload ?? ""
+          : action.payload?.message ?? "";
     },
     setSuccessMessage(state, action) {
-      state.success = action.payload ?? "";
+      state.successMessage =
+        typeof action.payload === "string"
+          ? action.payload ?? ""
+          : action.payload?.message ?? "";
     },
     setLoading(state, action) {
       state.loading = action.payload ?? false;
@@ -40,7 +46,9 @@ const inviteSlice = createSlice({
 
       state.invites = state.invites.filter((invite) => invite.id !== inviteId);
     },
-    resetInvites: () => initialState,
+    resetInvites() {
+      return initialState;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -50,14 +58,14 @@ const inviteSlice = createSlice({
         state.success = "";
       })
       .addCase(sendInviteThunk.rejected, (state, action) => {
-        state.error = action.payload ?? "";
+        state.error = action.payload ?? "Failed to send invite.";
         state.loading = false;
         state.success = "";
       })
       .addCase(sendInviteThunk.fulfilled, (state, action) => {
         state.error = "";
         state.loading = false;
-        state.success = action.payload ?? "";
+        state.success = action.payload ?? "Invite sent successfully!";
       })
       .addCase(inviteResponseThunk.pending, (state) => {
         state.error = "";
@@ -65,14 +73,15 @@ const inviteSlice = createSlice({
         state.success = "";
       })
       .addCase(inviteResponseThunk.rejected, (state, action) => {
-        state.error = action.payload ?? "";
+        state.error = action.payload ?? "Failed to respond to invite.";
         state.loading = false;
         state.success = "";
       })
       .addCase(inviteResponseThunk.fulfilled, (state, action) => {
         state.error = "";
         state.loading = false;
-        state.success = action.payload ?? "";
+        state.success =
+          action.payload ?? "Invite response recorded successfully!";
       })
       .addCase(receivedInvitesThunk.pending, (state) => {
         state.error = "";
@@ -80,14 +89,14 @@ const inviteSlice = createSlice({
         state.success = "";
       })
       .addCase(receivedInvitesThunk.rejected, (state, action) => {
-        state.error = action.payload ?? "";
+        state.error = action.payload ?? "Failed to fetch invites.";
         state.loading = false;
         state.success = "";
       })
       .addCase(receivedInvitesThunk.fulfilled, (state, action) => {
         state.error = "";
         state.loading = false;
-        state.success = action.payload ?? "";
+        state.success = action.payload ?? "Invites fetched successfully!";
       });
   },
 });
