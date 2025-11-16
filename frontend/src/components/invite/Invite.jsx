@@ -88,7 +88,7 @@ function Invite() {
                 className="text-green-500 text-sm"
               />
               <p role="alert" className="text-green-500 text-sm">
-                Invite Successful!
+                {successMessage}
               </p>
             </div>
           ) : (
