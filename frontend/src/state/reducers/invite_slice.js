@@ -58,7 +58,7 @@ const inviteSlice = createSlice({
         state.successMessage = "";
       })
       .addCase(sendInviteThunk.rejected, (state, action) => {
-        state.errorMessage = action.payload?.action ?? "Failed to send invite.";
+        state.errorMessage = action.payload?.message ?? "Failed to send invite.";
         state.loading = false;
         state.successMessage = "";
       })
