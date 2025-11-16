@@ -26,11 +26,10 @@ function NotificationsList() {
       dispatch(receivedInvitesThunk());
     }
   }, [dispatch]);
+
   const handleAcceptInvite = async (inviteId) => {
-    console.log("Accepted invite with id:", inviteId);
     await dispatch(inviteResponseThunk({ inviteId, status: "accepted" }));
     await dispatch(receivedInvitesThunk());
-    console.log("Current notifications:", notifications);
   };
 
   const handleRejectInvite = (inviteId) => {};
@@ -57,11 +56,14 @@ function NotificationsList() {
                     {notification.projectId.title}
                   </p>
                 ) : (
-                  <p>New invite! from {notification.fromUser.name}</p>
+                  <p>
+                    New invite! from {notification.fromUser.name} for{" "}
+                    {notification.projectId.title}
+                  </p>
                 )}
               </div>
               {notification.status === "pending" && (
-                <div className="flex flex-items gap-2">
+                <div className="flex flex-col sm:flex-row flex-items gap-2">
                   <button
                     onClick={() => handleAcceptInvite(notification.id)}
                     aria-label="accept-button"
