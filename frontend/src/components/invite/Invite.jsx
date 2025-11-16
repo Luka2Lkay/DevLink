@@ -55,9 +55,12 @@ function Invite() {
         sendInviteThunk({ id, email: trimmedEmail })
       );
 
-      if (result.payload) {
-        return await dispatch(setErrorMessage(result.payload));
-      }
+      console.log("Send Invite Result:", result);
+      console.log("Result Payload:", result.payload);
+      confirm.log("Success Message after dispatch:", successMessage); 
+      // if (result.payload) {
+      //   return await dispatch(setErrorMessage(result.payload));
+      // }
       await dispatch(setCurrentInvite(""));
     } catch (error) {
       await dispatch(setErrorMessage(error));
@@ -88,7 +91,7 @@ function Invite() {
                 className="text-green-500 text-sm"
               />
               <p role="alert" className="text-green-500 text-sm">
-                {successMessage}
+                Success
               </p>
             </div>
           ) : (
