@@ -57,7 +57,7 @@ function Invite() {
 
       console.log("Send Invite Result:", result);
       console.log("Result Payload:", result.payload);
-      confirm.log("Success Message after dispatch:", successMessage); 
+      console.log("Success Message after dispatch:", successMessage); 
       // if (result.payload) {
       //   return await dispatch(setErrorMessage(result.payload));
       // }
