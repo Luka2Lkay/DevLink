@@ -37,11 +37,6 @@ function NotificationsList() {
   return (
     <div>
       <Navigation />
-      {loading && (
-        <div className="flex justify-center items-center h-screen">
-          <CircularProgress role="progress-bar" />
-        </div>
-      )}
       <div>
         {notifications.length > 0 ? (
           notifications.map((notification) => (
@@ -66,6 +61,7 @@ function NotificationsList() {
                 <div className="flex flex-col sm:flex-row flex-items gap-2">
                   <button
                     onClick={() => handleAcceptInvite(notification.id)}
+                    disabled={loading}
                     aria-label="accept-button"
                     className="bg-green-500 text-sm text-white cursor-pointer border border-gray-700 p-2 rounded-md"
                   >
@@ -73,6 +69,8 @@ function NotificationsList() {
                   </button>
                   <button
                     onClick={() => handleRejectInvite(notification.id)}
+                    disabled={loading}
+                    aria-label="reject-button"
                     className="bg-red-500 text-sm text-white cursor-pointer border border-gray-700 p-2 rounded-md"
                   >
                     Reject
