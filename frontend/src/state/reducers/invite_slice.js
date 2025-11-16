@@ -53,62 +53,65 @@ const inviteSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(sendInviteThunk.pending, (state) => {
-        state.error = "";
+        state.errorMessage = "";
         state.loading = true;
-        state.success = "";
+        state.successMessage = "";
       })
       .addCase(sendInviteThunk.rejected, (state, action) => {
-        state.error = action.payload ?? "Failed to send invite.";
+        state.errorMessage = action.payload ?? "Failed to send invite.";
         state.loading = false;
-        state.success = "";
+        state.successMessage = "";
       })
       .addCase(sendInviteThunk.fulfilled, (state, action) => {
-        state.error = "";
+        state.errorMessage = "";
         state.loading = false;
-        state.success = action.payload ?? "Invite sent successfully!";
+        state.successMessage = action.payload ?? "Invite sent successfully!";
       })
       .addCase(inviteResponseThunk.pending, (state) => {
-        state.error = "";
+        state.errorMessage = "";
         state.loading = true;
-        state.success = "";
+        state.successMessage = "";
       })
       .addCase(inviteResponseThunk.rejected, (state, action) => {
-        state.error = action.payload ?? "Failed to respond to invite.";
+        state.errorMessage = action.payload ?? "Failed to respond to invite.";
         state.loading = false;
-        state.success = "";
+        state.successMessage = "";
       })
       .addCase(inviteResponseThunk.fulfilled, (state, action) => {
-        state.error = "";
+        state.errorMessage = "";
         state.loading = false;
-        state.success =
+        state.successMessage =
           action.payload ?? "Invite response recorded successfully!";
       })
       .addCase(receivedInvitesThunk.pending, (state) => {
-        state.error = "";
+        state.errorMessage = "";
         state.loading = true;
-        state.success = "";
+        state.successMessage = "";
       })
       .addCase(receivedInvitesThunk.rejected, (state, action) => {
-        state.error = action.payload ?? "Failed to fetch invites.";
+        state.errorMessage = action.payload ?? "Failed to fetch invites.";
         state.loading = false;
-        state.success = "";
+        state.successMessage = "";
       })
       .addCase(receivedInvitesThunk.fulfilled, (state, action) => {
-        state.error = "";
+        state.errorMessage = "";
         state.loading = false;
-        state.success = action.payload ?? "Invites fetched successfully!";
+        state.successMessage =
+          action.payload ?? "Invites fetched successfully!";
       });
   },
 });
 
 export const selectCurrentInvite = (state) => state.invite.currentInvite ?? "";
 export const selectInvites = (state) => state.invite.invites ?? [];
-export const selectErrorMessage = (state) => state.invite.error ?? "";
+export const selectErrorMessage = (state) => state.invite.errorMessage ?? "";
 export const selectLoading = (state) => state.invite.loading ?? false;
-export const selectSuccessMessage = (state) => state.invite.success ?? "";
+export const selectSuccessMessage = (state) =>
+  state.invite.successMessage ?? "";
 
 export const {
   setCurrentInvite,
+  setLoading,
   addInvite,
   setInvites,
   setErrorMessage,
