@@ -20,10 +20,10 @@ import { useNavigate } from "react-router-dom";
 
 function Invite() {
   const { id } = useParams();
-  const email = useSelector(selectCurrentInvite) ?? "";
-  const errorMessage = useSelector(selectErrorMessage) ?? "";
+  const email = useSelector(selectCurrentInvite);
+  const errorMessage = useSelector(selectErrorMessage);
   const loading = useSelector(selectLoading) ?? false;
-  const successMessage = useSelector(selectSuccessMessage) ?? "";
+  const successMessage = useSelector(selectSuccessMessage);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
