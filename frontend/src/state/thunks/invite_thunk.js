@@ -62,7 +62,7 @@ export const receivedInvitesThunk = createAsyncThunk(
 
       await dispatch(setInvites(invites));
 
-      return getState();
+      return invites;
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.message || "Failed to receive invite"
