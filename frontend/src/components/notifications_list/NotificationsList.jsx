@@ -46,7 +46,7 @@ function NotificationsList() {
               key={notification.id}
               className="flex items-center justify-between max-w-sm mx-auto bg-white rounded-xl overflow-hidden md:max-w-2xl p-2 mb-2"
             >
-              <div className="mt-2 text-gray-700 text-base border-red-200 border">
+              <div className="mt-2 text-gray-700 max-w-sm md:max-w-2xl text-base border-red-200 border">
                 {notification.status === "accepted" ? (
                   <p className="text-center">
                     Accepted invite from {notification.fromUser.name} for{" "}
