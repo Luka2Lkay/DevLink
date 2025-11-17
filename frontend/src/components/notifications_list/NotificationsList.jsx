@@ -48,7 +48,7 @@ function NotificationsList() {
             >
               <div className="mt-2 text-gray-700 text-base">
                 {notification.status === "accepted" ? (
-                  <p>
+                  <p className="text-center">
                     Accepted invite from {notification.fromUser.name} for{" "}
                     {notification.projectId.title}
                   </p>
@@ -59,7 +59,7 @@ function NotificationsList() {
                   </p>
                 ) : (
                   notification.status === "rejected" && (
-                    <p>
+                    <p className="text-center">
                       Rejected invite from {notification.fromUser.name} for{" "}
                       {notification.projectId.title}
                     </p>
