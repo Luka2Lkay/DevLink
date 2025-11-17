@@ -52,18 +52,18 @@ function NotificationsList() {
                     Accepted invite from {notification.fromUser.name} for{" "}
                     {notification.projectId.title}
                   </p>
-                ) : (
+                ) : notification.status === "pending" ? (
                   <p>
                     New invite! from {notification.fromUser.name} for{" "}
                     {notification.projectId.title}
                   </p>
-                )}
-
-                {notification.status === "rejected" && (
-                  <p>
-                    Rejected invite from {notification.fromUser.name} for{" "}
-                    {notification.projectId.title}
-                  </p>
+                ) : (
+                  notification.status === "rejected" && (
+                    <p>
+                      Rejected invite from {notification.fromUser.name} for{" "}
+                      {notification.projectId.title}
+                    </p>
+                  )
                 )}
               </div>
               {notification.status === "pending" && (
