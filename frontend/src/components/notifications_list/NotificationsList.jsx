@@ -8,9 +8,8 @@ import {
   selectLoading,
 } from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import CircularProgress from "@mui/material/CircularProgress";
 
 function NotificationsList() {
   const dispatch = useDispatch();
