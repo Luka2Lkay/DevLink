@@ -32,13 +32,9 @@ function Invite() {
     const isLoggedIn = sessionStorage.getItem("user") !== null;
     if (!isLoggedIn) {
       navigate("/login");
-      return;
+    } else {
+      dispatch(resetInvites());
     }
-
-    dispatch(resetInvites());
-
-    console.log("Success Message:", successMessage);
-    console.log("Error Message:", errorMessage);
   }, [dispatch, navigate]);
 
   const sendInvite = async (e) => {
