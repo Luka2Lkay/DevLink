@@ -8,7 +8,7 @@ import {
   selectLoading,
 } from "../../state/reducers/invite_slice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function NotificationsList() {
@@ -31,7 +31,10 @@ function NotificationsList() {
     await dispatch(receivedInvitesThunk());
   };
 
-  const handleRejectInvite = (inviteId) => {};
+  const handleRejectInvite = async (inviteId) => {
+    await dispatch(inviteResponseThunk({ inviteId, status: "rejected" }));
+    await dispatch(receivedInvitesThunk());
+  };
 
   return (
     <div>
@@ -52,6 +55,13 @@ function NotificationsList() {
                 ) : (
                   <p>
                     New invite! from {notification.fromUser.name} for{" "}
+                    {notification.projectId.title}
+                  </p>
+                )}
+
+                {notification.status === "rejected" && (
+                  <p>
+                    Rejected invite from {notification.fromUser.name} for{" "}
                     {notification.projectId.title}
                   </p>
                 )}
