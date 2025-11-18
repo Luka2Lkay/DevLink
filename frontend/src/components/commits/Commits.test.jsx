@@ -1,22 +1,22 @@
 import { render, screen } from "@testing-library/react";
-import NotificationsList from "./NotificationsList";
 import { MemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "../../state/store.js";
+import Commits from "./Commits";
 
-describe("NotificationsList Component", () => {
+describe("Commits Component", () => {
   beforeEach(() => {
     render(
       <MemoryRouter>
         <Provider store={store}>
-          <NotificationsList/>
+          <Commits />
         </Provider>
       </MemoryRouter>
     );
   });
 
-  it("renders NotificationsList component", () => {
-    const navigationComponent = screen.getByTestId("navigation");
-    expect(navigationComponent).toBeInTheDocument();
+  it("renders Commits component", () => {
+    const headingElement = screen.getByText(/Commits Component/i);
+    expect(headingElement).toBeInTheDocument();
   });
 });

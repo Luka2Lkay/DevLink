@@ -6,6 +6,7 @@ import Register from "./components/register/Register";
 import Feed from "./components/feed/feed";
 import Invite from "./components/invite/Invite";
 import NotificationsList from "./components/notifications_list/NotificationsList";
+import Commits from "./components/commits/Commits";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/invite-a-contributor/:id" element={<Invite />} />
-          <Route path="notifications-list" element={<NotificationsList />} />
+          <Route path="/notifications-list" element={<NotificationsList />} />
+          <Route path="/commits" element={<Commits />} />
         </Routes>
       </BrowserRouter>
     </>

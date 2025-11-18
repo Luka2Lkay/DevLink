@@ -12,7 +12,7 @@ describe("Project component", () => {
                     title:"Test Project",
                     description:"This is a test project",
                     owner:{_id: "Test id", name: "Test Owner"},
-                    collaborators:[{ initials: "TP" }]}}/>
+                    collaborators:[{ name: "Luka" }]}}/>
             </MemoryRouter>
         )
     })
@@ -30,6 +30,6 @@ describe("Project component", () => {
     })
 
     it("renders the project collaborators", () => {
-        expect(screen.getByText("TP")).toBeInTheDocument();
+        expect(screen.getByText("Luka")).toBeInTheDocument();
     })
 })
