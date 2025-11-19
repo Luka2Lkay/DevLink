@@ -9,8 +9,8 @@ function Commits() {
   const {id}  = useParams();
 
   useEffect(() => {
-    console.log("Fetching commits for project ID:", id);
-    // dispatch(fetchProjectCommitsThunk(projectId));
+
+    dispatch(fetchProjectCommitsThunk(id));
   }, []);
 
   return (
