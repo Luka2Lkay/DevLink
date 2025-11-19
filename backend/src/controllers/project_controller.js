@@ -16,6 +16,15 @@ const createProject = async (req, res) => {
     const { title, description, githubRepoUrl, owner, collaborators } =
       req.body;
 
+
+      const githubUrlRegex =/^git@github\.com:[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+\.git$/
+
+      const isValidGithubUrl = githubUrlRegex.test(githubRepoUrl);
+
+      if (!isValidGithubUrl) {
+        return res.status(400).json({ message: "Invalid GitHub repository URL format. Please use the SSH format." });
+      }
+      
     const project = new Project({
       title,
       description,
