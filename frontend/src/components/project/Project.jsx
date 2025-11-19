@@ -13,7 +13,7 @@ function Project({ project, handleEditClick = () => { }, handleDeleteClick = () 
   return (
     <div className="max-w-sm mx-auto bg-white rounded-xl shadow-lg overflow-hidden md:max-w-2xl transform hover:scale-[1.02] transition duration-3000 ease-in-out mb-2">
       <div className="p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2 pointer-cursor">
          <Link to={`/commits/${project.id}`}>{project.title || "Project Title"}</Link> 
         </h2>
 
