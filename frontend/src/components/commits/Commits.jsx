@@ -6,10 +6,10 @@ import { useParams } from "react-router-dom";
 
 function Commits() {
   const dispatch = useDispatch();
-  const projectId  = useParams();
+  const {id}  = useParams();
 
   useEffect(() => {
-    console.log("Fetching commits for project ID:", projectId);
+    console.log("Fetching commits for project ID:", id);
     // dispatch(fetchProjectCommitsThunk(projectId));
   }, []);
 
