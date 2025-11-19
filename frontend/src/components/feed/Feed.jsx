@@ -81,8 +81,6 @@ function Feed() {
     }
   };
 
-  const sendInvite = () => {};
-
   const handleDelete = async (project) => {
     try {
       await dispatch(deleteProjectThunk(project.id));
