@@ -136,6 +136,7 @@ function AddProject({ project = {}, onSave = () => { }, editing = false }) {
               name="githubRepoUrl"
               type="text"
               data-testid="githubRepoUrl-input"
+              placeholder="example: git@github.com:user/repo"
               value={githubRepoUrl}
               onChange={(e) => setGithubRepoUrl(e.target.value)}
 
