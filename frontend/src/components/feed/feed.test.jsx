@@ -43,13 +43,16 @@ describe("Feed", () => {
     expect(screen.getByText("Logout")).toBeInTheDocument();
   });
 
-  // it('should render the welcome message', () => {
-  //     expect(screen.getByTestId("add-project-button")).toBeInTheDocument();
-  // });
+  it("should render the welcome message", () => {
+    expect(screen.getByTestId("add-project-button")).toBeInTheDocument();
+  });
 
-  // it('should render the Project component', async () => {
-  //     await waitFor(() => {
-  //         expect(screen.getByText(/Test project/i)).toBeInTheDocument();
-  //     }, { timeout: 3000 });
-  // })
+  it("should render the Project component", async () => {
+    await waitFor(
+      () => {
+        expect(screen.getByText(/Test project/i)).toBeInTheDocument();
+      },
+      { timeout: 3000 }
+    );
+  });
 });
