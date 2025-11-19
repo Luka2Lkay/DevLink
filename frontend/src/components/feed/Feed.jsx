@@ -17,6 +17,7 @@ import {
   removeProject,
   updateProject,
   selectErrorMessage,
+  setErrorMessage,
 } from "../../state/reducers/project_slice.js";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../navigation/Navigation.jsx";
@@ -80,6 +81,9 @@ function Feed() {
       dispatch(setCurrentProject(null));
     } catch (error) {
       console.error("Failed to update project:", error.message);
+      dispatch(setErrorMessage("hey"))
+
+      console.log("Error Message from State:", errorMessage);
     }
   };
 
