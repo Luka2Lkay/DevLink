@@ -1,5 +1,17 @@
 import Navigation from "../navigation/Navigation";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchProjectCommitsThunk } from "../../state/thunks/project_thunk";
+import { useParams } from "react-router-dom";
+
 function Commits() {
+  const dispatch = useDispatch();
+  const { projectId } = useParams();
+
+  useEffect(() => {
+    dispatch(fetchProjectCommitsThunk(projectId));
+  }, []);
+
   return (
     <div>
       <Navigation />
