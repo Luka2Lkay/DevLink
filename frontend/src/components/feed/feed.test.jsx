@@ -1,47 +1,55 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import Feed from './Feed.jsx';
-import { MemoryRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import projectReducer from '../../state/reducers/project_slice.js';
+import { render, screen, waitFor } from "@testing-library/react";
+import Feed from "./Feed.jsx";
+import { MemoryRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import projectReducer from "../../state/reducers/project_slice.js";
+import inviteReducer from "../../state/reducers/invite_slice.js";
 
-describe('Feed', () => {
-    let store;
+describe("Feed", () => {
+  let store;
 
-    beforeEach(() => {
-        store = configureStore({
-            reducer: { project: projectReducer },
-            preloadedState: {
-                project: {
-                    projects: [
-                        { id: '1', title: 'Test Project', owner: 'Alice', description: 'desc', collaborators: [] },
-                    ],
-                    currentProject: null,
-                    error: null,
-                },
+  beforeEach(() => {
+    store = configureStore({
+      reducer: { project: projectReducer, invite: inviteReducer },
+      preloadedState: {
+        project: {
+          projects: [
+            {
+              id: "1",
+              title: "Test Project",
+              owner: "Alice",
+              description: "desc",
+              collaborators: [],
             },
-        });
-
-        render(
-            <MemoryRouter>
-                <Provider store={store}>
-                    <Feed />
-                </Provider>
-            </MemoryRouter>
-        );
+          ],
+          currentProject: null,
+          error: null,
+        },
+        invite: { invites: [{ id: "1", status: "pending" }] },
+      },
     });
 
-    it('should render the Logout link', () => {
-        expect(screen.getByText('Logout')).toBeInTheDocument();
-    });
+    render(
+      <MemoryRouter>
+        <Provider store={store}>
+          <Feed />
+        </Provider>
+      </MemoryRouter>
+    );
+  });
 
-    // it('should render the welcome message', () => {
-    //     expect(screen.getByTestId("add-project-button")).toBeInTheDocument();
-    // });
+  it("should render the Logout link", () => {
+    expect(screen.getByText("Logout")).toBeInTheDocument();
+  });
 
-    // it('should render the Project component', async () => {
-    //     await waitFor(() => {
-    //         expect(screen.getByText(/Test project/i)).toBeInTheDocument();
-    //     }, { timeout: 3000 });
-    // })
+  // it('should render the welcome message', () => {
+  //     expect(screen.getByTestId("add-project-button")).toBeInTheDocument();
+  // });
+
+  // it('should render the Project component', async () => {
+  //     await waitFor(() => {
+  //         expect(screen.getByText(/Test project/i)).toBeInTheDocument();
+  //     }, { timeout: 3000 });
+  // })
 });
