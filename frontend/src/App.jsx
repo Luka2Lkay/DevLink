@@ -19,7 +19,7 @@ function App() {
           <Route path="/feed" element={<Feed />} />
           <Route path="/invite-a-contributor/:id" element={<Invite />} />
           <Route path="/notifications-list" element={<NotificationsList />} />
-          <Route path="/commits" element={<Commits />} />
+          <Route path="/commits/:id" element={<Commits />} />
         </Routes>
       </BrowserRouter>
     </>
