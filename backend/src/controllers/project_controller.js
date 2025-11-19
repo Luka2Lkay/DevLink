@@ -70,7 +70,9 @@ const deleteAllProjects = async (req, res) => {
 const getOneProject = async (req, res) => {
   try {
     const projectId = req.params.id;
-    const project = await Project.findById(projectId).populate("owner", "name").populate("collaborators", "name githubUsername");
+    const project = await Project.findById(projectId)
+      .populate("owner", "name")
+      .populate("collaborators", "name githubUsername");
 
     if (project) {
       res.status(200).json({ project });
@@ -84,7 +86,9 @@ const getOneProject = async (req, res) => {
 
 const getAllProjects = async (req, res) => {
   try {
-    const projects = await Project.find().populate("owner", "name").populate("collaborators", "name githubUsername");
+    const projects = await Project.find()
+      .populate("owner", "name")
+      .populate("collaborators", "name githubUsername");
 
     res.status(200).json({ projects });
   } catch (error) {
@@ -143,7 +147,7 @@ const githubRepoCommits = async (req, res) => {
   try {
     const githubToken = process.env.GITHUB_TOKEN;
     const githubHeaders = {
-      Authorization: `token ${githubToken}`,
+      Authorization: `Bearer ${githubToken}`,
     };
     const projectId = req.params.id;
     const project = await Project.findById(projectId);
@@ -153,11 +157,19 @@ const githubRepoCommits = async (req, res) => {
     }
 
     const splitUrl = project.githubRepoUrl.split("/");
-    const owner = splitUrl[0].split(":")[1];
+    // const owner = splitUrl[0].split(":")[1];
+    const owner = splitUrl[3];
     const repo = splitUrl[splitUrl.length - 1].replace(".git", "");
 
+    // return res.status(200).json({ owner: owner, repo: repo });
+    // return res.status(200).json({ repo: project.githubRepoUrl.split("/") });
     const repoUrl = `https://api.github.com/repos/${owner}/${repo}`;
-    const repoResponse = await axios.get(repoUrl, { headers: githubHeaders });
+    //return res.status(200).json({ response: repoUrl });
+    const repoResponse = await axios.get(repoUrl, {
+      headers: { Authorization: `token ${githubToken}` },
+    });
+
+    return res.status(200).json({ repoResponse: repoResponse.data });
 
     if (repoResponse.data.private === true) {
       return res
