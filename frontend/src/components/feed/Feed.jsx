@@ -159,7 +159,7 @@ function Feed() {
         )}
       </div>
 
-      <div>
+      {/* <div>
         <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
           <form onSubmit={sendInvite} className="space-y-6">
             <div>
@@ -185,7 +185,7 @@ function Feed() {
             </div>
           </form>
         </Modal>
-      </div>
+      </div> */}
 
       <div>
         <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
