@@ -17,7 +17,6 @@ import {
   removeProject,
   updateProject,
   selectErrorMessage,
-  setErrorMessage,
 } from "../../state/reducers/project_slice.js";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../navigation/Navigation.jsx";
@@ -75,9 +74,11 @@ function Feed() {
       } else {
         const result = await dispatch(addProjectThunk(project));
 
-        console.log("Add Project Result:", result);
+      
         await dispatch(addProject(project));
         await dispatch(fetchProjectsThunk());
+
+          console.log("Add Project Result:", result);
       }
       setModalOpen(false);
       dispatch(setCurrentProject(null));
