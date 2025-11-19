@@ -16,6 +16,7 @@ import {
   addProject,
   removeProject,
   updateProject,
+  selectErrorMessage,
 } from "../../state/reducers/project_slice.js";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../navigation/Navigation.jsx";
@@ -28,6 +29,7 @@ function Feed() {
 
   const projects = useSelector(selectProjects);
   const currentProject = useSelector(selectCurrentProject);
+  const errorMessage = useSelector(selectErrorMessage);
   const loading = useSelector(selectLoading);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);

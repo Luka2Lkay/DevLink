@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   fetchProjectsThunk,
   updateProjectThunk,
+  addProjectThunk,
 } from "../thunks/project_thunk.js";
 
 const initialState = {
@@ -86,15 +87,20 @@ const projectSlice = createSlice({
         state.loading = false;
       })
       .addCase(updateProjectThunk.pending, (state) => {
-        state.errorMessage = null;
+        state.errorMessage = "";
+        state.loading = true;
+      })
+      .addCase(addProjectThunk.rejected, (state) => {
+        state.errorMessage = action.payload;
         state.loading = true;
       });
   },
 });
 
-export const selectProjects = (state) => state.project.projects;
-export const selectCurrentProject = (state) => state.project.currentProject;
-export const selectLoading = (state) => state.project.loading;
+export const selectProjects = (state) => state.project.projects ?? [];
+export const selectCurrentProject = (state) => state.project.currentProject ?? null;
+export const selectLoading = (state) => state.project.loading ?? false;
+export const selectErrorMessage = (state) => state.project.errorMessage ?? "";
 
 export const {
   setCurrentProject,
