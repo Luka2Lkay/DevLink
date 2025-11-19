@@ -60,7 +60,7 @@ function Feed() {
   };
 
   const handleInviteClick = (projectId) => {
-     navigate(`/invite-a-contributor/${projectId}`);
+    navigate(`/invite-a-contributor/${projectId}`);
   };
 
   const handleSave = async (project) => {
@@ -158,34 +158,6 @@ function Feed() {
           </Modal>
         )}
       </div>
-
-      {/* <div>
-        <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-          <form onSubmit={sendInvite} className="space-y-6">
-            <div>
-              <label
-                htmlFor="email"
-                className="text-left text-gray-100 block font-medium text-sm/6"
-              >
-                Email address
-              </label>
-              <div className="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={""}
-                  onChange={(e) => e.target.value}
-                  data-testid="email-input"
-                  autoComplete="email"
-                  required
-                  className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 -outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:-outline-offset-2 sm:text-sm/6"
-                />
-              </div>
-            </div>
-          </form>
-        </Modal>
-      </div> */}
 
       <div>
         <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
