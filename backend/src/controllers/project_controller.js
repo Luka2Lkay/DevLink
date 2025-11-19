@@ -147,7 +147,7 @@ const githubRepoCommits = async (req, res) => {
   try {
     const githubToken = process.env.GITHUB_TOKEN;
     const githubHeaders = {
-      Authorization: `Bearer ${githubToken}`,
+      Authorization: `token ${githubToken}`,
     };
     const projectId = req.params.id;
     const project = await Project.findById(projectId);
@@ -157,19 +157,13 @@ const githubRepoCommits = async (req, res) => {
     }
 
     const splitUrl = project.githubRepoUrl.split("/");
-    // const owner = splitUrl[0].split(":")[1];
-    const owner = splitUrl[3];
+    const owner = splitUrl[0].split(":")[1];
     const repo = splitUrl[splitUrl.length - 1].replace(".git", "");
 
-    // return res.status(200).json({ owner: owner, repo: repo });
-    // return res.status(200).json({ repo: project.githubRepoUrl.split("/") });
     const repoUrl = `https://api.github.com/repos/${owner}/${repo}`;
-    //return res.status(200).json({ response: repoUrl });
     const repoResponse = await axios.get(repoUrl, {
-      headers: { Authorization: `token ${githubToken}` },
+      headers: githubHeaders,
     });
-
-    return res.status(200).json({ repoResponse: repoResponse.data });
 
     if (repoResponse.data.private === true) {
       return res
