@@ -73,7 +73,9 @@ function Feed() {
         await dispatch(updateProject(project));
         await dispatch(fetchProjectsThunk());
       } else {
-        await dispatch(addProjectThunk(project));
+        const result = await dispatch(addProjectThunk(project));
+
+        console.log("Add Project Result:", result);
         await dispatch(addProject(project));
         await dispatch(fetchProjectsThunk());
       }
@@ -81,9 +83,6 @@ function Feed() {
       dispatch(setCurrentProject(null));
     } catch (error) {
       console.error("Failed to update project:", error.message);
-      dispatch(setErrorMessage("hey"))
-
-      console.log("Error Message from State:", errorMessage);
     }
   };
 
