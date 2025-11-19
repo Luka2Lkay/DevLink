@@ -140,7 +140,7 @@ function AddProject({ project = {}, onSave = () => { }, editing = false }) {
               value={githubRepoUrl}
               onChange={(e) => setGithubRepoUrl(e.target.value)}
 
-              className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
+              className="block w-full px-3 py-2 bg-white/5 text-base placeholder-sm text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
             />
           </div>
         </div>
