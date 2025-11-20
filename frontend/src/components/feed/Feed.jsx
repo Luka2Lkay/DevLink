@@ -17,7 +17,7 @@ import {
   removeProject,
   updateProject,
   setErrorMessage,
-  selectErrorMessage
+  selectErrorMessage,
 } from "../../state/reducers/project_slice.js";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../navigation/Navigation.jsx";
@@ -30,7 +30,7 @@ function Feed() {
 
   const projects = useSelector(selectProjects);
   const currentProject = useSelector(selectCurrentProject);
- const errorMessage = useSelector(selectErrorMessage);
+  const errorMessage = useSelector(selectErrorMessage);
   const loading = useSelector(selectLoading);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
@@ -77,12 +77,13 @@ function Feed() {
         dispatch(addProject(project));
         await dispatch(fetchProjectsThunk());
 
-        if(result.payload){
-          dispatch(setErrorMessage(result.payload));
+        if (result.payload) {
+          await dispatch(setErrorMessage(result.payload));
+          console.log("errorMessage:", errorMessage);
+          return;
         }
       }
 
-      console.log("errorMessage:", errorMessage);
       setModalOpen(false);
       dispatch(setCurrentProject(null));
     } catch (error) {
