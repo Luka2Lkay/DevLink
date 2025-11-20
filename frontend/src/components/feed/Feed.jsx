@@ -16,7 +16,6 @@ import {
   addProject,
   removeProject,
   updateProject,
-  selectErrorMessage,
 } from "../../state/reducers/project_slice.js";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../navigation/Navigation.jsx";
@@ -29,7 +28,7 @@ function Feed() {
 
   const projects = useSelector(selectProjects);
   const currentProject = useSelector(selectCurrentProject);
-  const errorMessage = useSelector(selectErrorMessage);
+ // const errorMessage = useSelector(selectErrorMessage);
   const loading = useSelector(selectLoading);
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
@@ -73,16 +72,8 @@ function Feed() {
         await dispatch(fetchProjectsThunk());
       } else {
         const result = await dispatch(addProjectThunk(project));
-
-
-        if(result.payload) {          console.error("Failed to add project:", result.payload);
-          return;
-        }
-      console.log("Dispatching addProject for:", project);
         await dispatch(addProject(project));
         await dispatch(fetchProjectsThunk());
-
-          console.log("Add Project Result:", result);
       }
       setModalOpen(false);
       dispatch(setCurrentProject(null));

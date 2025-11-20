@@ -102,10 +102,6 @@ export const addProjectThunk = createAsyncThunk(
         }
       );
 
-      if(response.status === 400) {
-        return rejectWithValue(response.data.message || "Failed to add project");
-      }
-
       return response.data.project;
     } catch (error) {
       return rejectWithValue(
