@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 
-function AddProject({ project = {}, onSave = () => { }, editing = false }) {
+function AddProject({ project = {}, onSave = () => {}, editing = false }) {
   const [isEditing, setIsEditing] = useState(editing);
   const [title, setTitle] = useState(project.title || "");
   const [description, setDescription] = useState(project.description || "");
   const [owner, setOwner] = useState(project.owner || "");
-  const [githubRepoUrl, setGithubRepoUrl] = useState(project.githubRepoUrl || "");
+  const [githubRepoUrl, setGithubRepoUrl] = useState(
+    project.githubRepoUrl || ""
+  );
 
   useEffect(() => {
-
     const user = JSON.parse(sessionStorage.getItem("user"));
 
     setTitle(project.title || "");
@@ -24,7 +25,7 @@ function AddProject({ project = {}, onSave = () => { }, editing = false }) {
     const trimmedGithubRepoUrl = githubRepoUrl.trim();
 
     // Remove alerts and utilise the global error state
-    if(!trimmedDescription) {
+    if (!trimmedDescription) {
       alert("Description cannot be empty.");
       return;
     } else if (!trimmedTitle) {
@@ -59,7 +60,9 @@ function AddProject({ project = {}, onSave = () => { }, editing = false }) {
 
   return (
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm bg-gray-800 p-4">
-      <h2 className="text-white text-center">{project.id && isEditing ? "Edit Project" : "Add New Project"}</h2>
+      <h2 className="text-white text-center">
+        {project.id && isEditing ? "Edit Project" : "Add New Project"}
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label
@@ -96,7 +99,6 @@ function AddProject({ project = {}, onSave = () => { }, editing = false }) {
               data-testid="description-input"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-
               className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
             />
           </div>
@@ -117,7 +119,6 @@ function AddProject({ project = {}, onSave = () => { }, editing = false }) {
               data-testid="owner-input"
               value={owner._id || owner}
               onChange={(e) => setOwner(e.target.value)}
-
               className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
             />
           </div>
@@ -139,9 +140,9 @@ function AddProject({ project = {}, onSave = () => { }, editing = false }) {
               placeholder="example: git@github.com:user/repo"
               value={githubRepoUrl}
               onChange={(e) => setGithubRepoUrl(e.target.value)}
-
               className="block w-full px-3 py-2 bg-white/5 text-base placeholder-sm text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
             />
+            <p className="text-red text-sm">error message</p>
           </div>
         </div>
 
@@ -156,7 +157,6 @@ function AddProject({ project = {}, onSave = () => { }, editing = false }) {
         </div>
       </form>
     </div>
-
-  )
+  );
 }
-export default AddProject
+export default AddProject;
