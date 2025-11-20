@@ -172,7 +172,7 @@ await dispatch(fetchProjectsThunk());
             project={currentProject || {}}
             onSave={handleSave}
             editing={isEditing}
-            errorMessage={errorMessage}
+            githubErrorMessage={errorMessage}
           />
         </Modal>
       </div>
