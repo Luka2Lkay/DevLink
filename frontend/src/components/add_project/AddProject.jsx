@@ -25,24 +25,36 @@ function AddProject({
     setGithubRepoUrl(project.githubRepoUrl || "");
   }, [project]);
 
+  const validate = () => {
+    let isValid = true;
+
+    setDescriptionErrorMessage("");
+    setTitleErrorMessage("");
+
+    if (!title.trim()) {
+      setTitleErrorMessage("Title is required.");
+      isValid = false;
+    } else if (!description.trim()) {
+      setDescriptionErrorMessage("Description is required.");
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const trimmedTitle = title.trim();
-    const trimmedDescription = description.trim();
-    const trimmedGithubRepoUrl = githubRepoUrl.trim();
 
-    if (!trimmedDescription) {
-      setDescriptionErrorMessage("Description cannot be empty.");
-    } else if (!trimmedTitle) {
-      setTitleErrorMessage("Title cannot be empty.");
+    if (!validate()) {
+      return;
     }
 
     const payload = {
       ...project,
-      title: trimmedTitle,
-      description: trimmedDescription,
+      title: title.trim(),
+      description: description.trim(),
       owner,
-      githubRepoUrl: trimmedGithubRepoUrl,
+      githubRepoUrl: githubRepoUrl.trim(),
     };
 
     onSave(payload);
