@@ -71,18 +71,18 @@ function Feed() {
       if (project.id) {
         dispatch(updateProjectThunk(project));
         dispatch(updateProject(project));
-        await dispatch(fetchProjectsThunk());
+       // await dispatch(fetchProjectsThunk());
       } else {
         const result = await dispatch(addProjectThunk(project));
         dispatch(addProject(project));
-        await dispatch(fetchProjectsThunk());
+        
 console.log('error', result.payload);
         if (result.payload) {
           await dispatch(setErrorMessage(result.payload));
           return;
         }
       }
-
+await dispatch(fetchProjectsThunk());
       setModalOpen(false);
       dispatch(setCurrentProject(null));
     } catch (error) {
