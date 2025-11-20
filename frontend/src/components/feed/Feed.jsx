@@ -75,7 +75,7 @@ function Feed() {
       } else {
         const result = await dispatch(addProjectThunk(project));
         dispatch(addProject(project));
-        consol
+      
         if (result.payload) {
           await dispatch(setErrorMessage(result.payload));
           console.log('Error adding project:', result.payload);
