@@ -75,6 +75,10 @@ function Feed() {
         dispatch(addProject(project));
         await dispatch(fetchProjectsThunk());
 
+        if(result.payload){
+          console.log("Add project result:", result.payload);
+        }
+
         console.log("Add project result:", result);
       }
       setModalOpen(false);
