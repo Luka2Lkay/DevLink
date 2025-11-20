@@ -76,10 +76,9 @@ function Feed() {
         const result = await dispatch(addProjectThunk(project));
         dispatch(addProject(project));
         await dispatch(fetchProjectsThunk());
-
+console.log('error', result.payload);
         if (result.payload) {
           await dispatch(setErrorMessage(result.payload));
-          console.log("errorMessage:", result);
           return;
         }
       }
