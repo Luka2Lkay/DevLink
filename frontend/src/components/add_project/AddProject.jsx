@@ -13,7 +13,8 @@ function AddProject({
   const [githubRepoUrl, setGithubRepoUrl] = useState(
     project.githubRepoUrl || ""
   );
-  const [errorMessage, setErrorMessage] = useState("");
+  const [descriptionErrorMessage, setDescriptionErrorMessage] = useState("");
+  const [titleErrorMessage, setTitleErrorMessage] = useState("");
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
@@ -31,16 +32,10 @@ function AddProject({
     const trimmedGithubRepoUrl = githubRepoUrl.trim();
 
     if (!trimmedDescription) {
-      setErrorMessage("Description cannot be empty.");
+      setDescriptionErrorMessage("Description cannot be empty.");
       return;
     } else if (!trimmedTitle) {
-      setErrorMessage("Title cannot be empty.");
-      return;
-    } else if (!owner) {
-      setErrorMessage("Owner cannot be empty.");
-      return;
-    } else if (!trimmedGithubRepoUrl) {
-      setErrorMessage("Github Repository URL cannot be empty.");
+      setTitleErrorMessage("Title cannot be empty.");
       return;
     }
 
@@ -86,7 +81,7 @@ function AddProject({
               data-testid="title-input"
               className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 -outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:-outline-offset-2 sm:text-sm/6"
             />
-            <p className="text-red-500 text-sm">{errorMessage}</p>
+            <p className="text-red-500 text-sm">{titleErrorMessage}</p>
           </div>
         </div>
 
@@ -107,7 +102,7 @@ function AddProject({
               onChange={(e) => setDescription(e.target.value)}
               className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
             />
-            <p className="text-red-500 text-sm">{errorMessage}</p>
+            <p className="text-red-500 text-sm">{descriptionErrorMessage}</p>
           </div>
         </div>
 
@@ -128,7 +123,6 @@ function AddProject({
               onChange={(e) => setOwner(e.target.value)}
               className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
             />
-            <p className="text-red-500 text-sm">{errorMessage}</p>
           </div>
         </div>
 
