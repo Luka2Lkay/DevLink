@@ -79,7 +79,7 @@ function Feed() {
 
         if (result.payload) {
           await dispatch(setErrorMessage(result.payload));
-          console.log("errorMessage:", result.payload);
+          console.log("errorMessage:", result);
           return;
         }
       }
