@@ -172,6 +172,7 @@ function Feed() {
             project={currentProject || {}}
             onSave={handleSave}
             editing={isEditing}
+            errorMessage={errorMessage}
           />
         </Modal>
       </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function AddProject({ project = {}, onSave = () => {}, editing = false }) {
+function AddProject({ project = {}, onSave = () => {}, editing = false, errorMessage = "" }) {
   const [isEditing, setIsEditing] = useState(editing);
   const [title, setTitle] = useState(project.title || "");
   const [description, setDescription] = useState(project.description || "");
