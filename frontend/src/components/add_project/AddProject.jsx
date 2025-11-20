@@ -33,10 +33,8 @@ function AddProject({
 
     if (!trimmedDescription) {
       setDescriptionErrorMessage("Description cannot be empty.");
-      return;
     } else if (!trimmedTitle) {
       setTitleErrorMessage("Title cannot be empty.");
-      return;
     }
 
     const payload = {
