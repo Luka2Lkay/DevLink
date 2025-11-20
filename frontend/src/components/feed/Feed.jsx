@@ -68,6 +68,7 @@ function Feed() {
   const handleSave = async (project) => {
     try {
       if (project.id) {
+        console.log("Updating Project id:", project.id);
         await dispatch(updateProjectThunk(project));
         await dispatch(updateProject(project));
         await dispatch(fetchProjectsThunk());
