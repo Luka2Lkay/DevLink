@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 
-function AddProject({ project = {}, onSave = () => {}, editing = false, errorMessage = "" }) {
+function AddProject({
+  project = {},
+  onSave = () => {},
+  editing = false,
+  githubErrorMessage = "",
+}) {
   const [isEditing, setIsEditing] = useState(editing);
   const [title, setTitle] = useState(project.title || "");
   const [description, setDescription] = useState(project.description || "");
@@ -8,6 +13,7 @@ function AddProject({ project = {}, onSave = () => {}, editing = false, errorMes
   const [githubRepoUrl, setGithubRepoUrl] = useState(
     project.githubRepoUrl || ""
   );
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
@@ -25,16 +31,16 @@ function AddProject({ project = {}, onSave = () => {}, editing = false, errorMes
     const trimmedGithubRepoUrl = githubRepoUrl.trim();
 
     if (!trimmedDescription) {
-      errorMessage = "Description cannot be empty.";
+      setErrorMessage("Description cannot be empty.");
       return;
     } else if (!trimmedTitle) {
-      errorMessage = "Title cannot be empty.";
+      setErrorMessage("Title cannot be empty.");
       return;
     } else if (!owner) {
-      errorMessage = "Owner cannot be empty.";
+      setErrorMessage("Owner cannot be empty.");
       return;
     } else if (!trimmedGithubRepoUrl) {
-      errorMessage = "Github Repository URL cannot be empty.";
+      setErrorMessage("Github Repository URL cannot be empty.");
       return;
     }
 
@@ -144,7 +150,7 @@ function AddProject({ project = {}, onSave = () => {}, editing = false, errorMes
               onChange={(e) => setGithubRepoUrl(e.target.value)}
               className="block w-full px-3 py-2 bg-white/5 text-base placeholder-sm text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
             />
-            <p className="text-red-500 text-sm">{errorMessage}</p>
+            <p className="text-red-500 text-sm">{githubErrorMessage}</p>
           </div>
         </div>
 
