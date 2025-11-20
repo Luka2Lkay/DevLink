@@ -67,18 +67,18 @@ function Feed() {
   const handleSave = async (project) => {
     try {
       if (project.id) {
-        await dispatch(updateProjectThunk(project));
-        await dispatch(updateProject(project));
+        dispatch(updateProjectThunk(project));
+        dispatch(updateProject(project));
         await dispatch(fetchProjectsThunk());
       } else {
-        const result = await dispatch(addProjectThunk(project));
-        await dispatch(addProject(project));
+        const result = dispatch(addProjectThunk(project));
+        dispatch(addProject(project));
         await dispatch(fetchProjectsThunk());
       }
       setModalOpen(false);
       dispatch(setCurrentProject(null));
     } catch (error) {
-      console.error("Failed to update project:", error.message);
+      console.error("Failed to save/update project:", error);
     }
   };
 
