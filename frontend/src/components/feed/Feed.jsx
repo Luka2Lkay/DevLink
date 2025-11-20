@@ -71,19 +71,19 @@ function Feed() {
       if (project.id) {
         dispatch(updateProjectThunk(project));
         dispatch(updateProject(project));
-       // await dispatch(fetchProjectsThunk());
+        // await dispatch(fetchProjectsThunk());
       } else {
         const result = await dispatch(addProjectThunk(project));
         dispatch(addProject(project));
-      
+
         if (result.payload) {
           await dispatch(setErrorMessage(result.payload));
           return;
         }
 
-          console.log('Error adding project:', errorMessage);
+        console.log("Error adding project:", errorMessage);
       }
-await dispatch(fetchProjectsThunk());
+      await dispatch(fetchProjectsThunk());
       setModalOpen(false);
       dispatch(setCurrentProject(null));
     } catch (error) {

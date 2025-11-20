@@ -15,7 +15,7 @@ function AddProject({
   );
   const [descriptionErrorMessage, setDescriptionErrorMessage] = useState("");
   const [titleErrorMessage, setTitleErrorMessage] = useState("");
-  const [githubErrorMessageState, setGithubErrorMessage] = useState("");
+  const [githubErrorMessageState, setGithubErrorMessageState] = useState("");
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
@@ -39,7 +39,7 @@ function AddProject({
       setDescriptionErrorMessage("Description is required.");
       isValid = false;
     } else if (!githubRepoUrl.trim()) {
-      setGithubErrorMessage("GitHub Repository URL is required.");
+      setGithubErrorMessageState("GitHub Repository URL is required.");
       isValid = false;
     }
 
@@ -91,7 +91,10 @@ function AddProject({
               name="title"
               type="text"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => {
+                setTitle(e.target.value);
+                setTitleErrorMessage("");
+              }}
               data-testid="title-input"
               className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 -outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:-outline-offset-2 sm:text-sm/6"
             />
@@ -113,7 +116,10 @@ function AddProject({
               type="text"
               data-testid="description-input"
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e) => {
+                setDescription(e.target.value);
+                setDescriptionErrorMessage("");
+              }}
               className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
             />
             <p className="text-red-500 text-sm">{descriptionErrorMessage}</p>
@@ -155,7 +161,10 @@ function AddProject({
               data-testid="githubRepoUrl-input"
               placeholder="example: git@github.com:user/repo"
               value={githubRepoUrl}
-              onChange={(e) => setGithubRepoUrl(e.target.value)}
+              onChange={(e) => {
+                setGithubRepoUrl(e.target.value);
+                setGithubErrorMessageState("");
+              }}
               className="block w-full px-3 py-2 bg-white/5 text-base placeholder-sm text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
             />
             {githubErrorMessageState && (
