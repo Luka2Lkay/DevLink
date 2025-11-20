@@ -75,7 +75,7 @@ function Feed() {
       } else {
         const result = await dispatch(addProjectThunk(project));
 
-      
+      console.log("Dispatching addProject for:", project);
         await dispatch(addProject(project));
         await dispatch(fetchProjectsThunk());
 
