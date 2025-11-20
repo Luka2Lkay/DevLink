@@ -15,6 +15,7 @@ function AddProject({
   );
   const [descriptionErrorMessage, setDescriptionErrorMessage] = useState("");
   const [titleErrorMessage, setTitleErrorMessage] = useState("");
+  const [githubErrorMessageState, setGithubErrorMessage] = useState("");
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
@@ -36,6 +37,9 @@ function AddProject({
       isValid = false;
     } else if (!description.trim()) {
       setDescriptionErrorMessage("Description is required.");
+      isValid = false;
+    } else if (!githubRepoUrl.trim()) {
+      setGithubErrorMessage("GitHub Repository URL is required.");
       isValid = false;
     }
 
@@ -154,7 +158,7 @@ function AddProject({
               onChange={(e) => setGithubRepoUrl(e.target.value)}
               className="block w-full px-3 py-2 bg-white/5 text-base placeholder-sm text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
             />
-            <p className="text-red-500 text-sm">{githubErrorMessage}</p>
+            <p className="text-red-500 text-sm">{githubErrorMessage || githubErrorMessageState}</p>
           </div>
         </div>
 
