@@ -74,11 +74,13 @@ function Feed() {
         const result = dispatch(addProjectThunk(project));
         dispatch(addProject(project));
         await dispatch(fetchProjectsThunk());
+
+        console.log("Add project result:", result);
       }
       setModalOpen(false);
       dispatch(setCurrentProject(null));
     } catch (error) {
-      console.error("Failed to save/update project:", error);
+      console.error("Failed to save/update project:", error.message);
     }
   };
 

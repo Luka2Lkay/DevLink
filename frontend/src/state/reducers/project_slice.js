@@ -90,7 +90,7 @@ const projectSlice = createSlice({
         state.errorMessage = "";
         state.loading = true;
       })
-      .addCase(addProjectThunk.rejected, (state) => {
+      .addCase(addProjectThunk.rejected, (state, action) => {
         state.errorMessage = action.payload;
         state.loading = false;
       });
