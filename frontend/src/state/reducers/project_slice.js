@@ -92,7 +92,7 @@ const projectSlice = createSlice({
       })
       .addCase(addProjectThunk.rejected, (state) => {
         state.errorMessage = action.payload;
-        state.loading = true;
+        state.loading = false;
       });
   },
 });
