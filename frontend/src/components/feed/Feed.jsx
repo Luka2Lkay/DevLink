@@ -78,7 +78,7 @@ function Feed() {
       
         if (result.payload) {
           await dispatch(setErrorMessage(result.payload));
-          console.log('Error adding project:', result.payload);
+          console.log('Error adding project:', errorMessage);
           return;
         }
       }
