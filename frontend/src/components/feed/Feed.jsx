@@ -68,13 +68,16 @@ function Feed() {
   const handleSave = async (project) => {
     try {
       if (project.id) {
-        console.log("Updating Project id:", project.id);
         await dispatch(updateProjectThunk(project));
         await dispatch(updateProject(project));
         await dispatch(fetchProjectsThunk());
       } else {
         const result = await dispatch(addProjectThunk(project));
 
+
+        if(result.payload) {          console.error("Failed to add project:", result.payload);
+          return;
+        }
       console.log("Dispatching addProject for:", project);
         await dispatch(addProject(project));
         await dispatch(fetchProjectsThunk());
