@@ -102,7 +102,7 @@ export const addProjectThunk = createAsyncThunk(
         }
       );
 
-      return response.data.project;
+      return response.data;
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.message || "Failed to add project"
