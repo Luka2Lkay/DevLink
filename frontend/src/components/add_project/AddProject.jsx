@@ -24,18 +24,17 @@ function AddProject({ project = {}, onSave = () => {}, editing = false }) {
     const trimmedDescription = description.trim();
     const trimmedGithubRepoUrl = githubRepoUrl.trim();
 
-    // Remove alerts and utilise the global error state
     if (!trimmedDescription) {
-      alert("Description cannot be empty.");
+      errorMessage = "Description cannot be empty.";
       return;
     } else if (!trimmedTitle) {
-      alert("Title cannot be empty.");
+      errorMessage = "Title cannot be empty.";
       return;
     } else if (!owner) {
-      alert("Owner cannot be empty.");
+      errorMessage = "Owner cannot be empty.";
       return;
     } else if (!trimmedGithubRepoUrl) {
-      alert("Github Repository URL cannot be empty.");
+      errorMessage = "Github Repository URL cannot be empty.";
       return;
     }
 
@@ -81,6 +80,7 @@ function AddProject({ project = {}, onSave = () => {}, editing = false }) {
               data-testid="title-input"
               className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 -outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:-outline-offset-2 sm:text-sm/6"
             />
+            <p className="text-red-500 text-sm">{errorMessage}</p>
           </div>
         </div>
 
@@ -101,6 +101,7 @@ function AddProject({ project = {}, onSave = () => {}, editing = false }) {
               onChange={(e) => setDescription(e.target.value)}
               className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
             />
+            <p className="text-red-500 text-sm">{errorMessage}</p>
           </div>
         </div>
 
@@ -121,6 +122,7 @@ function AddProject({ project = {}, onSave = () => {}, editing = false }) {
               onChange={(e) => setOwner(e.target.value)}
               className="block w-full px-3 py-2 bg-white/5 text-base text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
             />
+            <p className="text-red-500 text-sm">{errorMessage}</p>
           </div>
         </div>
 
@@ -142,7 +144,7 @@ function AddProject({ project = {}, onSave = () => {}, editing = false }) {
               onChange={(e) => setGithubRepoUrl(e.target.value)}
               className="block w-full px-3 py-2 bg-white/5 text-base placeholder-sm text-white outline-1 outline-offset-1 outline-white/10 rounded-md shadow-sm placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-500 focus:outline-offset-2 sm:text-sm/6"
             />
-            <p className="text-red-500 text-sm">error message</p>
+            <p className="text-red-500 text-sm">{errorMessage}</p>
           </div>
         </div>
 
