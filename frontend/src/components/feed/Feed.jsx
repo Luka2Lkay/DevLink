@@ -78,9 +78,10 @@ function Feed() {
       
         if (result.payload) {
           await dispatch(setErrorMessage(result.payload));
-          console.log('Error adding project:', errorMessage);
           return;
         }
+
+          console.log('Error adding project:', errorMessage);
       }
 await dispatch(fetchProjectsThunk());
       setModalOpen(false);
