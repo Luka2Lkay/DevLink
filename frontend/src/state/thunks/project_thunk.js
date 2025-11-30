@@ -134,9 +134,15 @@ export const fetchProjectCommitsThunk = createAsyncThunk(
       console.log("Commits response:", response.data);
       return response.data.commits;
     } catch (error) {
-      return rejectWithValue(
-        error.response?.data?.message || "Failed to fetch project commits"
-      );
+      // return rejectWithValue(
+      //   error.response?.data?.message || "Failed to fetch project commits"
+      // );
+
+      console.error("fetchProjectCommitsThunk error:", {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+      });
     }
   }
 );
