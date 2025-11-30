@@ -171,9 +171,6 @@ const githubRepoCommits = async (req, res) => {
         .json({ message: "GitHub token not configured on server." });
     }
 
-    // const githubHeaders = {
-    //   Authorization: `token ${githubToken}`,
-    // };
     const projectId = req.params.id;
     const project = await Project.findById(projectId);
 
@@ -191,7 +188,7 @@ const githubRepoCommits = async (req, res) => {
       });
     }
 
-    const [,owner, repo] = match;
+    const [, owner, repo] = match;
 
     const githubHeaders = {
       Authorization: `token ${githubToken}`,
@@ -219,15 +216,6 @@ const githubRepoCommits = async (req, res) => {
       throw new Error(err.message);
     }
 
-    // const splitUrl = project.githubRepoUrl.split("/");
-    // const owner = splitUrl[0].split(":")[1];
-    // const repo = splitUrl[splitUrl.length - 1].replace(".git", "");
-
-    // const repoUrl = `https://api.github.com/repos/${owner}/${repo}`;
-    // const repoResponse = await axios.get(repoUrl, {
-    //   headers: githubHeaders,
-    // });
-
     if (repoResponse.data.private === true) {
       return res
         .status(403)
@@ -254,10 +242,6 @@ const githubRepoCommits = async (req, res) => {
       throw new Error(err.message);
     }
 
-    // const commitsResponse = await axios.get(`${repoUrl}/commits`, {
-    //   headers: githubHeaders,
-    // });
-
     const commits = commitsResponse.data.map((commit) => ({
       sha: commit.sha,
       message: commit.commit?.message || "No commit message",
@@ -268,7 +252,7 @@ const githubRepoCommits = async (req, res) => {
 
     res.status(200).json(commits);
   } catch (error) {
-    res.status(500).json({message: error.message});
+    res.status(500).json({ message: error.message });
   }
 };
 
