@@ -38,8 +38,8 @@ const commitSlice = createSlice({
   },
 });
 
-export const selectCommits = (state) => state.commits.commits;
-export const selectLoading = (state) => state.commits.loading;
-export const selectError = (state) => state.commits.error;
+export const selectCommits = (state) => state.commits.commits ?? [];
+export const selectLoading = (state) => state.commits.loading ?? false;
+export const selectError = (state) => state.commits.error ?? null;
 
 export const { setCommits, setLoading, setError } = commitSlice.actions;

@@ -1,6 +1,7 @@
 import Navigation from "../navigation/Navigation";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { selectCommits, selectLoading } from "../../state/reducers/commit_slice.js";
 import { fetchProjectCommitsThunk } from "../../state/thunks/commit_thunk.js";
 import { useParams } from "react-router-dom";
 import SingleCommit from "../single_commit/SingleCommit";
@@ -9,7 +10,7 @@ function Commits() {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const [commits, setCommits] = useState([]);
+  
 
   useEffect(() => {
     setCommits(dispatch(fetchProjectCommitsThunk(id)));
