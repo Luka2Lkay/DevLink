@@ -191,7 +191,7 @@ const githubRepoCommits = async (req, res) => {
       });
     }
 
-    const [owner, repo] = match;
+    const [,owner, repo] = match;
 
     const githubHeaders = {
       Authorization: `token ${githubToken}`,
@@ -268,7 +268,7 @@ const githubRepoCommits = async (req, res) => {
 
     res.status(200).json(commits);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(500).json({message: error.message});
   }
 };
 
