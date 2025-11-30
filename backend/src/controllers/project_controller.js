@@ -216,7 +216,7 @@ const githubRepoCommits = async (req, res) => {
           .json({ message: "Access to GitHub repository is forbidden." });
       }
 
-      throw new Error("Failed to fetch repository information from GitHub.");
+      throw new Error(err.message);
     }
 
     // const splitUrl = project.githubRepoUrl.split("/");
@@ -234,19 +234,39 @@ const githubRepoCommits = async (req, res) => {
         .json({ message: "Repository is private. Commits cannot be fetched." });
     }
 
+    let commitsResponse;
+
+    try {
+      commitsResponse = await axios.get(`${repoUrl}/commits`, {
+        headers: githubHeaders,
+      });
+    } catch (err) {
+      if (err.response && err.response.status === 404) {
+        return res
+          .status(404)
+          .json({ message: "Commits not found for the GitHub repository." });
+      } else if (err.response && err.response.status === 429) {
+        return res.status(429).json({
+          message: "GitHub API rate limit exceeded. Try again later.",
+        });
+      }
+
+      throw new Error(err.message);
+    }
+
     // const commitsResponse = await axios.get(`${repoUrl}/commits`, {
     //   headers: githubHeaders,
     // });
 
-    // const commits = commitsResponse.data.map((commit) => ({
-    //   sha: commit.sha,
-    //   message: commit.commit.message,
-    //   author: commit.commit.author.name,
-    //   date: commit.commit.author.date,
-    //   url: commit.html_url,
-    // }));
+    const commits = commitsResponse.data.map((commit) => ({
+      sha: commit.sha,
+      message: commit.commit?.message || "No commit message",
+      author: commit.commit?.author?.name || "Unknown author",
+      date: commit.commit?.author?.date || null,
+      url: commit.html_url,
+    }));
 
-    // res.status(200).json(commits);
+    res.status(200).json(commits);
   } catch (error) {
     res.status(500).send(error.message);
   }
