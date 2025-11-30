@@ -154,6 +154,13 @@ const projectsByUserId = async (req, res) => {
 
 const githubRepoCommits = async (req, res) => {
   try {
+
+    const {user} = req;
+
+    if(!user){
+      return res.status(401).json({ message: "User not authenticated!" });
+    }
+
     const githubToken = process.env.GITHUB_TOKEN;
     const githubHeaders = {
       Authorization: `token ${githubToken}`,
