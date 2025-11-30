@@ -162,6 +162,13 @@ const githubRepoCommits = async (req, res) => {
     }
 
     const githubToken = process.env.GITHUB_TOKEN;
+
+    if (!githubToken) {
+      return res
+        .status(500)
+        .json({ message: "GitHub token not configured on server." });
+    }
+
     const githubHeaders = {
       Authorization: `token ${githubToken}`,
     };
