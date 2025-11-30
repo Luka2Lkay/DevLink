@@ -122,6 +122,9 @@ export const fetchProjectCommitsThunk = createAsyncThunk(
       }
 
       const { token } = JSON.parse(user);
+
+      console.log("Fetching commits for projectId:", projectId);
+           console.log("Fetching commits for token:", token);
       const response = await axios.get(
         `https://devlink-9xp4.onrender.com/api/projects/commits/${projectId}`,
         {
