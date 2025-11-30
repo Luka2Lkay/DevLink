@@ -13,7 +13,7 @@ function Commits() {
 
   useEffect(() => {
     setCommits(dispatch(fetchProjectCommitsThunk(id)));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

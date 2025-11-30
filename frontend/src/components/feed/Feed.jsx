@@ -71,7 +71,6 @@ function Feed() {
       if (project.id) {
         dispatch(updateProjectThunk(project));
         dispatch(updateProject(project));
-        // await dispatch(fetchProjectsThunk());
       } else {
         const result = await dispatch(addProjectThunk(project));
         dispatch(addProject(project));

@@ -123,8 +123,6 @@ export const fetchProjectCommitsThunk = createAsyncThunk(
 
       const { token } = JSON.parse(user);
 
-      console.log("Fetching commits for projectId:", projectId);
-           console.log("Fetching commits for token:", token);
       const response = await axios.get(
         `https://devlink-9xp4.onrender.com/api/projects/commits/${projectId}`,
         {
@@ -137,29 +135,9 @@ export const fetchProjectCommitsThunk = createAsyncThunk(
       console.log("Commits response:", response.data);
       return response.data.commits;
     } catch (error) {
-      // return rejectWithValue(
-      //   error.response?.data?.message || "Failed to fetch project commits"
-      // );
-
-      // console.error("fetchProjectCommitsThunk error:", {
-      //   message: error.message,
-      //   status: error.response?.status,
-      //   data: error.response?.data,
-      // });
-
-      const backendMsg =
-        error.response?.data?.message ||
-        error.response?.data?.error ||
-        error.response?.data ||
-        null;
-
-      const msg =
-        backendMsg ??
-        (error.response
-          ? `Server error (${error.response.status})`
-          : "Network or CORS error");
-
-      return rejectWithValue(msg);
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch project commits"
+      );
     }
   }
 );
