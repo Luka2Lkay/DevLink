@@ -9,6 +9,7 @@ import { fetchProjectCommitsThunk } from "../../state/thunks/commit_thunk.js";
 import { useParams } from "react-router-dom";
 import SingleCommit from "../single_commit/SingleCommit";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Commits() {
   const navigate = useNavigate();
@@ -33,7 +34,10 @@ function Commits() {
       <Navigation />
       <div className="p-4">
         <h1 className="text-2xl text-white font-bold mb-4">Commits</h1>
-        {commits && commits.length > 0 ? (
+
+        {loading ? (
+          <CircularProgress role="progressbar" />
+        ) : commits.length > 0 ? (
           commits.map((commit) => (
             <SingleCommit
               author={commit.author}
