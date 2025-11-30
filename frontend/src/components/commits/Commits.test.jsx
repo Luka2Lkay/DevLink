@@ -16,7 +16,7 @@ describe("Commits Component", () => {
   });
 
   it("renders Commits component", () => {
-    const headingElement = screen.getByText("Commits Component");
+    const headingElement = screen.getByText("Commits");
     expect(headingElement).toBeInTheDocument();
   });
 });
