@@ -1,7 +1,7 @@
 import Navigation from "../navigation/Navigation";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchProjectCommitsThunk } from "../../state/thunks/project_thunk";
+import { fetchProjectCommitsThunk } from "../../state/thunks/commit_thunk.js";
 import { useParams } from "react-router-dom";
 import SingleCommit from "../single_commit/SingleCommit";
 
