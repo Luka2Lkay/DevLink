@@ -1,19 +1,31 @@
 import Navigation from "../navigation/Navigation";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { selectCommits, selectLoading } from "../../state/reducers/commit_slice.js";
+import { useEffect } from "react";
+import { useDispatch, useSelector, setCommits } from "react-redux";
+import {
+  selectCommits,
+  selectLoading,
+} from "../../state/reducers/commit_slice.js";
 import { fetchProjectCommitsThunk } from "../../state/thunks/commit_thunk.js";
 import { useParams } from "react-router-dom";
 import SingleCommit from "../single_commit/SingleCommit";
+import { useNavigate } from "react-router-dom";
 
 function Commits() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  
+  const commits = useSelector(selectCommits);
+  const loading = useSelector(selectLoading);
 
   useEffect(() => {
-    setCommits(dispatch(fetchProjectCommitsThunk(id)));
+    const isLoggedIn = sessionStorage.getItem("user");
+
+    if (!isLoggedIn) {
+      navigate("/login");
+    } else {
+      dispatch(fetchProjectCommitsThunk(id));
+    }
   }, [dispatch]);
 
   return (
