@@ -138,11 +138,25 @@ export const fetchProjectCommitsThunk = createAsyncThunk(
       //   error.response?.data?.message || "Failed to fetch project commits"
       // );
 
-      console.error("fetchProjectCommitsThunk error:", {
-        message: error.message,
-        status: error.response?.status,
-        data: error.response?.data,
-      });
+      // console.error("fetchProjectCommitsThunk error:", {
+      //   message: error.message,
+      //   status: error.response?.status,
+      //   data: error.response?.data,
+      // });
+
+      const backendMsg =
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        error.response?.data ||
+        null;
+
+      const msg =
+        backendMsg ??
+        (error.response
+          ? `Server error (${error.response.status})`
+          : "Network or CORS error");
+
+      return rejectWithValue(msg);
     }
   }
 );
