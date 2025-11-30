@@ -16,15 +16,18 @@ const createProject = async (req, res) => {
     const { title, description, githubRepoUrl, owner, collaborators } =
       req.body;
 
+    const githubUrlRegex =
+      /^git@github\.com:[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+\.git$/;
 
-      const githubUrlRegex =/^git@github\.com:[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+\.git$/
+    const isValidGithubUrl = githubUrlRegex.test(githubRepoUrl);
 
-      const isValidGithubUrl = githubUrlRegex.test(githubRepoUrl);
+    if (!isValidGithubUrl) {
+      return res.status(400).json({
+        message:
+          "Invalid GitHub repository URL format. Please use the SSH format.",
+      });
+    }
 
-      if (!isValidGithubUrl) {
-        return res.status(400).json({ message: "Invalid GitHub repository URL format. Please use the SSH format." });
-      }
-      
     const project = new Project({
       title,
       description,
@@ -154,10 +157,9 @@ const projectsByUserId = async (req, res) => {
 
 const githubRepoCommits = async (req, res) => {
   try {
+    const { user } = req;
 
-    const {user} = req;
-
-    if(!user){
+    if (!user) {
       return res.status(401).json({ message: "User not authenticated!" });
     }
 
@@ -169,9 +171,9 @@ const githubRepoCommits = async (req, res) => {
         .json({ message: "GitHub token not configured on server." });
     }
 
-    const githubHeaders = {
-      Authorization: `token ${githubToken}`,
-    };
+    // const githubHeaders = {
+    //   Authorization: `token ${githubToken}`,
+    // };
     const projectId = req.params.id;
     const project = await Project.findById(projectId);
 
@@ -179,14 +181,52 @@ const githubRepoCommits = async (req, res) => {
       return res.status(404).json({ message: "Project not found!" });
     }
 
-    const splitUrl = project.githubRepoUrl.split("/");
-    const owner = splitUrl[0].split(":")[1];
-    const repo = splitUrl[splitUrl.length - 1].replace(".git", "");
+    const sshUrlRegex =
+      /^git@github\.com:([a-zA-Z0-9_-]+)\/([a-zA-Z0-9_-]+)\.git$/;
+    const match = project.githubRepoUrl.match(sshUrlRegex);
+
+    if (!match) {
+      return res.status(400).json({
+        message: "Invalid GitHub repository URL format in project",
+      });
+    }
+
+    const [owner, repo] = match;
+
+    const githubHeaders = {
+      Authorization: `token ${githubToken}`,
+      Accept: "application/vnd.github.v3+json",
+    };
 
     const repoUrl = `https://api.github.com/repos/${owner}/${repo}`;
-    const repoResponse = await axios.get(repoUrl, {
-      headers: githubHeaders,
-    });
+    let repoResponse;
+
+    try {
+      repoResponse = await axios.get(repoUrl, {
+        headers: githubHeaders,
+      });
+    } catch (err) {
+      if (err.response && err.response.status === 404) {
+        return res
+          .status(404)
+          .json({ message: "GitHub repository not found." });
+      } else if (err.response && err.response.status === 403) {
+        return res
+          .status(403)
+          .json({ message: "Access to GitHub repository is forbidden." });
+      }
+
+      throw new Error("Failed to fetch repository information from GitHub.");
+    }
+
+    // const splitUrl = project.githubRepoUrl.split("/");
+    // const owner = splitUrl[0].split(":")[1];
+    // const repo = splitUrl[splitUrl.length - 1].replace(".git", "");
+
+    // const repoUrl = `https://api.github.com/repos/${owner}/${repo}`;
+    // const repoResponse = await axios.get(repoUrl, {
+    //   headers: githubHeaders,
+    // });
 
     if (repoResponse.data.private === true) {
       return res
@@ -194,19 +234,19 @@ const githubRepoCommits = async (req, res) => {
         .json({ message: "Repository is private. Commits cannot be fetched." });
     }
 
-    const commitsResponse = await axios.get(`${repoUrl}/commits`, {
-      headers: githubHeaders,
-    });
+    // const commitsResponse = await axios.get(`${repoUrl}/commits`, {
+    //   headers: githubHeaders,
+    // });
 
-    const commits = commitsResponse.data.map((commit) => ({
-      sha: commit.sha,
-      message: commit.commit.message,
-      author: commit.commit.author.name,
-      date: commit.commit.author.date,
-      url: commit.html_url,
-    }));
+    // const commits = commitsResponse.data.map((commit) => ({
+    //   sha: commit.sha,
+    //   message: commit.commit.message,
+    //   author: commit.commit.author.name,
+    //   date: commit.commit.author.date,
+    //   url: commit.html_url,
+    // }));
 
-    res.status(200).json(commits);
+    // res.status(200).json(commits);
   } catch (error) {
     res.status(500).send(error.message);
   }
