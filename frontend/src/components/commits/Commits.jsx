@@ -37,7 +37,7 @@ function Commits() {
 
         {loading ? (
           <CircularProgress role="progressbar" />
-        ) : commits.length > 0 ? (
+        ) : commits && commits.length > 0 ? (
           commits.map((commit) => (
             <SingleCommit
               author={commit.author}
