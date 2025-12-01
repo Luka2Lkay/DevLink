@@ -141,9 +141,9 @@
 
 ## 3. Required Headers
 
-All authenticated routes require a valid JSON Web Token (JWT) in the `x-access-token` header.
+All authenticated routes require a valid JSON Web Token (JWT) in the `Authorization` header.
 
-- **Header Name:** `x-access-token`.
+- **Header Name:** `Authorization`.
 - **Value Format:** `Bearer <your-jwt-token>`.
 
 ## 4. Common Error Messages
