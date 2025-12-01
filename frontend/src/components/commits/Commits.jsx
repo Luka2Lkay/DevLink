@@ -27,8 +27,6 @@ function Commits() {
     } else {
       dispatch(fetchProjectCommitsThunk(id));
       console.log("Dispatched fetchProjectCommitsThunk for project ID:", id);
-      console.log("Current commits state:", commits);
-      console.log("Current loading state:", loading);
     }
   }, [dispatch]);
 
@@ -37,7 +35,6 @@ function Commits() {
       <Navigation />
       <div className="p-4">
         <h1 className="text-2xl text-white font-bold mb-4">Commits</h1>
-        {/* 
         {loading ? (
           <CircularProgress role="progressbar" />
         ) : commits && commits.length > 0 ? (
@@ -53,7 +50,7 @@ function Commits() {
           ))
         ) : (
           <p className="text-white">No commits available for this project.</p>
-        )} */}
+        )}
       </div>
     </div>
   );
