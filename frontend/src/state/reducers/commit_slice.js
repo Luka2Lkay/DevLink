@@ -26,6 +26,7 @@ const commitSlice = createSlice({
       .addCase(fetchProjectCommitsThunk.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.commits = [];
       })
       .addCase(fetchProjectCommitsThunk.fulfilled, (state, action) => {
         state.loading = false;
@@ -34,6 +35,7 @@ const commitSlice = createSlice({
       .addCase(fetchProjectCommitsThunk.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+        state.commits = [];
       });
   },
 });
