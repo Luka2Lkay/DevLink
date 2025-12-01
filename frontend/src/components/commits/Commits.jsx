@@ -26,7 +26,6 @@ function Commits() {
       navigate("/login");
     } else {
       dispatch(fetchProjectCommitsThunk(id));
-      console.log("Dispatched fetchProjectCommitsThunk for project ID:", id);
     }
   }, [dispatch]);
 

@@ -22,7 +22,6 @@ export const fetchProjectCommitsThunk = createAsyncThunk(
         }
       );
 
-      console.log("Commits response:", response.data.commits);
       return response.data;
     } catch (error) {
       return rejectWithValue(
