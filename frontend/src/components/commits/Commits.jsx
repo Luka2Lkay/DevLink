@@ -40,7 +40,7 @@ function Commits() {
           commits.map((commit) => (
             <SingleCommit
               author={commit.author}
-              date={commit.date.split(":")[0]}
+              date={commit.date.split("T")[0]}
               message={commit.message}
               sha={commit.sha}
               url={commit.url}
