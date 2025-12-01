@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const commitSlice = createSlice({
-  name: "commits",
+  name: "commit",
   initialState,
   reducers: {
     setCommits: (state, action) => {
@@ -38,8 +38,8 @@ const commitSlice = createSlice({
   },
 });
 
-export const selectCommits = (state) => state.commits.commits ?? [];
-export const selectLoading = (state) => state.commits.loading ?? false;
-export const selectError = (state) => state.commits.error ?? null;
+export const selectCommits = (state) => state.commit.commits ?? [];
+export const selectLoading = (state) => state.commit.loading ?? false;
+export const selectError = (state) => state.commit.error ?? null;
 
 export const { setCommits, setLoading, setError } = commitSlice.actions;
