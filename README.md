@@ -50,6 +50,11 @@ PORT=<PORT_NUMBER>
 
 https://devlink-react-frontend.onrender.com/
 
+## Technologies
+- React
+- Express.js
+- MongoDB
+
 ## Database configuration
 
 1. Open your browser and enter the address to log in/ sign up: **https://account.mongodb.com/account/login**
