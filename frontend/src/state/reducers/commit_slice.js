@@ -30,6 +30,7 @@ const commitSlice = createSlice({
       .addCase(fetchProjectCommitsThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.commits = action.payload;
+        console.log("Commits stored in state:", state.commits);
       })
       .addCase(fetchProjectCommitsThunk.rejected, (state, action) => {
         state.loading = false;

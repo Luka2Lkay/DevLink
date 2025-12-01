@@ -39,20 +39,18 @@ function Commits() {
           <CircularProgress role="progressbar" />
         ) : commits.length > 0 ? (
           commits.map((commit) => (
-
-            <p>{commit}</p>
-            // <SingleCommit
-            //   author={commit.author}
-            //   date={commit.date.split(":")[0]}
-            //   message={commit.message}
-            //   sha={commit.sha}
-            //   url={commit.url}
-            //   key={commit.sha}
-            // />
+            <SingleCommit
+              author={commit.author}
+              date={commit.date.split(":")[0]}
+              message={commit.message}
+              sha={commit.sha}
+              url={commit.url}
+              key={commit.sha}
+            />
           )
         )
         ) : (
-          <p className="text-white">No commits available for this project.{console.log(commits.length)}</p>
+          <p className="text-white">No commits available for this project.</p>
           
         )}
       </div>
