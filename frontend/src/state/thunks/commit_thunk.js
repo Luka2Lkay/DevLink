@@ -22,8 +22,8 @@ export const fetchProjectCommitsThunk = createAsyncThunk(
         }
       );
 
-      console.log("Commits response:", response.data);
-      return response.data.commits;
+      console.log("Commits response:", response.data.commits);
+      return response.data;
     } catch (error) {
       return rejectWithValue(
         error.response?.data?.message || "Failed to fetch project commits"
