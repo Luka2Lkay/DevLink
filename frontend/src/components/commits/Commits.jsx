@@ -16,7 +16,7 @@ function Commits() {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  // const commits = useSelector(selectCommits);
+  const commits = useSelector(selectCommits);
   const loading = useSelector(selectLoading);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function Commits() {
     } else {
       dispatch(fetchProjectCommitsThunk(id));
       console.log("Dispatched fetchProjectCommitsThunk for project ID:", id);
-      // console.log("Current commits state:", commits);
+      console.log("Current commits state:", commits);
       console.log("Current loading state:", loading);
     }
   }, [dispatch]);

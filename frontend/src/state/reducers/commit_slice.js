@@ -43,3 +43,5 @@ export const selectLoading = (state) => state.commit.loading ?? false;
 export const selectError = (state) => state.commit.error ?? null;
 
 export const { setCommits, setLoading, setError } = commitSlice.actions;
+
+export default commitSlice.reducer;
