@@ -52,7 +52,8 @@ function Commits() {
           )
         )
         ) : (
-          <p className="text-white">No commits available for this project.</p>
+          <p className="text-white">No commits available for this project.{console.log(commits.length)}</p>
+          
         )}
       </div>
     </div>
