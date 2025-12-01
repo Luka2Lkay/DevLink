@@ -37,17 +37,20 @@ function Commits() {
         <h1 className="text-2xl text-white font-bold mb-4">Commits</h1>
         {loading ? (
           <CircularProgress role="progressbar" />
-        ) : commits && commits.length > 0 ? (
+        ) : commits.length > 0 ? (
           commits.map((commit) => (
-            <SingleCommit
-              author={commit.author}
-              date={commit.date.split(":")[0]}
-              message={commit.message}
-              sha={commit.sha}
-              url={commit.url}
-              key={commit.sha}
-            />
-          ))
+
+            <p>{commit}</p>
+            // <SingleCommit
+            //   author={commit.author}
+            //   date={commit.date.split(":")[0]}
+            //   message={commit.message}
+            //   sha={commit.sha}
+            //   url={commit.url}
+            //   key={commit.sha}
+            // />
+          )
+        )
         ) : (
           <p className="text-white">No commits available for this project.</p>
         )}
