@@ -43,7 +43,7 @@ function Project({
             <span className="text-xs font-semibold uppercase tracking-wider text-indigo-600 block mb-2">
               Collaborators:
             </span>
-            <div className="flex -space-x-2 overflow-hidden mb-2 gap-2 p-2">
+            <div className="flex -space-x-2 overflow-hidden mb-2 gap-2 flex-wrap">
               {project.collaborators && project.collaborators.length === 0 ? (
                 <span className="w-full text-sm text-gray-500 flex justify-center items-center">
                   No collaborators
